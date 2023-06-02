@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { increment, decrement } from '../redux/actions/countAction'
 
-export default function Home() {
+export default function Home({navigation}) {
   const dispatch = useDispatch();
 
   const count = useSelector((store) => store.count.count);
@@ -14,6 +14,7 @@ export default function Home() {
 
   const handleDecreament = () => {
     dispatch(decrement());
+    navigation.navigate('Spells')
   };
 
   return (
@@ -30,7 +31,7 @@ export default function Home() {
         style={{ ...styles.btn, backgroundColor: '#6e3b3b' }}
         // className="p-10 m-10"
         >
-        <Text className="text-white"> Decrement </Text>
+        <Text className="text-white"> Spells </Text>
       </TouchableOpacity>
    </View>
   );
