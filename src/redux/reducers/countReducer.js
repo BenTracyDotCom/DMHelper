@@ -1,3 +1,5 @@
+//All new reducers will be under '/features'
+
 const initialState = {
   count: 0,
 };
