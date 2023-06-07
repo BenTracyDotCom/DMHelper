@@ -65,10 +65,6 @@ const styles = StyleSheet.create({
     fontSize: 23,
     color: '#fff',
   },
-<<<<<<< HEAD
 });
 
 //TODO: Replace all stylesheets with Tailwind classes (this is 2023)
-=======
-});
->>>>>>> 6cbdb6fc17409669cdd8c4cfc50046252ead02b2
