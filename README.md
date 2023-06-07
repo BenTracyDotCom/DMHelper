@@ -18,10 +18,8 @@ OK, this is the really cool part. First:
 npm start
 ```
 Then, 
-on Android, go into the Expo Go app and pick the option to scan QR code
-on iOS, open the camera app
-
-There should be a QR code right there in the CLI terminal. Scroll up a bit if you don't see it.
+on Android, go into the Expo Go app and pick the option to scan QR code.
+On iOS, open the camera app. There should be a QR code right there in the CLI terminal. Scroll up a bit if you don't see it.
 
 ### OR
 
