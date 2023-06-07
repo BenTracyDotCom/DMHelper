@@ -3,25 +3,23 @@ import sampleCampaign from '../../../../utilities/sampleCampaign'
 
 const campaignsSlice = createSlice({
     name: 'campaigns',
-    initialState: {
-        campaigns: [sampleCampaign]
-    },
+    initialState: [ sampleCampaign ],
     reducers: {
         campaignAdded(state, action) {
-            state.campaigns.push({
+            state.push({
                 id: action.payload.id,
                 campaign: action.payload.campaign
             })
         },
         campaignEdited(state, action) {
-            state.campaigns = state.campaigns.filter(campaign => (campaign.id !== action.payload.id))
-            state.campaigns.push({
+            state = state.filter(campaign => (campaign.id !== action.payload.id))
+            state.push({
                 id: action.payload.id,
                 campaign: action.payload.campign
             })
         },
         campaignDeleted(state, action) {
-            state.campaigns = state.campaigns.filter(campaign => (campaign.id !== action.payload.id))
+            state = state.filter(campaign => (campaign.id !== action.payload.id))
         }
     }
 })
