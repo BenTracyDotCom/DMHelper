@@ -23,11 +23,12 @@ on iOS, open the camera app
 
 There should be a QR code right there in the CLI terminal. Scroll up a bit if you don't see it.
 
-## OR
+### OR
 
 ### Run the Dev server on a virtual device
 
-Set up the virtual Android or iOS device according to respective docs
+Set up the virtual Android or iOS device according to respective docs.
+
 Run the Expo command pertinent to send the app to the virtual device (a for Android or i for iOS)
 
 ### Start editing and see the app change! 
