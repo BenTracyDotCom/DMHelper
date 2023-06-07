@@ -19,7 +19,8 @@ export default function Home({navigation}) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title_text}>Counter App</Text>
+      <Text style={styles.title_text}>Current mission:</Text>
+      <Text className="text-2xs"> To take over the world!!!</Text>
       <Text style={styles.counter_text}>{count}</Text>
 
       <TouchableOpacity onPress={handleIncreament} style={styles.btn}>
@@ -65,3 +66,5 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
 });
+
+//TODO: Replace all stylesheets with Tailwind classes (this is 2023)
