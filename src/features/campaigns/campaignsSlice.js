@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import sampleCampaign from '../../../../utilities/sampleCampaign'
+
+// Sample data for testing:
+import sampleCampaign from '../../../utilities/sampleCampaign'
 
 const campaignsSlice = createSlice({
     name: 'campaigns',
