@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { increment, decrement } from '../features/counter/counterSlice'
 import Counter from '../features/counter/Counter';
 
-export default function Home({navigation}) {
+export default function Home({ navigation }) {
   const count = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
 
@@ -20,8 +20,7 @@ export default function Home({navigation}) {
     <View style={styles.container}>
       <Text style={styles.title_text}>Current mission:</Text>
       <Text className="text-2xs"> To take over the world!!!</Text>
-      <Text style={styles.counter_text}>{count}</Text>
-<Counter />
+      <Counter />
       {/* <TouchableOpacity onPress={handleIncreament} style={styles.btn}>
         <Text style={styles.btn_text}> Increment </Text>
       </TouchableOpacity> */}
@@ -29,11 +28,11 @@ export default function Home({navigation}) {
       <TouchableOpacity
         onPress={handleDecreament}
         style={{ ...styles.btn, backgroundColor: '#6e3b3b' }}
-        // className="p-10 m-10"
-        >
+      // className="p-10 m-10"
+      >
         <Text className="text-white"> Spells </Text>
       </TouchableOpacity>
-   </View>
+    </View>
   );
 }
 const styles = StyleSheet.create({

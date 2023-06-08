@@ -1,25 +1,25 @@
 import { Text, View, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import NewCampaign from '../components/NewCampaign';
+import NewCampaign from '../features/campaigns/NewCampaign';
+import { modalToggled } from '../features/campaigns/newCampaignSlice';
 
 export default function Launch({ navigation }) {
 
+  const dispatch = useDispatch();
   const campaigns = useSelector(state => state.campaigns)
-  const newCampaignModal = JSON.stringify(useSelector(state => state.newCampaign))
-
+  
   const handleCampaign = () => {
     navigation.navigate('Home')
   }
   const handleNew = () => {
-    alert("TODO")
+    dispatch(modalToggled())
   }
 
 
   return (
     <View>
-      <NewCampaign />
       {campaigns.map(campaign => (
-      <TouchableOpacity
+        <TouchableOpacity
         onPress={handleCampaign}
         key={campaign.id}
         className="m-auto mt-5 w-11/12 bg-blue-900 rounded-lg">
@@ -29,7 +29,7 @@ export default function Launch({ navigation }) {
       <TouchableOpacity onPress={handleNew} className="m-auto mt-5 w-11/12 bg-blue-500 rounded-lg">
         <Text className="p-2 m-auto text-white">New Campaign +</Text>
       </TouchableOpacity>
-      <Text>{newCampaignModal}</Text>
+      <NewCampaign />
     </View>
   )
 }
