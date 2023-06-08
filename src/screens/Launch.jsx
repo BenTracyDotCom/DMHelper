@@ -5,7 +5,7 @@ import NewCampaign from '../components/NewCampaign';
 export default function Launch({ navigation }) {
 
   const campaigns = useSelector(state => state.campaigns)
-  
+  const newCampaignModal = JSON.stringify(useSelector(state => state.newCampaign))
 
   const handleCampaign = () => {
     navigation.navigate('Home')
@@ -29,6 +29,7 @@ export default function Launch({ navigation }) {
       <TouchableOpacity onPress={handleNew} className="m-auto mt-5 w-11/12 bg-blue-500 rounded-lg">
         <Text className="p-2 m-auto text-white">New Campaign +</Text>
       </TouchableOpacity>
+      <Text>{newCampaignModal}</Text>
     </View>
   )
 }

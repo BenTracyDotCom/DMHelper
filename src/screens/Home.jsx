@@ -1,12 +1,11 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-
 import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement } from '../redux/actions/countAction'
+import { increment, decrement } from '../features/counter/counterSlice'
+import Counter from '../features/counter/Counter';
 
 export default function Home({navigation}) {
+  const count = useSelector((state) => state.counter.value);
   const dispatch = useDispatch();
-
-  const count = useSelector((store) => store.count.count);
 
   const handleIncreament = () => {
     dispatch(increment());
@@ -22,10 +21,10 @@ export default function Home({navigation}) {
       <Text style={styles.title_text}>Current mission:</Text>
       <Text className="text-2xs"> To take over the world!!!</Text>
       <Text style={styles.counter_text}>{count}</Text>
-
-      <TouchableOpacity onPress={handleIncreament} style={styles.btn}>
+<Counter />
+      {/* <TouchableOpacity onPress={handleIncreament} style={styles.btn}>
         <Text style={styles.btn_text}> Increment </Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       <TouchableOpacity
         onPress={handleDecreament}
