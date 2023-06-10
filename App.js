@@ -8,7 +8,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Launch from './src/screens/Launch';
 import Home from './src/screens/Home';
 import Spells from './src/screens/Spells';
-
+import Spell from './src/screens/Spell';
+import Debug from './src/screens/Debug';
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +30,14 @@ export default function App() {
           <Stack.Screen
             name="Spells"
             component={Spells}
+          />
+          <Stack.Screen
+            name="Spell"
+            component={Spell}
+          />
+          <Stack.Screen
+          name="Debug"
+          component={Debug}
           />
         </Stack.Navigator>
       </Provider>

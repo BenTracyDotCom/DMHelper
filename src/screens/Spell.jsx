@@ -1,1 +1,12 @@
-//TODO: Make this screen and pipe it to the App navigator
+import { View, Text } from 'react-native';
+
+export default function Spell() {
+
+    return (
+        <View>
+            <Text>
+                Spell
+            </Text>
+        </View>
+    )
+}
