@@ -2,10 +2,23 @@ import { View, Text, Modal, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import React from 'react';
+import Home from './Home';
+import Launch from './Launch';
+import Spell from './Spell';
+import Spells from './Spells';
 
-export default function () {
+export default function ({ navigation }) {
   const [show, setShow] = useState(false);
   const state = useSelector(state => (state));
+  
+  // Add new pages to this object to have them show up on the list all neat like
+
+  const pages = {
+    Launch: Launch,
+    Home: Home,
+    Spell: Spell,
+    Spells: Spells,
+  }
 
   return (
     <View>
@@ -27,9 +40,16 @@ export default function () {
           <Text className="text-blue-500">Click to close</Text>
         </TouchableOpacity>
       </Modal>
-      <Text className="mx-auto mt-5">
+      <Text className="mx-auto mt-5 text-2xl">
         Screens
       </Text>
+      {Object.keys(pages).map(page => (
+        <TouchableOpacity className="mx-auto mt-5 w-11/12 bg-teal-700 rounded-2xl" key={pages[page]} onPress={() => {navigation.navigate(pages[page])}}>
+          <Text className="p-2 m-auto text-white">
+            {page}
+          </Text>
+        </TouchableOpacity>
+      ))}
       <TouchableOpacity onPress={() => setShow(true)} className="mx-auto my-5 rounded-2xl bg-slate-500">
         <Text className="text-white p-5">Current State</Text>
       </TouchableOpacity>
