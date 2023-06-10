@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import NewCampaign from '../features/campaigns/NewCampaign';
 import { modalToggled } from '../features/campaigns/newCampaignSlice';
 
+
 export default function Launch({ navigation }) {
 
   const dispatch = useDispatch();
@@ -15,21 +16,27 @@ export default function Launch({ navigation }) {
     dispatch(modalToggled())
   }
 
+  const handleDebug = () => {
+    navigation.navigate('Debug')
+  }
 
   return (
-    <View>
+    <View className="h-full">
+      <NewCampaign />
       {campaigns.map(campaign => (
         <TouchableOpacity
         onPress={handleCampaign}
         key={campaign.id}
-        className="m-auto mt-5 w-11/12 bg-blue-900 rounded-lg">
-        <Text className="p-2 m-auto text-white">{campaign.title}</Text>
+        className="mx-auto mt-5 w-11/12 bg-blue-900 rounded-lg">
+        <Text className="p-2 mx-auto text-white">{campaign.title}</Text>
       </TouchableOpacity>
       ))}
-      <TouchableOpacity onPress={handleNew} className="m-auto mt-5 w-11/12 bg-blue-500 rounded-lg">
-        <Text className="p-2 m-auto text-white">New Campaign +</Text>
+      <TouchableOpacity onPress={handleNew} className="mx-auto mt-5 w-11/12 bg-blue-500 rounded-lg">
+        <Text className="p-2 mx-auto text-white">New Campaign +</Text>
       </TouchableOpacity>
-      <NewCampaign />
+        <TouchableOpacity onPress={handleDebug} className="mx-auto mt-5 border-2 w-11/12 bg-slate-500 rounded-lg">
+          <Text className="p-2 m-auto text-white">Debug</Text>
+        </TouchableOpacity>
     </View>
   )
 }
