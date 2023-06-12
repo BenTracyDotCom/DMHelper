@@ -1,6 +1,7 @@
+import React from 'react';
 import { View, Text } from 'react-native';
 
-export default function Spell() {
+export default function Spell({data}) {
 
     return (
         <View>
