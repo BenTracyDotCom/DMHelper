@@ -9,6 +9,8 @@ import Launch from './src/screens/Launch';
 import Home from './src/screens/Home';
 import Spells from './src/screens/Spells';
 import Spell from './src/screens/Spell';
+import Monsters from './src/screens/Monsters.jsx'
+import Monster from './src/screens/Monster.jsx'
 import Debug from './src/screens/Debug';
 
 const Stack = createNativeStackNavigator();
@@ -34,6 +36,14 @@ export default function App() {
           <Stack.Screen
             name="Spell"
             component={Spell}
+          />
+           <Stack.Screen
+            name="Monsters"
+            component={Monsters}
+          />
+          <Stack.Screen
+            name="Monster"
+            component={Monster}
           />
           <Stack.Screen
           name="Debug"
