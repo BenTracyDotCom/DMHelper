@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity } from 'react-native';
-import { useDispatch, useSelect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import CharList from '../features/encounter/CharList';
 
 export default function Encounter(props) {

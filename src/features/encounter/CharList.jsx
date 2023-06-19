@@ -14,11 +14,11 @@ export default function CharList(props) {
     }
 
     return (
-        <View>
-            <Text>{encounter.title}</Text>
+        <View className="h-full relative font-[Scada]">
+            <Text className="mx-auto py-3 font-[Scada-Bold] text-2xl">{encounter.title}</Text>
             {encounter.chars.map((char, i) => (<Character character={char} key={i} active={i === encounter.active} />))}
-            <TouchableOpacity onPress={advance} className="mx-auto bg-green-400 rounded-2xl">
-                <Text className="text-white text-xl m-auto pl-3 pr-2 pb-1">▶</Text>
+            <TouchableOpacity onPress={advance} className="bg-green-400 rounded-3xl absolute bottom-0 mb-8 flex self-center">
+                <Text className="text-white text-3xl m-auto p-3 pl-4">▶</Text>
             </TouchableOpacity>
         </View>
     )
