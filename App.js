@@ -9,6 +9,8 @@ import Launch from './src/screens/Launch';
 import Home from './src/screens/Home';
 import Spells from './src/screens/Spells';
 import Spell from './src/screens/Spell';
+import Encounter from './src/screens/Encounter';
+
 import Debug from './src/screens/Debug';
 
 const Stack = createNativeStackNavigator();
@@ -34,6 +36,10 @@ export default function App() {
           <Stack.Screen
             name="Spell"
             component={Spell}
+          />
+          <Stack.Screen
+          name="Encounter"
+          component={Encounter}
           />
           <Stack.Screen
           name="Debug"
