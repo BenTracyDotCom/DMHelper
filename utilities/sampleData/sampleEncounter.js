@@ -1,8 +1,8 @@
 export default {
     title: "Goblin Ambush",
-    characters: [
+    active: 0,
+    chars: [
         {   name: 'Snervelin',
-            active: true,
             ac: 14,
             hp: 23,
             status: [],
@@ -10,7 +10,6 @@ export default {
         },
         {
             name: 'Goblin Mage',
-            active: false,
             ac: 12,
             hp: 30,
             status: [],
@@ -18,7 +17,6 @@ export default {
         },
         {
             name: 'Jealdor',
-            active: false, 
             ac: 13,
             hp: 30,
             status: [],
@@ -26,7 +24,6 @@ export default {
         },
         {
             name: 'Goblin A',
-            active: false, 
             ac: 12,
             hp: 24,
             status: [],
@@ -34,7 +31,6 @@ export default {
         },
         {
             name: 'Boxbix',
-            active: false, 
             ac: 16,
             hp: 32,
             status: [],
