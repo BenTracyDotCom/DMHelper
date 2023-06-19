@@ -4,7 +4,7 @@ export default {
     chars: [
         {   name: 'Snervelin',
             ac: 14,
-            hp: 23,
+            hp: 123,
             status: [],
             type: 'pc'
         },
