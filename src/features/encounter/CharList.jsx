@@ -7,11 +7,13 @@ import Character from './Character';
 export default function CharList(props) {
 
     const encounter = useSelector((state) => state.encounter)
+    const dispatch = useDispatch()
 
     return(
         <View>
             <Text>{encounter.title}</Text>
             {encounter.chars.map((char, i) => (<Character character={char} key={i} active={i === encounter.active}/>))}
+            <TouchableOpacity onPress={() => dispatch(nextChar())}><Text className="text-green-500">Advance!</Text></TouchableOpacity>
         </View>
     )
 }
