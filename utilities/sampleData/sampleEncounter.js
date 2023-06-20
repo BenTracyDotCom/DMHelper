@@ -1,6 +1,9 @@
 export default {
     title: "Goblin Ambush",
     active: 0,
+    target: 0,
+    xpEarned: 0,
+    loot: [],
     chars: [
         {   name: 'Snervelin',
             ac: 14,
@@ -9,11 +12,12 @@ export default {
             type: 'pc'
         },
         {
-            name: 'Goblin Mage',
+            name: 'Goblin Shmn',
             ac: 12,
             hp: 30,
             status: [],
-            type: 'enemy'
+            type: 'enemy',
+            cr: 3
         },
         {
             name: 'Jealdor',
@@ -27,7 +31,8 @@ export default {
             ac: 12,
             hp: 24,
             status: [],
-            type: 'enemy'
+            type: 'enemy',
+            cr: 0.25
         },
         {
             name: 'Boxbix',

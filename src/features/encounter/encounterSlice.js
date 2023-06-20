@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { tallyXp } from '../../api';
 
 import sampleEncounter from '../../../utilities/sampleData/sampleEncounter';
 
@@ -26,9 +27,10 @@ const encounterSlice = createSlice({
         let target = state.chars[action.target];
         target.hp -= action.hp
       },
-      targetDestroyed: (state, action) => {
+      targetDestroyed: async (state, action) => {
         let target = state.chars[action.target];
         state.chars = state.chars.filter(char => (char !== target))
+        state.xpEarned += await tallyXp(target.name)
       }
     }
 })
