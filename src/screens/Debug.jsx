@@ -6,6 +6,7 @@ import Home from './Home';
 import Launch from './Launch';
 import Spell from './Spell';
 import Spells from './Spells';
+import Encounter from './Encounter';
 
 export default function ({ navigation }) {
   const [show, setShow] = useState(false);
@@ -18,6 +19,7 @@ export default function ({ navigation }) {
     Home: Home,
     Spell: Spell,
     Spells: Spells,
+    Encounter: Encounter,
   }
 
   return (
@@ -31,7 +33,7 @@ export default function ({ navigation }) {
           Current State:
         </Text>
         {Object.keys(state).map(stateThing => (
-          <React.Fragment>
+          <React.Fragment key="stateThing">
             <Text className="font-bold ml-5 my-2">{stateThing}:</Text>
             <Text className="ml-5">{JSON.stringify(state[stateThing])}</Text>
           </React.Fragment>
