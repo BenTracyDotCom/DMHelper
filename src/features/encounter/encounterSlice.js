@@ -10,9 +10,12 @@ const encounterSlice = createSlice({
       nextChar: state => {
         state.active = (state.active + 1) % state.chars.length
       },
-      //the following actions require a "target" corresponding to an index in the encounter's "chars" array
+      setTargeted: (state, action) => {
+        
+      },
+      //the following actions require a "target" integer corresponding to an index in the encounter's "chars" array
       statusAdded: (state, action) => {
-        let target = state.chars[action.target];
+        let target = state.chars[target];
         target.status = [...target.status, action.status]
       },
       statusRemoved: (state, action) => {
