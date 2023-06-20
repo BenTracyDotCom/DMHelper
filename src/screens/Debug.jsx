@@ -7,19 +7,20 @@ import Launch from './Launch';
 import Spell from './Spell';
 import Spells from './Spells';
 import Encounter from './Encounter';
+import Monsters from './Monsters'
 
 export default function ({ navigation }) {
   const [show, setShow] = useState(false);
   const state = useSelector(state => (state));
-  
+
   // Add new pages to this object to have them show up on the list all neat like
 
   const pages = {
     Launch: Launch,
     Home: Home,
-    Spell: Spell,
     Spells: Spells,
     Encounter: Encounter,
+    Monsters: Monsters,
   }
 
   return (
@@ -46,7 +47,9 @@ export default function ({ navigation }) {
         Screens
       </Text>
       {Object.keys(pages).map(page => (
-        <TouchableOpacity className="mx-auto mt-5 w-11/12 bg-teal-700 rounded-2xl" key={pages[page]} onPress={() => {navigation.navigate(pages[page])}}>
+        <TouchableOpacity className="mx-auto mt-5 w-11/12 bg-teal-700 rounded-2xl"
+         key={pages[page]}
+         onPress={() => {navigation.navigate(pages[page])}}>
           <Text className="p-2 m-auto text-white">
             {page}
           </Text>
