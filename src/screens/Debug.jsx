@@ -18,7 +18,6 @@ export default function ({ navigation }) {
   const pages = {
     Launch: Launch,
     Home: Home,
-    Spell: Spell,
     Spells: Spells,
     Monster: Monster,
     Monsters: Monsters,

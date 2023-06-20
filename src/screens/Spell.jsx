@@ -30,23 +30,23 @@ export default function Spell({data}) {
 
     return (
         <ScrollView className="h-full p-5 bg-gray-800">
-            <Text className="text-2xl text-white mb-5 text-center">{spellData.name}</Text>
+            <Text className="text-2xl text-yellow-600 mb-5 text-center">{spellData.name}</Text>
             <View className="bg-white p-4 rounded-lg mb-4 shadow-lg border border-gray-300">
-                <Text className="text-lg text-gray-800 mb-2">{`Level: ${spellData.level}`}</Text>
-                <Text style={{textAlign: 'left'}} className="text-sm text-gray-600"> {`${spellData.desc.map(desc => desc.trim().replace(/\n/g, '')).join(' ')}`}</Text>
+                <Text className="text-lg text-red-800 mb-2">{`Level ${spellData.level}`}</Text>
+                <Text style={{textAlign: 'left'}} className="text-sm text-green-800"> {`${spellData.desc.map(desc => desc.trim().replace(/\n/g, '')).join(' ')}`}</Text>
                 <View className="mt-4">
-                    <Text className="text-sm text-gray-600"> {`Range: ${spellData.range}`}</Text>
-                    <Text className="text-sm text-gray-600"> {`Components: ${spellData.components.join(', ')}`}</Text>
-                    <Text className="text-sm text-gray-600"> {`Duration: ${spellData.duration}`}</Text>
-                    <Text className="text-sm text-gray-600"> {`Casting Time: ${spellData.casting_time}`}</Text>
+                    <Text className="text-sm text-blue-800"> {`Range: ${spellData.range}`}</Text>
+                    <Text className="text-sm text-blue-800"> {`Components: ${spellData.components.join(', ')}`}</Text>
+                    <Text className="text-sm text-blue-800"> {`Duration: ${spellData.duration}`}</Text>
+                    <Text className="text-sm text-blue-800"> {`Casting Time: ${spellData.casting_time}`}</Text>
                 </View>
                 <View className="mt-4">
-                <Text className="text-sm text-gray-600"> {`School: ${spellData.school.name}`}</Text>
-                    <Text className="text-sm text-gray-600"> {`Attack Type: ${spellData.attack_type}`}</Text>
+                <Text className="text-sm text-blue-800"> {`School: ${spellData.school.name}`}</Text>
+                    <Text className="text-sm text-blue-800"> {`Attack Type: ${spellData.attack_type}`}</Text>
                 </View>
                 <View className="mt-4">
-                    <Text className="text-sm text-gray-600"> {`Classes: ${spellData.classes.map(cl => cl.name).join(', ')}`}</Text>
-                    <Text className="text-sm text-gray-600"> {`Subclasses: ${spellData.subclasses.map(sc => sc.name).join(', ')}`}</Text>
+                    <Text className="text-sm text-blue-800"> {`Classes: ${spellData.classes.map(cl => cl.name).join(', ')}`}</Text>
+                    <Text className="text-sm text-blue-800"> {`Subclasses: ${spellData.subclasses.map(sc => sc.name).join(', ')}`}</Text>
                 </View>
             </View>
         </ScrollView>

@@ -2,7 +2,6 @@ import React, {useState, useEffect, useCallback} from 'react'
 import { Text, View, FlatList, ActivityIndicator, TouchableOpacity, TextInput, StyleSheet, Button } from 'react-native';
 import {useNavigation} from '@react-navigation/native'
 import Spell from '../components/Spell'
-import { Picker } from '@react-native-picker/picker'
 
 export default function Spells() {
 
@@ -49,7 +48,7 @@ export default function Spells() {
  }
   return (
     <View className="h-full p-5 bg-gray-800">
-      <Text className="text-2xl text-white mb-5 text-center">Spells</Text>
+      <Text className="text-2xl text-yellow-600 mb-5 text-center">Spells</Text>
       <View style={styles.searchBarContainer}>
         <TextInput
         style={styles.searchBar}
@@ -71,10 +70,10 @@ export default function Spells() {
       renderItem={({item}) => (
         <TouchableOpacity onPress={() => handlePress(item)}>
           <View className="bg-white p-4 rounded-lg mb-4 shadow-lg border border-gray-300">
-            <Text className="text-lg text-gray-800 mb-2">{item.name}</Text>
+            <Text className="text-lg text-red-800 mb-2">{item.name}</Text>
             <View className="border-t border-gray-200 pt-2">
-              <Text className="text-md text-gray-400">Level: {item.level}</Text>
-              <Text className="text-md text-gray-400">Comps: {item.components.join(', ')}</Text>
+              <Text className="text-md text-blue-800">Level: {item.level}</Text>
+              <Text className="text-md text-blue-800">Comps: {item.components.join(', ')}</Text>
             </View>
           </View>
         </TouchableOpacity>
