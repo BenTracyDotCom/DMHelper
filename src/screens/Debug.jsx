@@ -6,7 +6,6 @@ import Home from './Home';
 import Launch from './Launch';
 import Spell from './Spell';
 import Spells from './Spells';
-import Monster from './Monster'
 import Monsters from './Monsters'
 
 export default function ({ navigation }) {
@@ -19,7 +18,6 @@ export default function ({ navigation }) {
     Launch: Launch,
     Home: Home,
     Spells: Spells,
-    Monster: Monster,
     Monsters: Monsters,
   }
 

@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     borderWidth: 2,
-    borderColor: 'black',// Gold
+    borderColor: ' ',// Gold
     borderRadius: 8,
     overflow: 'hidden'
   },
