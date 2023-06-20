@@ -72,8 +72,11 @@ export default function Spells() {
           <View className="bg-white p-4 rounded-lg mb-4 shadow-lg border border-gray-300">
             <Text className="text-lg text-red-800 mb-2">{item.name}</Text>
             <View className="border-t border-gray-200 pt-2">
-              <Text className="text-md text-blue-800">Level: {item.level}</Text>
-              <Text className="text-md text-blue-800">Comps: {item.components.join(', ')}</Text>
+            <Text className="text-md text-blue-800">Level: {item && item.level === 0 ? 'cantrip' : item.level}</Text>
+              <Text className="text-md text-blue-800">{item.components.join(', ')}</Text>
+              <Text className="text-md text-blue-800">Casting Time: {item.casting_time}</Text>
+              <Text className="text-md text-blue-800">Concentration: {item.concentration ? 'Yes' : 'No'}</Text>
+              <Text className="text-md text-blue-800">Ritual: {item.ritual ? 'Yes' : 'No'}</Text>
             </View>
           </View>
         </TouchableOpacity>
