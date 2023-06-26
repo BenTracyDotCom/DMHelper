@@ -1,4 +1,4 @@
-import { Modal, Text, TouchableOpacity } from 'react-native';
+import { Modal, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { modalToggled, titleAdded, characterAdded, characterRemoved, mainQuestAdded, mainQuestRemoved, firstQuestAdded } from './newCampaignSlice'
 
@@ -7,9 +7,10 @@ export default function NewCampaign() {
     const dispatch = useDispatch()
     const newCampaign = useSelector(state => state.newCampaign)
 
-    const handleClose = () => {
-        dispatch(modalToggled())
+    const handleTitle = (text) => {
+      dispatch(titleAdded(text))
     }
+
 
     return (
         <Modal
@@ -21,8 +22,22 @@ export default function NewCampaign() {
                 New campaign wooo
                 {JSON.stringify(newCampaign)}
             </Text>
-            <TouchableOpacity onPress={handleClose} className="m-auto">
+            <TextInput
+              style={styles.input}
+              onChangeText={handleTitle}
+              value={newCampaign.title}
+              />
+            <TouchableOpacity onPress={() => {dispatch(modalToggled())}} className="m-auto">
                 <Text className="text-blue-500">Click to close</Text>
             </TouchableOpacity>
         </Modal>)
+
 }
+const styles = StyleSheet.create({
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10
+  }
+})
