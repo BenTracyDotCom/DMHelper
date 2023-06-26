@@ -63,6 +63,7 @@ export default function App() {
           <Stack.Screen
           name="Campaign"
           component={Campaign}
+          options={({ route }) => ({ title: route.params.name})}
           />
           <Stack.Screen
           name="Debug"
