@@ -7,7 +7,8 @@ import Launch from './Launch';
 import Spell from './Spell';
 import Spells from './Spells';
 import Encounter from './Encounter';
-import Monsters from './Monsters'
+import Monsters from './Monsters';
+import Campaign from './Campaign';
 
 export default function ({ navigation }) {
   const [show, setShow] = useState(false);
@@ -18,6 +19,7 @@ export default function ({ navigation }) {
   const pages = {
     Launch: Launch,
     Home: Home,
+    Campaign: Campaign,
     Spells: Spells,
     Encounter: Encounter,
     Monsters: Monsters,
