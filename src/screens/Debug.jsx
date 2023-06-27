@@ -9,6 +9,8 @@ import Spells from './Spells';
 import Encounter from './Encounter';
 import Monsters from './Monsters';
 import Campaign from './Campaign';
+import Equipment from './Equipment'
+import Equipments from './Equipments'
 
 export default function ({ navigation }) {
   const [show, setShow] = useState(false);
@@ -22,6 +24,7 @@ export default function ({ navigation }) {
     Spells: Spells,
     Encounter: Encounter,
     Monsters: Monsters,
+    Equipment: Equipments,
   }
 
   return (
