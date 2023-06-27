@@ -17,6 +17,9 @@ import Monsters from './src/screens/Monsters.jsx'
 import Monster from './src/screens/Monster.jsx'
 import Debug from './src/screens/Debug';
 
+import Equipments from './src/screens/Equipments.jsx'
+import Equipment from './src/screens/Equipment.jsx'
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -63,7 +66,14 @@ export default function App() {
           <Stack.Screen
           name="Campaign"
           component={Campaign}
-          options={({ route }) => ({ title: route.params.name})}
+          options={({ route }) => ({ title: route.params.name})} />
+          <Stack.Screen
+          name="Equipments"
+          component={Equipments}
+          />
+          <Stack.Screen
+          name="Equipment"
+          component={Equipment}
           />
           <Stack.Screen
           name="Debug"
