@@ -7,7 +7,8 @@ import Launch from './Launch';
 import Spell from './Spell';
 import Spells from './Spells';
 import Encounter from './Encounter';
-import Monsters from './Monsters'
+import Monsters from './Monsters';
+import Campaign from './Campaign';
 
 export default function ({ navigation }) {
   const [show, setShow] = useState(false);
@@ -46,6 +47,13 @@ export default function ({ navigation }) {
       <Text className="mx-auto mt-5 text-2xl">
         Screens
       </Text>
+      <TouchableOpacity className="mx-auto mt-5 w-11/12 bg-teal-700 rounded-2xl"
+      key="campaign"
+      onPress={() => navigation.navigate('Campaign', {name: state.campaign.title})}><Text className="p-2 m-auto text-white">
+        Campaign
+      </Text>
+
+      </TouchableOpacity>
       {Object.keys(pages).map(page => (
         <TouchableOpacity className="mx-auto mt-5 w-11/12 bg-teal-700 rounded-2xl"
          key={pages[page]}

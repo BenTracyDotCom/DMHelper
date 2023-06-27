@@ -11,6 +11,7 @@ import Home from './src/screens/Home';
 import Spells from './src/screens/Spells';
 import Spell from './src/screens/Spell';
 import Encounter from './src/screens/Encounter';
+import Campaign from './src/screens/Campaign';
 
 import Monsters from './src/screens/Monsters.jsx'
 import Monster from './src/screens/Monster.jsx'
@@ -58,6 +59,11 @@ export default function App() {
           <Stack.Screen
           name="Encounter"
           component={Encounter}
+          />
+          <Stack.Screen
+          name="Campaign"
+          component={Campaign}
+          options={({ route }) => ({ title: route.params.name})}
           />
           <Stack.Screen
           name="Debug"
