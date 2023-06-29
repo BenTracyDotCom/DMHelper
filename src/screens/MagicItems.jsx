@@ -64,6 +64,7 @@ export default function MagicItems() {
               <Text style={styles.itemName}>{item.name}</Text>
               <View style={styles.itemDetails}>
                 <Text style={styles.itemDetail}>{item.equipment_category.name}</Text>
+                <Text style={styles.itemDetail}>{item.rarity.name}</Text>
               </View>
             </View>
           </TouchableOpacity>
