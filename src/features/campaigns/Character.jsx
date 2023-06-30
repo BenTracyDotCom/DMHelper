@@ -4,7 +4,10 @@ export default function Character({ character }) {
 
   return (
     <View>
-      <Text>{character.name}</Text>
+      <TouchableOpacity>
+        <Text>{character.name}</Text>
+        <Text>{`${character.race} ${character.class} ${character.level}`}</Text>
+      </TouchableOpacity>
     </View>
   )
 }
