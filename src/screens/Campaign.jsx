@@ -31,6 +31,7 @@ export default function Campaign() {
             </View>
           </ScrollView>
           <View style={styles.rightColumn}>
+            <Text className="border-2">Notes:</Text>
             <Text>
               // Fixed height content goes here...
             </Text>
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
   header: {
     width: '100%',
     height: 200,
-    backgroundColor: 'lightblue',
+    backgroundColor: '#e2e8f0',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
   },
   leftColumn: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: '#e2e8f0',
     height: '100%',
   },
   scrollableContent: {
@@ -73,9 +74,7 @@ const styles = StyleSheet.create({
   },
   rightColumn: {
     flex: 1,
-    backgroundColor: 'lightgray',
+    backgroundColor: '#e2e8f0',
     height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });

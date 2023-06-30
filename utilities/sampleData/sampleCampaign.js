@@ -14,7 +14,7 @@ export default {
     {
      name: "Jealdor",
      type: 'pc',
-     race: "Draagonborn",
+     race: "Dragonborn",
      class: "Barbarian",
      level: 4,
      status: [],
@@ -51,4 +51,5 @@ export default {
   },
   quests: [],
   currentQuest: 'To take over the world!!!',
+  notes: ['This is the initial note for the sample campaign. Click to edit someday I guess.']
 }

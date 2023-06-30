@@ -4,6 +4,7 @@ import campaignsReducer from './features/campaigns/campaignsSlice';
 import campaignReducer from './features/campaigns/campaignSlice';
 import newCampaignReducer from './features/campaigns/newCampaignSlice';
 import encounterReducer from './features/encounter/encounterSlice';
+import notesReducer from './features/campaigns/notesSlice';
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     campaign: campaignReducer,
     counter: counterReducer,
     newCampaign: newCampaignReducer,
-    encounter: encounterReducer
+    encounter: encounterReducer,
+    notes: notesReducer,
   }
 });
