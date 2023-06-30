@@ -38,6 +38,7 @@ export default function Weapons() {
         const weaponDetails = [...weaponDetailsNormalWithFlag, ...weaponDetailsMagicWithFlag];
         weaponDetails.sort((a, b) => a.name.localeCompare(b.name)); // Sort weapons alphabetically
         setData(weaponDetails)
+        console.log(data)
         setLoading(false)
       } catch (error) {
         console.error(error)
@@ -52,9 +53,15 @@ export default function Weapons() {
     setFilteredData(filtered)
   }, [searchQuery, data])
 
-  const handlePress = (weapon) => {
-    navigation.navigate('Weapon', {weaponUrl: weapon.url})
+  const handlePressNormal = (weapon) => {
+    navigation.navigate('Equipment', {equipmentUrl: weapon.url})
   }
+
+  const handlePressMagic = (weapon) => {
+    navigation.navigate('MagicItem', {itemUrl: weapon.url})
+  }
+
+
 
   if (loading) {
     return <ActivityIndicator />
@@ -74,13 +81,19 @@ export default function Weapons() {
       <FlatList
         data={filteredData}
         keyExtractor={(item) => item.url}
-        renderItem={({item}) => (
-          <TouchableOpacity onPress={() => handlePress(item)}>
+        renderItem={({item}) => {
+          const handlePress = item.isMagicItem ? handlePressMagic : handlePressNormal;
+           return (<TouchableOpacity onPress={() => handlePress(item)}>
             <View style={styles.itemContainer}>
               <Text style={styles.itemName}>{item.name}</Text>
               <View style={styles.itemDetails}>
               {item.isMagicItem ?
-                <Text style={styles.itemDetail}>Magic Item: Yes</Text> :
+              <>
+                <Text style={styles.itemDetail}>Magic Item: Yes</Text>
+                <Text style={styles.itemDetail}>Rarity: {item.rarity.name}</Text>
+                <Text style={styles.itemDetail}>Variant: {item.varient === true ? 'yes' : 'no'}</Text>
+                </>
+                 :
                 <Text style={styles.itemDetail}>Magic Item: No</Text>}
                 {item.cost && item.cost.quantity != null &&
                   <Text style={styles.itemDetail}>Cost: {item.cost.quantity} {item.cost.unit}</Text>}
@@ -91,7 +104,7 @@ export default function Weapons() {
               </View>
             </View>
           </TouchableOpacity>
-        )}
+        )}}
       ></FlatList>
     </View>
   )
