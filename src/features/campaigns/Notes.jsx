@@ -1,14 +1,15 @@
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
+import Note from './Note';
 
 export default function Notes() {
 
   const notes = useSelector(state => state.notes.current)
 
   return (
-    <View>
+    <View className="bg-white rounded-xl mr-2 ">
       {notes.map((note, index) => (
-       <Text key={index}>{note}</Text>
+       <Note note={note} key={index} />
       ))}
     </View>
   )

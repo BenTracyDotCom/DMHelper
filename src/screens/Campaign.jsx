@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useSelector } from 'react-redux';
+import Header from '../features/campaigns/Header';
 import CharacterList from '../features/campaigns/CharacterList';
 import Notes from '../features/campaigns/Notes';
 
@@ -16,64 +17,59 @@ export default function Campaign() {
 
   else {
     return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Text>Main Quest:</Text>
-          <Text>{Object.keys(campaign.quests)[0]}</Text>
-          <Text>Current Objective:</Text>
-          <Text>{campaign.currentQuest}</Text>
+      //     <View style={styles.container}>
+      //       <View style={styles.header}>
+      //         <Text>Main Quest:</Text>
+      //         <Text>{Object.keys(campaign.quests)[0]}</Text>
+      //         <Text>Current Objective:</Text>
+      //         <Text>{campaign.currentQuest}</Text>
+      //       </View>
+      //       <View style={styles.contentContainer} className="h-[120px] border-2">
+      //         <View className="bg-slate-200">
+      //           <Text className="font-[Scada] m-auto font-bold text-xl">Party:</Text>
+      //           <ScrollView style={styles.leftColumn} className="">
+      //               <CharacterList />
+      //           </ScrollView>
+      //         </View>
+      //         <View className="bg-slate-200">
+      //           <Text className="font-[Scada] w-1/2 m-auto font-bold text-xl">Notes:</Text>
+      //           <ScrollView style={styles.leftColumn} className="w-full">
+      //             <View style={styles.scrollableContent} className="w-[200px] h-[320px]">
+      //               <Notes />
+      //             </View>
+      //           </ScrollView>
+      //         </View>
+      //         {/* <View style={styles.rightColumn} className="border-2 border-red-500">
+      //           <Text className="font-[Scada] m-auto font-bold text-xl">Notes:</Text>
+      //           <Notes />
+      //         </View> */}
+      //       </View>
+      //     </View>
+      //   );
+      <View>
+        <View className="bg-slate-200 w-full">
+          <Header />
         </View>
-        <View style={styles.contentContainer}>
-          <ScrollView style={styles.leftColumn}>
-            <View style={styles.scrollableContent}>
-              <Text>
-                <CharacterList />
-              </Text>
+        <View className="flex-row">
+          <ScrollView className="w-1/2 bg-slate-200">
+            <View className="p-4">
+              <Text className="text-lg font-[Scada] m-auto">Party:</Text>
+              <CharacterList />
             </View>
           </ScrollView>
-          <View style={styles.rightColumn}>
-            <Text className=''>Notes:</Text>
-            <Notes />
-          </View>
+          <ScrollView className="w-1/2 bg-slate-200">
+            <View className="p-4">
+              <Text className="text-lg font-[Scada] m-auto">Notes:</Text>
+              <Notes />
+            </View>
+          </ScrollView>
+        </View>
+        <View className="h-[150px] bg-blue-500 justify-center items-center">
+          <Text>Toolbox</Text>
         </View>
       </View>
+
     );
-  };
 
+  }
 }
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  header: {
-    width: '100%',
-    height: 200,
-    backgroundColor: '#e2e8f0',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  contentContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    width: '100%',
-  },
-  leftColumn: {
-    flex: 1,
-    backgroundColor: '#e2e8f0',
-    height: '100%',
-  },
-  scrollableContent: {
-    flexGrow: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-  },
-  rightColumn: {
-    flex: 1,
-    backgroundColor: '#e2e8f0',
-    height: '100%',
-  },
-});

@@ -17,7 +17,7 @@ export default function Character({ character }) {
       dispatch(setNotes(campaignNotes))
     } else {
       dispatch(setActive(character))
-      dispatch(setNotes(character.notes.length ? character.notes : [`No notes to display for ${character.name}`]))
+      dispatch(setNotes(character.notes.length ? character.notes : [`No notes to display for ${character.name}.`]))
     }
   }
 
@@ -25,8 +25,8 @@ export default function Character({ character }) {
     <View className="pb-3">
       <TouchableOpacity className={`${character.type === 'npc' ? 'bg-sky-200 ' : 'bg-white '} ${isActive ? `border-2 border-lime-400` : ''} rounded-xl`} onPress={handlePress}>
         <View className="p-2">
-          <Text className="font-[Scada]">{character.name}</Text>
-          <Text>{`${character.race} ${character.class} ${character.level}`}</Text>
+          <Text className="font-[Scada] text-xl">{character.name}</Text>
+          <Text className="font-[Scada]">{`${character.race} ${character.class} ${character.level}`}</Text>
         </View>
       </TouchableOpacity>
     </View>

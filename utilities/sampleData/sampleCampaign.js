@@ -30,10 +30,19 @@ export default {
       notes: []
     },
     {
-      name: "Boxbix",
+      name: 'Boxbix',
       type: 'npc',
       race: 'Dwarf',
       class: 'Cleric',
+      level: '4',
+      status: [],
+      notes: []
+    },
+    {
+      name: "Brandalf",
+      type: 'npc',
+      race: 'High Elf',
+      class: 'Wizard',
       level: '4',
       status: [],
       notes: []
@@ -52,5 +61,6 @@ export default {
   quests: [],
   currentQuest: 'To take over the world!!!',
   notes: ['This is the initial note for the sample campaign. Click to edit someday I guess.'],
+  location: 'On the road',
   active: null
 }
