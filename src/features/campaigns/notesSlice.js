@@ -2,10 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const notesSlice = createSlice({
   name: 'notes',
-  initialState: [],
+  initialState: { current: ['notes in da notes sliceee'] },
   reducers: {
     setNotes: (state, action) => {
-      state = action.payload
+      state.current = action.payload
     }
   }
 })

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 export default function Notes() {
 
-  const notes = useSelector(state => (state.notes))
+  const notes = useSelector(state => state.notes.current)
 
   return (
     <View>

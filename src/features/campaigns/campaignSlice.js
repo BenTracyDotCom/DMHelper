@@ -8,9 +8,15 @@ const campaignSlice = createSlice({
   reducers: {
     currentQuestUpdated: (state, action) => {
       state.currentQuest = action.payload
+    },
+    notesUpdated: (state, action) => {
+      //TODO
+    },
+    setActive: (state, action) => {
+      state.active = action.payload
     }
   }
 })
 
-export const {} = campaignSlice.actions
+export const { currentQuestUpdated, notesUpdated, setActive } = campaignSlice.actions
 export default campaignSlice.reducer

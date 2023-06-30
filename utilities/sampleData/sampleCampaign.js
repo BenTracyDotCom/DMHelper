@@ -18,7 +18,7 @@ export default {
      class: "Barbarian",
      level: 4,
      status: [],
-     notes: []
+     notes: ['Failed CON save vs. were-babboons']
     },
     {
       name: "Benthar",
@@ -51,5 +51,6 @@ export default {
   },
   quests: [],
   currentQuest: 'To take over the world!!!',
-  notes: ['This is the initial note for the sample campaign. Click to edit someday I guess.']
+  notes: ['This is the initial note for the sample campaign. Click to edit someday I guess.'],
+  active: null
 }

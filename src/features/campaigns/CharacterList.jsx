@@ -7,7 +7,7 @@ export default function CharacterList(){
   const campaign = useSelector(state => (state.campaign))
 
   return (
-    <View>
+    <View className="mx-2">
       {campaign.characters && campaign.characters.map(char => (
       <Character character={char} key={char.name}/>
       ))}

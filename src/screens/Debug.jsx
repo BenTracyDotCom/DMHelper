@@ -1,4 +1,4 @@
-import { View, Text, Modal, TouchableOpacity } from 'react-native';
+import { View, Text, Modal, TouchableOpacity, ScrollView } from 'react-native';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import React from 'react';
@@ -37,12 +37,14 @@ export default function ({ navigation }) {
         <Text className="w-11/12 h-11/12 m-auto">
           Current State:
         </Text>
-        {Object.keys(state).map(stateThing => (
-          <React.Fragment key="stateThing">
-            <Text className="font-bold ml-5 my-2">{stateThing}:</Text>
-            <Text className="ml-5">{JSON.stringify(state[stateThing])}</Text>
-          </React.Fragment>
-        ))}
+        <ScrollView>
+          {Object.keys(state).map(stateThing => (
+            <React.Fragment key="stateThing">
+              <Text className="font-bold ml-5 my-2">{stateThing}:</Text>
+              <Text className="ml-5">{JSON.stringify(state[stateThing])}</Text>
+            </React.Fragment>
+          ))}
+        </ScrollView>
         <TouchableOpacity onPress={() => setShow(false)} className="m-auto">
           <Text className="text-blue-500">Click to close</Text>
         </TouchableOpacity>

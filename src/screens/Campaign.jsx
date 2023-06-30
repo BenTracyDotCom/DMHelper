@@ -3,13 +3,14 @@ import { View, Text, ScrollView, StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useSelector } from 'react-redux';
 import CharacterList from '../features/campaigns/CharacterList';
+import Notes from '../features/campaigns/Notes';
 
 export default function Campaign() {
 
   const campaign = useSelector(state => (state.campaign))
   const [loading, setLoading] = useState(false)
 
-  if(loading){
+  if (loading) {
     return <StatusBar />
   }
 
@@ -31,17 +32,15 @@ export default function Campaign() {
             </View>
           </ScrollView>
           <View style={styles.rightColumn}>
-            <Text className="border-2">Notes:</Text>
-            <Text>
-              // Fixed height content goes here...
-            </Text>
+            <Text className=''>Notes:</Text>
+            <Notes />
           </View>
         </View>
       </View>
     );
   };
 
-  }
+}
 
 
 const styles = StyleSheet.create({
