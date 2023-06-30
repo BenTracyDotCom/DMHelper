@@ -11,7 +11,10 @@ const encounterSlice = createSlice({
         state.active = (state.active + 1) % state.chars.length
       },
       setTargeted: (state, action) => {
-        
+        //TODO
+      },
+      setInitiative: (state, action) => {
+        const index = state.chars.findIndex(char => char.name === action.payload.name)
       },
       //the following actions require a "target" integer corresponding to an index in the encounter's "chars" array
       statusAdded: (state, action) => {
