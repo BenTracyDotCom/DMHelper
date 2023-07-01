@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react'
 import Modal from 'react-native-modal';
 import { toggleNoteModal } from './notesSlice';
+import { addNote } from '../campaigns/campaignSlice';
 
 export default function AddNote() {
 
@@ -12,7 +13,7 @@ export default function AddNote() {
   const [text, setText] = useState('')
 
   return (
-    <Modal isVisible={!visible} avoidKeyboard={true} style={styles.modalBg}>
+    <Modal isVisible={visible} avoidKeyboard={true} style={styles.modalBg}>
       <View style={styles.modalBase}>
         <View style={styles.modalCard}>
           <TextInput style={styles.textInput} />
@@ -57,7 +58,7 @@ const styles = StyleSheet.create({
     borderRadius: 12
   },
   buttonbar: {
-    marginTop: 8,
+    marginTop: 6,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginHorizontal: 20

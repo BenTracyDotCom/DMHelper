@@ -9,8 +9,18 @@ const campaignSlice = createSlice({
     currentQuestUpdated: (state, action) => {
       state.currentQuest = action.payload
     },
-    notesUpdated: (state, action) => {
-      //TODO
+    addNote: (state, action) => {
+      state.notes.push(action.payload)
+    },
+    deleteNote: (state, action) => {
+      state.notes = state.notes.filter(note => (note !== action.payload))
+    },
+    /*requires payload to include:
+    { old: noteToUpdate, new: noteToReplaceItWith }
+    */
+    editNote: (state, action) => {
+      const index = state.notes.findIndex(action.payload.old)
+      state.notes.splice(index, 1, action.payload.new)
     },
     setActive: (state, action) => {
       state.active = action.payload
@@ -18,5 +28,5 @@ const campaignSlice = createSlice({
   }
 })
 
-export const { currentQuestUpdated, notesUpdated, setActive } = campaignSlice.actions
+export const { currentQuestUpdated, addNote, deleteNote, editNote, setActive } = campaignSlice.actions
 export default campaignSlice.reducer
