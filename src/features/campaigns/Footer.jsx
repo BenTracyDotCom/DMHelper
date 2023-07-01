@@ -2,9 +2,15 @@ import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
 
 export default function Footer(){
 
+  const handleEncounter = () => {
+    //TODO
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Feet go here lol</Text>
+      <TouchableOpacity style={styles.encounters} onPress={handleEncounter}>
+        <Text style={styles.buttonText}>Encounters</Text>
+      </TouchableOpacity>
     </View>
   )
 }
@@ -12,5 +18,18 @@ export default function Footer(){
 const styles = StyleSheet.create({
   container: {
     height: 150
+  },
+  encounters: {
+    borderRadius: 12,
+    backgroundColor: 'blue',
+    marginHorizontal: 9,
+    marginTop: 9,
+  },
+  buttonText: {
+    color: 'white',
+    fontFamily: 'Scada',
+    padding: 8,
+    textAlign: 'center',
+    fontSize: 20
   }
 })

@@ -2,7 +2,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import NewCampaign from '../features/campaigns/NewCampaign';
 import { modalToggled } from '../features/campaigns/newCampaignSlice';
-import { setNotes } from '../features/campaigns/notesSlice';
+import { setNotes } from '../features/notes/notesSlice';
 
 
 export default function Launch({ navigation }) {

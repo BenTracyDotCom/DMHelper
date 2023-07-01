@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity } from 'react-native';
-import { setNotes } from './notesSlice';
+import { setNotes } from '../notes/notesSlice';
 import { setActive } from './campaignSlice';
 import { useDispatch, useSelector } from 'react-redux';
 

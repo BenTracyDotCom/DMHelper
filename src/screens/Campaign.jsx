@@ -5,7 +5,8 @@ import { useSelector } from 'react-redux';
 import Header from '../features/campaigns/Header';
 import Footer from '../features/campaigns/Footer';
 import CharacterList from '../features/campaigns/CharacterList';
-import Notes from '../features/campaigns/Notes';
+import Notes from '../features/notes/Notes';
+import AddNote from '../features/notes/AddNote';
 
 export default function Campaign({ navigation }) {
 
@@ -21,6 +22,7 @@ export default function Campaign({ navigation }) {
     <View style={styles.container}>
       <Header />
       <View style={styles.content}>
+        <AddNote />
         <View style={styles.column}>
           <View style={styles.columnHeader}>
             <Text style={styles.columnTitle}>Party</Text>

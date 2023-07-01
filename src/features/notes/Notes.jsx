@@ -1,13 +1,17 @@
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Note from './Note';
+import { toggleNoteModal } from './notesSlice';
 
 export default function Notes() {
 
   const notes = useSelector(state => state.notes.current)
+  const active = useSelector(state => state.campaign.active)
+
+  const dispatch = useDispatch()
 
   const handleAddNote = () => {
-    //TODO, popup a text input modal to add a note to active notepad
+    dispatch(toggleNoteModal())
   }
 
   return (
@@ -44,6 +48,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 30,
     height: 30,
-    backgroundColor: '#e5e7eb'
+    backgroundColor: 'white'
   }
 })
