@@ -1,11 +1,16 @@
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { useState } from 'react';
-import { modalToggled } from '../campaigns/newCampaignSlice';
+import { useDispatch } from 'react-redux';
+import { toggleNoteModal } from './notesSlice';
+import { setStale } from './notesSlice';
 
 export default function Note({note}) {
+  
+  const dispatch = useDispatch()
 
   const handleEdit = () => {
-
+    dispatch(setStale(note))
+    dispatch(toggleNoteModal())
   }
 
   return (

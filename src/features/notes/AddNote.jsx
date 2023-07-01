@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Modal from 'react-native-modal';
 import { toggleNoteModal, setStale } from './notesSlice';
 import { addNote, editNote } from '../campaigns/campaignSlice';
@@ -40,13 +40,22 @@ export default function AddNote() {
     }
   }
 
+  const handleCancel = () => {
+    setText('')
+    dispatch(toggleNoteModal())
+  }
+
+  useEffect(() => {
+    setText(old)
+  }, [old])
+
   return (
     <Modal isVisible={visible} avoidKeyboard={true} style={styles.modalBg}>
       <View style={styles.modalBase}>
         <View style={styles.modalCard}>
           <TextInput style={styles.textInput} onChangeText={setText} value={text} />
           <View style={styles.buttonbar}>
-            <TouchableOpacity style={{ ...styles.button, backgroundColor: '#ef4444' }}>
+            <TouchableOpacity style={{ ...styles.button, backgroundColor: '#ef4444' }} onPress={handleCancel}>
               <Text>X</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{ ...styles.button, backgroundColor: '#4ade80' }} onPress={handleSubmit}>
