@@ -1,12 +1,21 @@
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 export default function Note({note}) {
 
   return (
     <View>
-      <TouchableOpacity className="px-2 pt-2">
-        <Text>{note}</Text>
+      <TouchableOpacity>
+        <Text style={styles.noteText}>{note}</Text>
       </TouchableOpacity>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  noteCard: {
+
+  },
+  noteText: {
+    paddingHorizontal: 5
+  }
+})
