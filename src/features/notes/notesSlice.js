@@ -3,8 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const notesSlice = createSlice({
   name: 'notes',
   initialState: { 
-    current: ['notes in da notes sliceee'],
-    showAddNoteModal: false 
+    current: [],
+    showAddNoteModal: false,
+    lastNote: '' 
   },
   reducers: {
     setNotes: (state, action) => {
@@ -12,9 +13,12 @@ const notesSlice = createSlice({
     },
     toggleNoteModal: state => {
       state.showAddNoteModal = !state.showAddNoteModal
+    },
+    setStale: (state, action) => {
+      state.lastNote = action.payload
     }
   }
 })
 
-export const { setNotes, toggleNoteModal } = notesSlice.actions
+export const { setNotes, toggleNoteModal, setStale } = notesSlice.actions
 export default notesSlice.reducer

@@ -2,26 +2,54 @@ import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-nativ
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react'
 import Modal from 'react-native-modal';
-import { toggleNoteModal } from './notesSlice';
-import { addNote } from '../campaigns/campaignSlice';
+import { toggleNoteModal, setStale } from './notesSlice';
+import { addNote, editNote } from '../campaigns/campaignSlice';
 
 export default function AddNote() {
 
+
   const dispatch = useDispatch()
   const visible = useSelector(state => state.notes.showAddNoteModal)
+  const old = useSelector(state => state.notes.lastNote)
+  const active = useSelector(state => state.campaign.active)
 
-  const [text, setText] = useState('')
+
+  //TODO: add note to proper array (campaign or character)
+
+  const [text, setText] = useState(old)
+
+  const handleSubmit = () => {
+    if (active !== null) {
+      //TODO: update character notes
+    } else {
+      if (old !== '') {
+        dispatch(editNote(
+          {
+            old: old,
+            new: text
+          }
+        ))
+        setText('')
+        dispatch(setStale(''))
+        dispatch(toggleNoteModal())
+      } else {
+        dispatch(addNote(text))
+        setText('')
+        dispatch(toggleNoteModal())
+      }
+    }
+  }
 
   return (
     <Modal isVisible={visible} avoidKeyboard={true} style={styles.modalBg}>
       <View style={styles.modalBase}>
         <View style={styles.modalCard}>
-          <TextInput style={styles.textInput} />
+          <TextInput style={styles.textInput} onChangeText={setText} value={text} />
           <View style={styles.buttonbar}>
             <TouchableOpacity style={{ ...styles.button, backgroundColor: '#ef4444' }}>
               <Text>X</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={{ ...styles.button, backgroundColor: '#4ade80' }} onPress={() => { dispatch(toggleNoteModal())}}>
+            <TouchableOpacity style={{ ...styles.button, backgroundColor: '#4ade80' }} onPress={handleSubmit}>
               <Text>✓</Text>
             </TouchableOpacity>
           </View>

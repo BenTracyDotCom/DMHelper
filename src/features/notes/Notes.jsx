@@ -1,18 +1,26 @@
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import Note from './Note';
-import { toggleNoteModal } from './notesSlice';
+import { toggleNoteModal, setStale } from './notesSlice';
+import { useEffect } from 'react';
+import { setNotes } from './notesSlice';
 
 export default function Notes() {
 
   const notes = useSelector(state => state.notes.current)
+  const campaignNotes = useSelector(state => state.campaign.notes)
   const active = useSelector(state => state.campaign.active)
 
   const dispatch = useDispatch()
 
+  
   const handleAddNote = () => {
     dispatch(toggleNoteModal())
   }
+
+  useEffect(() => {
+    dispatch(setNotes(campaignNotes))
+  }, [campaignNotes])
 
   return (
     <View style={styles.notes}>

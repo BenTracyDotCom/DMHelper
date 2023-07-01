@@ -10,7 +10,9 @@ const campaignSlice = createSlice({
       state.currentQuest = action.payload
     },
     addNote: (state, action) => {
-      state.notes.push(action.payload)
+      newNotes = state.notes
+      newNotes.push(action.payload)
+      state.notes = newNotes
     },
     deleteNote: (state, action) => {
       state.notes = state.notes.filter(note => (note !== action.payload))
