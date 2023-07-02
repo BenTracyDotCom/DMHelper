@@ -45,7 +45,11 @@ export default function AddNote() {
           note: text
         }))
         setText('');
-        charNotes.push(text)
+        if(charNotes[0].slice(0, 8) === 'No notes'){
+          charNotes.splice(0, 1, text)
+        } else {
+          charNotes.push(text)
+        }
         dispatch(setNotes(charNotes))
         dispatch(setActive(active))
         dispatch(toggleNoteModal())
