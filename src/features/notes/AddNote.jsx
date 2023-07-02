@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react'
 import Modal from 'react-native-modal';
 import { toggleNoteModal, setStale } from './notesSlice';
-import { addNote, editNote } from '../campaigns/campaignSlice';
+import { addNote, editNote, addCharNote, editCharNote, setActive } from '../campaigns/campaignSlice';
+import { setNotes } from './notesSlice';
 
 export default function AddNote() {
 
@@ -12,6 +13,7 @@ export default function AddNote() {
   const visible = useSelector(state => state.notes.showAddNoteModal)
   const old = useSelector(state => state.notes.lastNote)
   const active = useSelector(state => state.campaign.active)
+  const charNotes = useSelector(state => state.notes.current).slice(0)
 
 
   //TODO: add note to proper array (campaign or character)
@@ -20,7 +22,34 @@ export default function AddNote() {
 
   const handleSubmit = () => {
     if (active !== null) {
-      //TODO: update character notes
+      if (old !== '') {
+        const noteIndex = charNotes.findIndex(note => note === old)
+        dispatch(editCharNote({
+          name: active.name,
+          old: old,
+          new: text
+        }));
+        setText('');
+        dispatch(setStale(''));
+        if (text) {
+          charNotes.splice(noteIndex, 1, text)
+        } else {
+          charNotes.splice(noteIndex, 1)
+        }
+        dispatch(setNotes(charNotes))
+        dispatch(setActive(active))
+        dispatch(toggleNoteModal())
+      } else {
+        dispatch(addCharNote({
+          name: active.name,
+          note: text
+        }))
+        setText('');
+        charNotes.push(text)
+        dispatch(setNotes(charNotes))
+        dispatch(setActive(active))
+        dispatch(toggleNoteModal())
+      }
     } else {
       if (old !== '') {
         dispatch(editNote(

@@ -78,7 +78,7 @@ export default {
   },
   quests: [],
   currentQuest: 'To take over the world!!!',
-  notes: ['This is the initial note for the sample campaign. Click to edit someday I guess.'],
+  notes: ['This is the initial note for the sample campaign. Click to edit!'],
   location: 'On the road',
   active: null
 }

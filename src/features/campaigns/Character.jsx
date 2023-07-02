@@ -7,7 +7,7 @@ export default function Character({ character }) {
 
   const dispatch = useDispatch();
   const active = useSelector(state => state.campaign.active)
-  const isActive = character === active
+  const isActive = (active !== null && character.name === active.name)
   const campaignNotes = useSelector(state => state.campaign.notes)
 
 

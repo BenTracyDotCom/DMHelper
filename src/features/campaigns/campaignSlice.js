@@ -25,9 +25,35 @@ const campaignSlice = createSlice({
       if (action.payload.new) {
         state.notes.splice(index, 1, action.payload.new)
       } else {
-        alert('this should delete')
         state.notes.splice(index, 1)
       }
+    },
+    /*requires payload to include:
+    { name: string, note: string }
+    */
+    addCharNote: (state, action) => {
+      const charIndex = state.characters.findIndex((char) => char.name === action.payload.name)
+      const charToUpdate = state.characters[charIndex]
+      charToUpdate.notes.push(action.payload.note)
+      const chars = state.characters
+      chars.splice(charIndex, 1, charToUpdate)
+      state.characters = chars
+    },
+    /*requires payload to include:
+    { name: string, old: noteToUpdate, new: noteToReplaceItWith }
+    */
+    editCharNote: (state, action) => {
+      const charIndex = state.characters.findIndex((char) => char.name === action.payload.name)
+      const charToUpdate = state.characters[charIndex]
+      const noteIndex = charToUpdate.notes.findIndex((note) => note === action.payload.old)
+      if(action.payload.new){
+        charToUpdate.notes.splice(noteIndex, 1, action.payload.new)
+      } else {
+        charToUpdate.notes.splice(noteIndex, 1)
+      }
+      const chars = state.characters
+      chars.splice(charIndex, 1, charToUpdate)
+      state.characters = chars
     },
     setActive: (state, action) => {
       state.active = action.payload
@@ -35,5 +61,5 @@ const campaignSlice = createSlice({
   }
 })
 
-export const { currentQuestUpdated, addNote, deleteNote, editNote, setActive } = campaignSlice.actions
+export const { currentQuestUpdated, addNote, deleteNote, editNote, addCharNote, editCharNote, setActive } = campaignSlice.actions
 export default campaignSlice.reducer
