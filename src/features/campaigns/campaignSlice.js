@@ -22,7 +22,12 @@ const campaignSlice = createSlice({
     */
     editNote: (state, action) => {
       const index = state.notes.findIndex((note) => note === action.payload.old)
-      state.notes.splice(index, 1, action.payload.new)
+      if (action.payload.new) {
+        state.notes.splice(index, 1, action.payload.new)
+      } else {
+        alert('this should delete')
+        state.notes.splice(index, 1)
+      }
     },
     setActive: (state, action) => {
       state.active = action.payload
