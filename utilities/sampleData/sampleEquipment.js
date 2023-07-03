@@ -1,4 +1,4 @@
-{
+export default {
 	"desc": [],
 	"special": [],
 	"index": "abacus",

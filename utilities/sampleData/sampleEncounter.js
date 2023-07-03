@@ -9,7 +9,8 @@ export default {
             ac: 14,
             hp: 123,
             status: [],
-            type: 'pc'
+            type: 'pc',
+            initiative: 22 
         },
         {
             name: 'Goblin Shmn',
@@ -17,6 +18,7 @@ export default {
             hp: 30,
             status: [],
             type: 'enemy',
+            initiative: 21,
             cr: 3
         },
         {
@@ -24,7 +26,8 @@ export default {
             ac: 13,
             hp: 30,
             status: [],
-            type: 'pc'
+            type: 'pc',
+            initiative: 18,
         },
         {
             name: 'Goblin A',
@@ -32,14 +35,16 @@ export default {
             hp: 24,
             status: [],
             type: 'enemy',
-            cr: 0.25
+            cr: 0.25,
+            initiative: 13
         },
         {
             name: 'Boxbix',
             ac: 16,
             hp: 32,
             status: [],
-            type: 'npc'
+            type: 'npc',
+            initiative: 8
         }
     ]
 }

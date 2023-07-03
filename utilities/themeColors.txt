@@ -1,0 +1,9 @@
+Don't worry about all the import/export business, just copy and paste these theme colors:
+
+
+
+dark gray bg for buttons: '#d1d5db'
+
+Light gray under new note modal: '#d1d5db'
+
+Cancel buttons: '#ef4444'
