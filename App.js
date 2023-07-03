@@ -20,6 +20,13 @@ import Debug from './src/screens/Debug';
 import Equipments from './src/screens/Equipments.jsx'
 import Equipment from './src/screens/Equipment.jsx'
 
+import Weapons from './src/screens/Weapons.jsx'
+import Weapon from './src/screens/Weapon.jsx'
+
+import MagicItems from './src/screens/MagicItems.jsx'
+import MagicItem from './src/screens/MagicItem.jsx'
+
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -78,6 +85,22 @@ export default function App() {
           <Stack.Screen
           name="Debug"
           component={Debug}
+          />
+          <Stack.Screen
+          name="Weapons"
+          component={Weapons}
+          />
+          <Stack.Screen
+          name="Weapon"
+          component={Weapon}
+          />
+          <Stack.Screen
+          name="MagicItems"
+          component={MagicItems}
+          />
+          <Stack.Screen
+          name="MagicItem"
+          component={MagicItem}
           />
         </Stack.Navigator>
       </Provider>

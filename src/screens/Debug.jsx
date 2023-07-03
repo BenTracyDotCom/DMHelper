@@ -11,6 +11,8 @@ import Monsters from './Monsters';
 import Campaign from './Campaign';
 import Equipment from './Equipment'
 import Equipments from './Equipments'
+import Weapons from './Weapons'
+import MagicItems from './MagicItems'
 
 export default function ({ navigation }) {
   const [show, setShow] = useState(false);
@@ -25,6 +27,8 @@ export default function ({ navigation }) {
     Encounter: Encounter,
     Monsters: Monsters,
     Equipment: Equipments,
+    Weapons: Weapons,
+    Magic_Items: MagicItems,
   }
 
   return (

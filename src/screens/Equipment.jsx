@@ -13,7 +13,6 @@ export default function Equipment() {
       try {
         const response = await fetch(`https://www.dnd5eapi.co${equipmentUrl}`)
         const data = await response.json()
-        console.log(data)
         setEquipmentData(data)
         setLoading(false)
       } catch (error) {
@@ -85,3 +84,4 @@ const styles = StyleSheet.create({
     marginVertical: 5, // Some margin for separation
   }
 })
+
