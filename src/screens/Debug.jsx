@@ -28,12 +28,9 @@ export default function ({ navigation }) {
     Encounter: Encounter,
     Monsters: Monsters,
     Equipment: Equipments,
-<<<<<<< HEAD
     Weapons: Weapons,
     Magic_Items: MagicItems,
-=======
     EncounterBuilder: EncounterBuilder,
->>>>>>> cf97bdeb5d8301ca01f067318c5dcb71d3302e18
   }
 
   return (
