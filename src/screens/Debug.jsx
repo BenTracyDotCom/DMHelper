@@ -7,6 +7,7 @@ import Launch from './Launch';
 import Spell from './Spell';
 import Spells from './Spells';
 import Encounter from './Encounter';
+import EncounterBuilder from './EncounterBuilder';
 import Monsters from './Monsters';
 import Campaign from './Campaign';
 import Equipment from './Equipment'
@@ -25,6 +26,7 @@ export default function ({ navigation }) {
     Encounter: Encounter,
     Monsters: Monsters,
     Equipment: Equipments,
+    EncounterBuilder: EncounterBuilder,
   }
 
   return (

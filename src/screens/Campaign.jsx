@@ -7,6 +7,7 @@ import Footer from '../features/campaigns/Footer';
 import CharacterList from '../features/campaigns/CharacterList';
 import Notes from '../features/notes/Notes';
 import AddNote from '../features/notes/AddNote';
+import EncounterMenu from '../features/encounter/EncounterMenu';
 
 export default function Campaign({ navigation }) {
 
@@ -23,6 +24,7 @@ export default function Campaign({ navigation }) {
       <Header />
       <View style={styles.content}>
         <AddNote />
+        <EncounterMenu navigation={navigation}/>
         <View style={styles.column}>
           <View style={styles.columnHeader}>
             <Text style={styles.columnTitle}>Party</Text>

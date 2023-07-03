@@ -16,7 +16,7 @@ export default function AddNote() {
   const charNotes = useSelector(state => state.notes.current).slice(0)
 
 
-  //TODO: add note to proper array (campaign or character)
+  //TODO: make note text wrap instead of extend on textinput component
 
   const [text, setText] = useState(old)
 

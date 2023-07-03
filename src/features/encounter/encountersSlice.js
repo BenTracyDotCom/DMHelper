@@ -10,13 +10,13 @@ const encountersSlice = createSlice({
     encounters: [ sampleEncounter ]
   },
   reducers: {
-    toggleEncountersModal: state => {
+    toggleEncountersMenu: state => {
       state.showEncounterModal = !state.showEncounterModal
     },
 
   }
 })
 
-export const { toggleEncountersModal } = encountersSlice.actions
+export const { toggleEncountersMenu } = encountersSlice.actions
 
 export default encountersSlice.reducer

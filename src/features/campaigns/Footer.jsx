@@ -1,9 +1,13 @@
 import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { toggleEncountersMenu } from '../encounter/encountersSlice';
 
 export default function Footer(){
 
+  const dispatch = useDispatch()
+
   const handleEncounter = () => {
-    //TODO
+    dispatch(toggleEncountersMenu())
   }
 
   return (
