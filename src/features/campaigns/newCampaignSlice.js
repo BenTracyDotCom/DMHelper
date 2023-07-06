@@ -5,21 +5,31 @@ const newCampaignSlice = createSlice({
   name: 'newCampaign',
   initialState: {
     shown: false,
+    addCharacter: false,
     campaign: {
       //This is inelegant and will pull from Realm data later
       id: Math.floor(Math.random()*1000),
       title: "",
       characters: [],
+      npcs: [],
       quests: [],
       currentQuest: "Get started",
+      initialLocation: '',
+      maps: [], 
     }
   },
   reducers: {
     modalToggled: (state) => {
       state.shown = !state.shown
     },
+
+    //TODO: toggle a character and/or NPC modal to add either
+
     titleAdded: (state, action) => {
       state.campaign = {...state.campaign, title: action.payload}
+    },
+    toggleAddCharacter: (state) => {
+      state.addCharacter = !state.addCharacter
     },
     //The following require a "character" on the payload
     characterAdded: (state, action) => {
@@ -42,5 +52,5 @@ const newCampaignSlice = createSlice({
   }
 })
 
-export const { modalToggled, titleAdded, characterAdded, characterRemoved, mainQuestAdded, mainQuestRemoved, firstQuestAdded } = newCampaignSlice.actions
+export const { modalToggled, toggleAddCharacter, titleAdded, characterAdded, characterRemoved, mainQuestAdded, mainQuestRemoved, firstQuestAdded } = newCampaignSlice.actions
 export default newCampaignSlice.reducer
