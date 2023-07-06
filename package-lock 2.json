@@ -25,11 +25,10 @@
         "react-native-modal": "^13.0.1",
         "react-native-safe-area-context": "4.5.0",
         "react-native-screens": "~3.20.0",
-        "react-native-select-dropdown": "^3.3.4",
         "react-native-svg": "13.4.0",
         "react-native-svg-transformer": "^1.0.0",
         "react-redux": "^8.0.7",
-        "realm": "^11.10.1",
+        "realm": "^11.9.0",
         "redux": "^4.2.1",
         "tailwind-rn": "^4.2.0",
         "tailwindcss": "^3.3.2"
@@ -13989,11 +13988,6 @@
         "react-native": "*"
       }
     },
-    "node_modules/react-native-select-dropdown": {
-      "version": "3.3.4",
-      "resolved": "https://registry.npmjs.org/react-native-select-dropdown/-/react-native-select-dropdown-3.3.4.tgz",
-      "integrity": "sha512-Ld6BGGgCnbiv7uORAP+KnvDQiqeuqdlasKk9woJH9XtFMD44rwjKwelGzsDxFUM9hIAwZdac4UAFmOmXRaMeRg=="
-    },
     "node_modules/react-native-svg": {
       "version": "13.4.0",
       "license": "MIT",
@@ -14560,9 +14554,8 @@
     },
     "node_modules/realm": {
       "version": "11.10.1",
-      "resolved": "https://registry.npmjs.org/realm/-/realm-11.10.1.tgz",
-      "integrity": "sha512-WIro2gQ2OTixeJTs/vYYyElLkbY8Rkl9tVRGkKelndzy5S1YPsga3ha4DRJ9BNPlMCVpa9eVvW/28wtNBvx9pQ==",
       "hasInstallScript": true,
+      "license": "apache-2.0",
       "dependencies": {
         "@realm/common": "^0.1.4",
         "@realm/network-transport": "^0.7.2",
@@ -26284,8 +26277,6 @@
     },
     "realm": {
       "version": "11.10.1",
-      "resolved": "https://registry.npmjs.org/realm/-/realm-11.10.1.tgz",
-      "integrity": "sha512-WIro2gQ2OTixeJTs/vYYyElLkbY8Rkl9tVRGkKelndzy5S1YPsga3ha4DRJ9BNPlMCVpa9eVvW/28wtNBvx9pQ==",
       "requires": {
         "@realm/common": "^0.1.4",
         "@realm/network-transport": "^0.7.2",
