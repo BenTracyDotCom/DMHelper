@@ -20,6 +20,11 @@ export default function NewCampaign() {
     dispatch(modalToggled())
   }
 
+  const handleSubmit = () => {
+    //TODO: make this validate inputs and add newCampaign to campaigns array
+    dispatch(modalToggled())
+  }
+
 
   return (
     <Modal
@@ -34,7 +39,7 @@ export default function NewCampaign() {
         value={newCampaign.name}
         placeholder={"Enter a name for your new campaign"}
       />
-      {newCampaign.campaign.characters.length && newCampaign.campaign.characters.map((char, i) => (<TouchableOpacity key={i}>
+      {!!newCampaign.campaign.characters.length && newCampaign.campaign.characters.map((char, i) => (<TouchableOpacity key={i}>
         <Text>{char.name}</Text>
       </TouchableOpacity>))}
       <TouchableOpacity onPress={handleCharacter}>
@@ -46,7 +51,7 @@ export default function NewCampaign() {
       <TouchableOpacity onPress={handleCancel} className="m-auto">
         <Text className="text-red-500">Click to cancel</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => { dispatch(modalToggled()) }} className="m-auto">
+      <TouchableOpacity onPress={handleSubmit} className="m-auto">
         <Text className="text-blue-500">Save Campaign</Text>
       </TouchableOpacity>
     </Modal>)
