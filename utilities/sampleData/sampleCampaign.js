@@ -77,8 +77,9 @@ export default {
     }
   },
   quests: [],
-  currentQuest: 'To take over the world!!!',
-  notes: ['This is the initial note for the sample campaign. Click to edit!'],
-  location: 'On the road',
+  currentQuest: 'Meet Me in Phandalin',
+  currentObjective: 'Escort cart to Phandalin',
+  notes: ['Hired by Gundren Rockseeker to escort a wagon of supplies to Phandalin', 'Gundren went ahead with a warrior, Sildar Hallwinter', 'Characters promised 10gp each by the owner of Barthen\'s Provisions in Phandalin on safe delivery'],
+  location: 'Neverwinter',
   active: null
 }

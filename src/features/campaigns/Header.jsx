@@ -29,6 +29,12 @@ export default function Header() {
     <View style={styles.container}>
       <View style={styles.header}>
         <View style={styles.questDataRow}>
+          <Text style={styles.title}>Quest:</Text>
+          <TouchableOpacity style={styles.locationButton} onPress={handleQuest}>
+            <Text style={styles.locationText}>{campaign.currentQuest}</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.questDataRow}>
           <Text style={styles.title}>Where:</Text>
           <TouchableOpacity style={styles.locationButton} onPress={handleLocation}>
             <Text style={styles.locationText}>{campaign.location}</Text>
@@ -37,16 +43,10 @@ export default function Header() {
             <Text style={styles.mapText}>Map</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.questDataRow}>
-          <Text style={styles.title}>Quest:</Text>
-          <TouchableOpacity style={styles.locationButton} onPress={handleQuest}>
-            <Text style={styles.locationText}>{campaign.location}</Text>
-          </TouchableOpacity>
-        </View>
           <Text style={{...styles.title, fontSize: 18}}>Objective:</Text>
         <View style={styles.questDataRow}>
           <TouchableOpacity style={styles.locationButton} onPress={handleObjective}>
-            <Text style={styles.locationText}>{campaign.location}</Text>
+            <Text style={styles.locationText}>{campaign.currentObjective}</Text>
           </TouchableOpacity>
         </View>
         
@@ -79,20 +79,20 @@ const styles = StyleSheet.create({
     fontFamily: 'Scada',
     fontWeight: 'bold',
     fontSize: 24,
-    float: 'left'
   },
   locationButton: {
     flex: 1,
     marginHorizontal: 4,
-    borderRadius: 10,
+    borderRadius: 15,
     backgroundColor: '#d1d5db',
+    alignContent: 'center',
+    justifyContent: 'center'
   },
   locationText: {
     margin: 'auto',
-    padding: 4,
     fontSize: 20,
     fontFamily: 'Scada',
-    textAlign:'center'
+    textAlign:'center',
   },
   mapButton: {
     borderRadius: 10,
