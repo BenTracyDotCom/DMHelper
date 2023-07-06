@@ -16,6 +16,10 @@ export default function NewCampaign() {
     dispatch(toggleAddCharacter())
   }
 
+  const handleCancel = () => {
+    dispatch(modalToggled())
+  }
+
 
   return (
     <Modal
@@ -27,17 +31,23 @@ export default function NewCampaign() {
       <TextInput
         style={styles.input}
         onChangeText={handleTitle}
-        value={newCampaign.title}
+        value={newCampaign.name}
         placeholder={"Enter a name for your new campaign"}
       />
+      {newCampaign.campaign.characters.length && newCampaign.campaign.characters.map((char, i) => (<TouchableOpacity key={i}>
+        <Text>{char.name}</Text>
+      </TouchableOpacity>))}
       <TouchableOpacity onPress={handleCharacter}>
         <Text>Add Character</Text>
       </TouchableOpacity>
       <Text className="w-11/12 h-11/12 m-auto">
         All this page has to do is add a title for the campaign, some characters, the initial location, hook(broader, i.e. "Meet friend in Phandalin"), and objective(more molecular, i.e. 'escort cart to phandalin'). Encounters can be added in the actual campaign screen. Limit characters to what looks nice in those blocks bc no one wants to conditionally change text size on the campaign screen header.
       </Text>
+      <TouchableOpacity onPress={handleCancel} className="m-auto">
+        <Text className="text-red-500">Click to cancel</Text>
+      </TouchableOpacity>
       <TouchableOpacity onPress={() => { dispatch(modalToggled()) }} className="m-auto">
-        <Text className="text-blue-500">Click to close</Text>
+        <Text className="text-blue-500">Save Campaign</Text>
       </TouchableOpacity>
     </Modal>)
 

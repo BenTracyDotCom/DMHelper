@@ -32,6 +32,17 @@ export default function NewCharacterModal() {
     }
     setNotes(oldNotes)
   }
+
+  const handleNPCLocation = (text) => {
+    const oldNotes = notes.slice(0)
+    const newNote = `Location: ${text}`
+    if(oldNotes[0].slice(0, 9) === 'Location:'){
+      oldNotes[0] = newNote
+    } else {
+      oldNotes.unshift(newNote)
+    }
+    setNotes(oldNotes)
+  }
   const handleAddNote = () => {
     const toChange = notes.slice(0)
     toChange.push(note)
@@ -78,6 +89,12 @@ export default function NewCharacterModal() {
          <TextInput 
            placeholder="Player's name"
            onChangeText={handlePlayer}
+         />
+         }
+         {charType === 'NPC' && 
+         <TextInput 
+           placeholder="NPC's location"
+           onChangeText={handleNPCLocation}
          />
          }
          <Text>Race:</Text>
