@@ -3,40 +3,22 @@ export default {
   title: 'Default',
 
   characters: [{
-    name: 'Snervelin',
+    name: 'Benthar',
     type: 'pc',
-    race: 'Gnome',
-    class: 'Wizard',
-    level: 4,
+    race: 'Half-Orc',
+    class: 'Barbarian',
+    level: 1,
     status: [],
-    notes: []
-    },
-    {
-     name: 'Jealdor',
-     type: 'pc',
-     race: 'Dragonborn',
-     class: 'Barbarian',
-     level: 4,
-     status: [],
-     notes: ['Failed CON save vs. were-babboons']
+    notes: ['Ben\'s Character']
     },
     {
      name: 'Kar\'Kalon',
      type: 'pc',
      race: 'Half-Orc',
      class: 'Cleric',
-     level: 4,
+     level: 1,
      status: [],
      notes: ['Will\'s character']
-    },
-    {
-      name: 'Benthar',
-      type: 'pc',
-      race: 'V. Human',
-      class: 'Barbarian',
-      level: 4,
-      status: [],
-      notes: []
     },
     {
       name: 'Zallirill',
@@ -47,24 +29,6 @@ export default {
       status: [],
       notes: ['Zack\'s character']
     },
-    {
-      name: 'Boxbix',
-      type: 'npc',
-      race: 'Dwarf',
-      class: 'Cleric',
-      level: '4',
-      status: [],
-      notes: []
-    },
-    {
-      name: 'Brandalf',
-      type: 'npc',
-      race: 'High Elf',
-      class: 'Wizard',
-      level: '4',
-      status: [],
-      notes: []
-    }
   ],
   npcs: {
     'Boxbix': {
