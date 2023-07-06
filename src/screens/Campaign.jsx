@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, Text, ScrollView, Dimensions, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useSelector } from 'react-redux';
 import Header from '../features/campaigns/Header';
@@ -8,6 +8,7 @@ import CharacterList from '../features/campaigns/CharacterList';
 import Notes from '../features/notes/Notes';
 import AddNote from '../features/notes/AddNote';
 import EncounterMenu from '../features/encounter/EncounterMenu';
+import EncounterBuilder from './EncounterBuilder'
 
 export default function Campaign({ navigation }) {
 
@@ -44,6 +45,9 @@ export default function Campaign({ navigation }) {
           </View>
         </View>
       </View>
+      <TouchableOpacity onPress={() => navigation.navigate('Encounter')} style={styles.button}>
+        <Text style={styles.buttonText}>Go to EncounterBuilder</Text>
+      </TouchableOpacity>
       <Footer />
     </View>
   );
@@ -80,5 +84,17 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 12,
     margin: 4
+  },
+  button: {
+    backgroundColor: 'blue',
+    padding: 10,
+    borderRadius: 8,
+    margin: 20,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold'
   }
 });
