@@ -86,7 +86,7 @@ export default function AddNote() {
     <Modal isVisible={visible} avoidKeyboard={true} style={styles.modalBg}>
       <View style={styles.modalBase}>
         <View style={styles.modalCard}>
-          <TextInput style={styles.textInput} onChangeText={setText} value={text} />
+          <TextInput style={styles.textInput} onChangeText={setText} value={text} multiline={true}/>
           <View style={styles.buttonbar}>
             <TouchableOpacity style={{ ...styles.button, backgroundColor: '#ef4444' }} onPress={handleCancel}>
               <Text>X</Text>
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top',
     padding: 8,
     backgroundColor: 'white',
-    borderRadius: 12
+    borderRadius: 12,
   },
   buttonbar: {
     marginTop: 6,

@@ -9,16 +9,55 @@ export default function Header() {
     //TODO
   }
 
+  const handleQuest = () => {
+    //TODO
+  }
+
+  const handleObjective = () => {
+    //TODO
+  }
+
+  const handleNPCs = () => {
+    //TODO
+  }
+
+  const handleHooks = () => {
+    //TODO
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>Where:</Text>
-        <TouchableOpacity style={styles.locationButton} onPress={handleLocation}>
-          <Text style={styles.locationText}>{campaign.location}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.mapButton}>
-          <Text style={styles.mapText}>Map</Text>
-        </TouchableOpacity>
+        <View style={styles.questDataRow}>
+          <Text style={styles.title}>Quest:</Text>
+          <TouchableOpacity style={styles.locationButton} onPress={handleQuest}>
+            <Text style={styles.locationText}>{campaign.currentQuest}</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.questDataRow}>
+          <Text style={styles.title}>Where:</Text>
+          <TouchableOpacity style={styles.locationButton} onPress={handleLocation}>
+            <Text style={styles.locationText}>{campaign.location}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.mapButton}>
+            <Text style={styles.mapText}>Map</Text>
+          </TouchableOpacity>
+        </View>
+          <Text style={{...styles.title, fontSize: 18}}>Objective:</Text>
+        <View style={styles.questDataRow}>
+          <TouchableOpacity style={styles.locationButton} onPress={handleObjective}>
+            <Text style={styles.locationText}>{campaign.currentObjective}</Text>
+          </TouchableOpacity>
+        </View>
+        
+        <View style={styles.buttonBar}>
+          <TouchableOpacity style={styles.button} onPress={handleNPCs}>
+            <Text style={styles.buttonText}>NPCs</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={handleHooks}>
+            <Text style={styles.buttonText}>Hooks</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -27,13 +66,13 @@ export default function Header() {
 const styles = StyleSheet.create({
   container: {
     height: 200,
+    flexDirection: 'column',
   },
   header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
     alignItems: 'center',
     marginHorizontal: 2,
-    marginTop: 2,
     height: '100%',
   },
   title: {
@@ -44,14 +83,16 @@ const styles = StyleSheet.create({
   locationButton: {
     flex: 1,
     marginHorizontal: 4,
-    borderRadius: 10,
+    borderRadius: 15,
     backgroundColor: '#d1d5db',
+    alignContent: 'center',
+    justifyContent: 'center'
   },
   locationText: {
     margin: 'auto',
-    padding: 8,
     fontSize: 20,
     fontFamily: 'Scada',
+    textAlign:'center',
   },
   mapButton: {
     borderRadius: 10,
@@ -64,4 +105,31 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: 'Scada',
   },
+  questDataRow: {
+    flexDirection: 'row',
+    marginHorizontal: 4,
+    marginVertical: 4,
+  },
+  quest: {
+    flexDirection: 'row',
+  },
+  buttonBar: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '90%',
+    maxHeight: 30,
+    marginBottom: 0
+  },
+  button: {
+    borderRadius: 30,
+    backgroundColor: '#d1d5db',
+    width: '30%',
+    marginTop: 4
+  },
+  buttonText: {
+    fontFamily: 'Scada',
+    fontSize: 18,
+    textAlign: 'center',
+  }
 });

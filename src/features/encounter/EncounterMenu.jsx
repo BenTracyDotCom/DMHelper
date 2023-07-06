@@ -27,7 +27,7 @@ export default function EncounterMenu({ navigation }) {
           <View style={styles.modalCard}>
             <ScrollView contentContainerStyle={styles.listContainer}>
               {!!encounters.length && encounters.map((encounter, index) => (
-                <TouchableOpacity style={styles.encounter} key={`encounter${index}`}>
+                <TouchableOpacity style={styles.encounter} key={`encounter${index}`} onPress={handleClose}>
                   <Text style={styles.text}>{encounter.title}</Text>
                 </TouchableOpacity>
               ))}

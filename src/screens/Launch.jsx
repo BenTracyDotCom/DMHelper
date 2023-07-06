@@ -34,7 +34,7 @@ export default function Launch({ navigation }) {
         </TouchableOpacity>
       ))}
       <TouchableOpacity onPress={handleNew} className="mx-auto mt-5 w-11/12 bg-blue-500 rounded-lg">
-        <Text className="p-2 mx-auto text-white">New Campaign +</Text>
+        <Text className="p-2 mx-auto text-white">+ New Campaign +</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={handleDebug} className="mx-auto mt-5 border-2 w-11/12 bg-slate-500 rounded-lg">
         <Text className="p-2 m-auto text-white">Debug</Text>
