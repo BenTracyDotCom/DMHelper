@@ -84,4 +84,3 @@ const styles = StyleSheet.create({
     marginVertical: 5, // Some margin for separation
   }
 })
-
