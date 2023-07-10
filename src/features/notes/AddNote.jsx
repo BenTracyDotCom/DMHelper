@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react'
 import Modal from 'react-native-modal';
 import { toggleNoteModal, setStale } from './notesSlice';
-import { addNote, editNote, addCharNote, editCharNote, setActive } from '../campaigns/campaignSlice';
+import { addNote, editNote, addCharNote, editCharNote, setActiveNotes } from '../campaigns/campaignSlice';
 import { setNotes } from './notesSlice';
 
 export default function AddNote() {
@@ -12,7 +12,7 @@ export default function AddNote() {
   const dispatch = useDispatch()
   const visible = useSelector(state => state.notes.showAddNoteModal)
   const old = useSelector(state => state.notes.lastNote)
-  const active = useSelector(state => state.campaign.active)
+  const active = useSelector(state => state.campaign.activeNotes)
   const charNotes = useSelector(state => state.notes.current).slice(0)
 
 
@@ -37,7 +37,7 @@ export default function AddNote() {
           charNotes.splice(noteIndex, 1)
         }
         dispatch(setNotes(charNotes))
-        dispatch(setActive(active))
+        dispatch(setActiveNotes(active))
         dispatch(toggleNoteModal())
       } else {
         dispatch(addCharNote({
@@ -51,7 +51,7 @@ export default function AddNote() {
           charNotes.push(text)
         }
         dispatch(setNotes(charNotes))
-        dispatch(setActive(active))
+        dispatch(setActiveNotes(active))
         dispatch(toggleNoteModal())
       }
     } else {

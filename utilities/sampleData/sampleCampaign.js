@@ -37,7 +37,8 @@ export default {
       class: 'Cleric',
       stats: {
         
-      }
+      },
+      location: null
     }
   },
   quests: [],
@@ -45,5 +46,5 @@ export default {
   currentObjective: 'Escort cart to Phandalin',
   notes: ['Hired by Gundren Rockseeker to escort a wagon of supplies to Phandalin', 'Gundren went ahead with a warrior, Sildar Hallwinter', 'Characters promised 10gp each by the owner of Barthen\'s Provisions in Phandalin on safe delivery'],
   location: 'Neverwinter',
-  active: null
+  activeNotes: null
 }

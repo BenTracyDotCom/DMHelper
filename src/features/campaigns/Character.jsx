@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 export default function Character({ character }) {
 
   const dispatch = useDispatch();
-  const active = useSelector(state => state.campaign.active)
+  const active = useSelector(state => state.campaign.activeNotes)
   const isActive = (active !== null && character.name === active.name)
   const campaignNotes = useSelector(state => state.campaign.notes)
 

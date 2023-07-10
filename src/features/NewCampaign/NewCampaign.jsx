@@ -1,12 +1,18 @@
-import { Modal, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { Modal, Text, TextInput, TouchableOpacity, StyleSheet, View } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { modalToggled, titleAdded, toggleAddCharacter, characterAdded, characterRemoved, mainQuestAdded, mainQuestRemoved, firstQuestAdded } from './newCampaignSlice';
 import NewCharacterModal from './NewCharacterModal';
+import { useState } from 'react';
+import { campaignAdded } from '../campaigns/campaignsSlice';
 
 export default function NewCampaign() {
 
   const dispatch = useDispatch()
   const newCampaign = useSelector(state => state.newCampaign)
+
+  const [location, setLocation] = useState('')
+  const [hook, setHook] = useState('')
+  const [objective, setObjective] = useState('')
 
   const handleTitle = (text) => {
     dispatch(titleAdded(text))
@@ -21,7 +27,16 @@ export default function NewCampaign() {
   }
 
   const handleSubmit = () => {
-    //TODO: make this validate inputs and add newCampaign to campaigns array
+    //TODO: call a function to save this to Realm and return stored object with ID
+    dispatch(campaignAdded({
+      ...newCampaign.campaign,
+      quests: [hook],
+      currentQuest: hook,
+      location: location,
+      notes: [],
+      currentObjective: objective,
+      activeNotes: null
+    }))
     dispatch(modalToggled())
   }
 
@@ -45,9 +60,27 @@ export default function NewCampaign() {
       <TouchableOpacity onPress={handleCharacter}>
         <Text>Add Character</Text>
       </TouchableOpacity>
-      <Text className="w-11/12 h-11/12 m-auto">
-        All this page has to do is add a title for the campaign, some characters, the initial location, hook(broader, i.e. "Meet friend in Phandalin"), and objective(more molecular, i.e. 'escort cart to phandalin'). Encounters can be added in the actual campaign screen. Limit characters to what looks nice in those blocks bc no one wants to conditionally change text size on the campaign screen header.
-      </Text>
+      <View style={styles.inputRow}>
+        <Text style={styles.inputLabel}>Location:</Text>
+        <TextInput
+          placeholder="Where is your party starting?"
+          onChangeText={setLocation}
+        />
+      </View>
+      <View style={styles.inputRow}>
+        <Text style={styles.inputLabel}>First hook:</Text>
+        <TextInput
+          placeholder="E.g. 'Meet X in Y'"
+          onChangeText={setHook}
+        />
+      </View>
+      <View style={styles.inputRow}>
+        <Text style={styles.inputLabel}>First objective:</Text>
+        <TextInput
+          placeholder="E.g. Travel to Y"
+          onChangeText={setObjective}
+        />
+      </View>
       <TouchableOpacity onPress={handleCancel} className="m-auto">
         <Text className="text-red-500">Click to cancel</Text>
       </TouchableOpacity>
@@ -65,5 +98,11 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 15,
     textAlign: "left"
+  },
+  impotRow: {
+    flexDirection: 'row',
+  },
+  inputLabel: {
+    fontFamily: 'Scada',
   }
 })

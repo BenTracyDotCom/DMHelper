@@ -9,7 +9,7 @@ export default function Notes() {
 
   const notes = useSelector(state => state.notes.current)
   const campaignNotes = useSelector(state => state.campaign.notes)
-  const active = useSelector(state => state.campaign.active)
+  const active = useSelector(state => state.campaign.activeNotes)
 
   const dispatch = useDispatch()
 

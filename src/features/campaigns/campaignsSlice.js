@@ -9,8 +9,8 @@ const campaignsSlice = createSlice({
     reducers: {
         campaignAdded(state, action) {
             state.push({
-                id: action.payload.id,
-                campaign: action.payload.campaign
+              ...action.payload,
+              id: Math.floor(Math.random()*9999)
             })
         },
         campaignEdited(state, action) {
