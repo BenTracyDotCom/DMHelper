@@ -11,7 +11,7 @@ export default function NewCharacterModal() {
   const dispatch = useDispatch()
 
   const addCharacterVisible = useSelector(state => (state.newCampaign.addCharacter))
-  const campaignName = useSelector(state => (state.newCampaign.title))
+  const campaignName = useSelector(state => (state.newCampaign.campaign.title))
 
   const [name, setName] = useState('')
   const [charType, setCharType] = useState('')
@@ -20,7 +20,17 @@ export default function NewCharacterModal() {
   const [charClass, setCharClass] = useState('')
   const [level, setLevel] = useState(null)
   const [notes, setNotes] = useState([])
-  const [note, setNote] = useState([])
+  const [note, setNote] = useState('')
+  const resetEntries = () => {
+    setName('')
+    setCharType('')
+    setRace('')
+    setOtherRace(null)
+    setCharClass('')
+    setLevel(null)
+    setNotes([])
+    setNote('')
+  }
 
   const handlePlayer=(name) => {
     const newNote = `${name}'s character`
@@ -56,19 +66,21 @@ export default function NewCharacterModal() {
   }
 
   const handleCancel = () => {
+    resetEntries()
     dispatch(toggleAddCharacter())
   }
   const handleSubmit = () => {
     const character = {
       name: name,
       type: charType === 'Player' ? 'pc' : 'npc',
-      race: race,
+      race: race !== 'Other' ? race : otherRace,
       'class': charClass,
-      lavel: level,
+      level: level,
       status: [],
       notes: notes
     }
     dispatch(characterAdded(character))
+    resetEntries()
     dispatch(toggleAddCharacter())
   }
 
@@ -116,7 +128,7 @@ export default function NewCharacterModal() {
          <Text>Level:</Text>
          <SelectDropdown
          data={[...Array(20).keys()].map(num => (num + 1))}
-         onSelect={() => ('')}
+         onSelect={setLevel}
          />
          <Text>Notes:</Text>
          {!!notes.length && notes.map((note, i) => (

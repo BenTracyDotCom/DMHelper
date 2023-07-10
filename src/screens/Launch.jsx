@@ -1,7 +1,7 @@
 import { Text, View, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import NewCampaign from '../features/campaigns/NewCampaign';
-import { modalToggled } from '../features/campaigns/newCampaignSlice';
+import NewCampaign from '../features/NewCampaign/NewCampaign';
+import { modalToggled } from '../features/NewCampaign/newCampaignSlice';
 import { setNotes } from '../features/notes/notesSlice';
 
 
