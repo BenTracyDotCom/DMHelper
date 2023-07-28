@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-nati
 import Modal from 'react-native-modal';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleEncountersMenu } from './encountersSlice';
+// import Realm from "realm"
 
 export default function EncounterMenu({ navigation }) {
 
@@ -15,7 +16,7 @@ export default function EncounterMenu({ navigation }) {
   }
 
   //TODO: have list items navigate to Encounter screen and load their respective encounters
-  
+
   //TODO: make a "+" tile which navigates to the CampaignBuilder screen
 
   //TODO: styling: modal card should grow to 400px and scroll after that, should start at just the size of the tiles present
