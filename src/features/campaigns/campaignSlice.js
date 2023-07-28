@@ -55,11 +55,17 @@ const campaignSlice = createSlice({
       chars.splice(charIndex, 1, charToUpdate)
       state.characters = chars
     },
-    setActive: (state, action) => {
-      state.active = action.payload
+    setActiveNotes: (state, action) => {
+      state.activeNotes = action.payload
+    },
+    setCurrentCampaign: (state, action) => {
+      Object.keys(state).forEach(key => [
+        state[key] = action.payload[key]
+      ])
     }
   }
 })
 
-export const { currentQuestUpdated, addNote, deleteNote, editNote, addCharNote, editCharNote, setActive } = campaignSlice.actions
+export const { currentQuestUpdated, addNote, deleteNote, editNote, addCharNote, editCharNote, setActiveNotes, setCurrentCampaign } = campaignSlice.actions
+
 export default campaignSlice.reducer

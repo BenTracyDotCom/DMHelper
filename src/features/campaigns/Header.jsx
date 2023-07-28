@@ -3,7 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 export default function Header() {
 
-  const campaign = useSelector(state => state.campaign)
+  const { location, currentObjective, maps } = useSelector(state => (state.campaign))
+  const currentQuest = useSelector(state => (state.campaign.currentQuest))
 
   const handleLocation = () => {
     //TODO
@@ -31,13 +32,13 @@ export default function Header() {
         <View style={styles.questDataRow}>
           <Text style={styles.title}>Quest:</Text>
           <TouchableOpacity style={styles.locationButton} onPress={handleQuest}>
-            <Text style={styles.locationText}>{campaign.currentQuest}</Text>
+            <Text style={styles.locationText}>{currentQuest}</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.questDataRow}>
           <Text style={styles.title}>Where:</Text>
           <TouchableOpacity style={styles.locationButton} onPress={handleLocation}>
-            <Text style={styles.locationText}>{campaign.location}</Text>
+            <Text style={styles.locationText}>{location}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.mapButton}>
             <Text style={styles.mapText}>Map</Text>
@@ -46,7 +47,7 @@ export default function Header() {
           <Text style={{...styles.title, fontSize: 18}}>Objective:</Text>
         <View style={styles.questDataRow}>
           <TouchableOpacity style={styles.locationButton} onPress={handleObjective}>
-            <Text style={styles.locationText}>{campaign.currentObjective}</Text>
+            <Text style={styles.locationText}>{currentObjective}</Text>
           </TouchableOpacity>
         </View>
         

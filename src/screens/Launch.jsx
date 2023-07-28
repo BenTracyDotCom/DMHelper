@@ -2,6 +2,7 @@ import { Text, View, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import NewCampaign from '../features/NewCampaign/NewCampaign';
 import { modalToggled } from '../features/NewCampaign/newCampaignSlice';
+import { setCurrentCampaign } from '../features/campaigns/campaignSlice';
 import { setNotes } from '../features/notes/notesSlice';
 
 
@@ -12,7 +13,13 @@ export default function Launch({ navigation }) {
 
   const handleCampaign = (title) => {
     dispatch(setNotes(campaigns.filter(camp => camp.title === title)[0].notes))
-    navigation.navigate('Campaign', { name: title})
+    // alert(JSON.stringify(campaigns.find(campaign => (
+    //   campaign.title === title
+    // ))))
+    dispatch(setCurrentCampaign(campaigns.find(campaign => (
+      campaign.title === title
+    ))))
+    navigation.navigate('Campaign', { name: title })
   }
   const handleNew = () => {
     dispatch(modalToggled())

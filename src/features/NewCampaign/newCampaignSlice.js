@@ -14,7 +14,7 @@ const newCampaignSlice = createSlice({
       npcs: [],
       quests: [],
       currentQuest: "Get started",
-      initialLocation: '',
+      location: '',
       maps: [], 
     }
   },
@@ -34,6 +34,9 @@ const newCampaignSlice = createSlice({
     //The following require a "character" on the payload
     characterAdded: (state, action) => {
       state.campaign.characters.push(action.payload)
+      if(action.payload.type === 'npc'){
+        state.campaign.npcs.push(action.payload)
+      }
     },
     characterRemoved: (state, action) => {
       state.campaign.characters = state.campaign.characters.filter(char => (char !== action.payload))
@@ -48,6 +51,9 @@ const newCampaignSlice = createSlice({
     //This final one requires a "firstQuest" string on the payload
     firstQuestAdded: (state, action) => {
       state.campaign.currentQuest = action.payload
+    },
+    locationAdded: (state, action) => {
+      state.campaign.location = action.payload
     }
   }
 })
