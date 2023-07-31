@@ -9,7 +9,12 @@
     "test": "ava"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@react-native-async-storage/async-storage": "1.17.11",
+=======
+    "@expo/ngrok": "^4.1.1",
+    "@react-native-async-storage/async-storage": "^1.19.1",
+>>>>>>> 12227dafa9625c2a6b97a47d7a82db761c1693ef
     "@react-native-picker/picker": "2.4.8",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
@@ -18,6 +23,7 @@
     "@svgr/webpack": "^8.0.1",
     "axios": "^1.4.0",
     "expo": "~48.0.18",
+    "expo-splash-screen": "~0.18.2",
     "expo-status-bar": "~1.4.4",
     "metro": "^0.76.6",
     "nativewind": "^2.0.11",
