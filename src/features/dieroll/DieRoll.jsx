@@ -1,14 +1,38 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Animated } from 'react-native';
 
 export default function Dieroll() {
 
   const [showResult, setShowResult] = useState(false);
   const [show20s, setShow20s] = useState(false);
-  const [result, setResult] = useState(0)
+  const [twunnys, setTwunnys] = useState([])
+  const [result, setResult] = useState({dice: {}, total: 0})
 
-  const handleNon20 = (die) => {
+  const resetDelay = 3000
+  const non20ResetRef = useRef(null);
+
+  const startNon20Timer = () => {
+    if(!non20ResetRef.current){
+      setShowResult(true)
+      non20ResetRef.current = setTimeout(resetNon20s, resetDelay)
+    }
+  }
+  const stopNon20Timer = () => {
+    if(non20ResetRef.current) {
+      clearTimeout(non20ResetRef.current);
+      non20ResetRef.current = null
+    }
+  }
+  const resetNon20s = () => {
+    setShowResult(false)
+    setResult({dice: {}, total: 0})
+  }
+  
+  const handleNon20 = (die) => {   
     let num = Math.ceil(Math.random() * die)
+    //TODO: logic to add this dieroll to results state
+    stopNon20Timer()
+    startNon20Timer()
     console.log(num)
   }
 
