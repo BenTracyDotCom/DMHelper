@@ -18,8 +18,5 @@ export default function Encounter(props) {
 const styles = StyleSheet.create({
   container: {
   height: '100%',
-  borderStyle: 'solid',
-  borderWidth: 2,
-  borderColor: 'green'
 }
 })

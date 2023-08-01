@@ -13,6 +13,7 @@ export default function Dieroll() {
 
   const resetDelay = 3000
   const non20ResetRef = useRef(null);
+  const twunnyResetRef = useRef(null);
 
   const startNon20Timer = () => {
     if(!non20ResetRef.current){
@@ -30,22 +31,44 @@ export default function Dieroll() {
     setShowResult(false)
     setResult({dice: {}, total: 0})
   }
+
+  const start20Timer = () => {
+    if(!twunnyResetRef.current){
+      setShow20s(true)
+      twunnyResetRef.current = setTimeout(reset20s, resetDelay)
+    }
+  }
+  const stop20Timer = () => {
+    if(twunnyResetRef.current) {
+      clearTimeout(twunnyResetRef.current);
+      twunnyResetRef.current = null
+    }
+  }
+  const reset20s = () => {
+    setShow20s(false)
+    setTwunnys([])
+  }
   
   const handleNon20 = (die) => {   
-    let num = Math.ceil(Math.random() * die)
-    let toUpdate = result.dice
+    let num = Math.ceil(Math.random() * die);
+    let toUpdate = result.dice;
     toUpdate[die] ? 
     toUpdate[die].push(num) : 
-    toUpdate[die] = [num]
+    toUpdate[die] = [num];
     let newTotal = Object.keys(toUpdate).reduce((total, die) => (total + toUpdate[die].reduce((sum, roll) => (sum + roll),0)), 0);
-    setResult({dice: toUpdate, total: newTotal})
-    stopNon20Timer()
-    startNon20Timer()
+    setResult({dice: toUpdate, total: newTotal});
+    stopNon20Timer();
+    startNon20Timer();
   }
 
+
   const handle20 = () => {
-    let num = Math.ceil(Math.random() * 20)
-    console.log(num)
+    let num = Math.ceil(Math.random() * 20);
+    let toUpdate = twunnys.slice(0);
+    toUpdate.push(num);
+    setTwunnys(toUpdate);
+    stop20Timer();
+    start20Timer();
   }
 
   const non20s = [4, 6, 8, 10, 12]
@@ -56,6 +79,10 @@ export default function Dieroll() {
       <View>
         <Text style={styles.result}>{resultParser(result)}</Text>  
       </View>}
+      {show20s && 
+      <View>
+        <Text style={styles.result}>{`d20: ${twunnys.map(roll => (` ${roll.toString()}`))}`}</Text>
+        </View>}
       <View style={styles.dieContainer}>
         {non20s.map(die => (
           <TouchableOpacity style={styles.die} onPress={() => handleNon20(die)} key={die}>
