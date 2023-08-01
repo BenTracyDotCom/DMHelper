@@ -7,7 +7,7 @@ import Header from '../features/encounter/Header';
 export default function Encounter(props) {
 
   return (
-    <View>
+    <View style={styles.container}>
       <Header />
       <CharList />
       <DieRoll />
@@ -15,6 +15,11 @@ export default function Encounter(props) {
   )
 }
 
-// const styles = StyleSheet.create({
-//   charList: 
-// })
+const styles = StyleSheet.create({
+  container: {
+  height: '100%',
+  borderStyle: 'solid',
+  borderWidth: 2,
+  borderColor: 'green'
+}
+})

@@ -1,48 +1,62 @@
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { useState } from 'react';
+import { View, TouchableOpacity, Text, StyleSheet, Animated } from 'react-native';
 
 export default function Dieroll() {
 
-  return(
+  const [showResult, setShowResult] = useState(false);
+  const [show20s, setShow20s] = useState(false);
+  const [result, setResult] = useState(0)
+
+  const handleNon20 = (die) => {
+    let num = Math.ceil(Math.random() * die)
+    console.log(num)
+  }
+
+  const handle20 = () => {
+    let num = Math.ceil(Math.random() * 20)
+    console.log(num)
+  }
+
+  const non20s = [4, 6, 8, 10, 12]
+
+  return (
     <View style={styles.box}>
-     <View style={styles.dieContainer}>
-      <TouchableOpacity style={styles.die}>
-        <Text style={styles.dieFace}>d4</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.die}>
-        <Text style={styles.dieFace}>d6</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.die}>
-        <Text style={styles.dieFace}>d8</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.die}>
-        <Text style={styles.dieFace}>d10</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.die}>
-        <Text style={styles.dieFace}>d12</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.die}>
-        <Text style={styles.dieFace}>d20</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.die}>
-        <Text style={styles.dieFace}>d100</Text>
-      </TouchableOpacity>
-     </View>
+      {showResult && 
+      <View>
+        <Text style={styles.result}>Result:</Text>  
+      </View>}
+      <View style={styles.dieContainer}>
+        {non20s.map(die => (
+          <TouchableOpacity style={styles.die} onPress={() => handleNon20(die)} key={die}>
+            <Text style={styles.dieFace}>{`d${die}`}</Text>
+          </TouchableOpacity>
+        ))}
+        <TouchableOpacity style={styles.die} onPress={handle20}>
+          <Text style={styles.dieFace}>d20</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  box:{
+  box: {
     borderColor: 'red',
     borderStyle: 'solid',
     borderWidth: 2,
     flex: 1
   },
+  resultBox: {
+
+  },
+  result: {
+    
+  },
   dieContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    position: 'absolute',
+    justifyContent: 'space-around',
+    alignItems: 'flex-end',
+    flex: 1,
     width: '100%',
     // padding: 10,
     backgroundColor: 'gray',

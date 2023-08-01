@@ -16,12 +16,10 @@ export default function CharList(props) {
     const cr = encounter.chars.filter(char => (char.type === 'enemy')).reduce((memo, item) => (memo += item.cr), 0)
 
     return (
-        <View className="h-2/6 relative">
+        <View>
 
             {encounter.chars.map((char, i) => (<Character character={char} key={i} active={i === encounter.active} />))}
-            <TouchableOpacity onPress={advance} className="bg-green-400 rounded-3xl mb-8 flex self-center">
-                <Text className="text-white text-3xl m-auto p-3 pl-4">▶</Text>
-            </TouchableOpacity>
+
         </View>
     )
 }
