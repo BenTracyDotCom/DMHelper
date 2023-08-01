@@ -23,11 +23,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-<<<<<<< HEAD
-      "package": "com.bentracydotcom.DMHelper"
-=======
       "package": "com.anonymous.DMHelper"
->>>>>>> 12227dafa9625c2a6b97a47d7a82db761c1693ef
     },
     "web": {
       "favicon": "./assets/favicon.png"
