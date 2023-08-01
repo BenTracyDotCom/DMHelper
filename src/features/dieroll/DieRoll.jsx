@@ -30,7 +30,12 @@ export default function Dieroll() {
   
   const handleNon20 = (die) => {   
     let num = Math.ceil(Math.random() * die)
-    //TODO: logic to add this dieroll to results state
+    let toUpdate = result.dice
+    toUpdate[die] ? 
+    toUpdate[die].push(num) : 
+    toUpdate[die] = [num]
+    let newTotal = Object.keys(toUpdate).reduce((total, die) => (total + toUpdate[die].reduce((sum, roll) => (sum + roll),0)), 0);
+    setResult({dice: toUpdate, total: newTotal})
     stopNon20Timer()
     startNon20Timer()
     console.log(num)
@@ -47,7 +52,7 @@ export default function Dieroll() {
     <View style={styles.box}>
       {showResult && 
       <View>
-        <Text style={styles.result}>Result:</Text>  
+        <Text style={styles.result}>{`Result: ${JSON.stringify(result)}`}</Text>  
       </View>}
       <View style={styles.dieContainer}>
         {non20s.map(die => (
