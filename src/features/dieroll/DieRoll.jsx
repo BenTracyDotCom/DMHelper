@@ -7,6 +7,9 @@ export default function Dieroll() {
   const [show20s, setShow20s] = useState(false);
   const [twunnys, setTwunnys] = useState([])
   const [result, setResult] = useState({dice: {}, total: 0})
+  const resultParser = (res) => (
+    `${res.total} (${Object.keys(res.dice).map((die, i) => (`${i > 0 ? '+' : ''}${res.dice[die].length}d${die}`))})`.split('').filter(char => (char !== ',')).join('')
+  )
 
   const resetDelay = 3000
   const non20ResetRef = useRef(null);
@@ -38,7 +41,6 @@ export default function Dieroll() {
     setResult({dice: toUpdate, total: newTotal})
     stopNon20Timer()
     startNon20Timer()
-    console.log(num)
   }
 
   const handle20 = () => {
@@ -52,7 +54,7 @@ export default function Dieroll() {
     <View style={styles.box}>
       {showResult && 
       <View>
-        <Text style={styles.result}>{`Result: ${JSON.stringify(result)}`}</Text>  
+        <Text style={styles.result}>{resultParser(result)}</Text>  
       </View>}
       <View style={styles.dieContainer}>
         {non20s.map(die => (
@@ -70,9 +72,6 @@ export default function Dieroll() {
 
 const styles = StyleSheet.create({
   box: {
-    borderColor: 'red',
-    borderStyle: 'solid',
-    borderWidth: 2,
     flex: 1
   },
   resultBox: {
