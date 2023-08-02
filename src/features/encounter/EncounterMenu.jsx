@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-nati
 import Modal from 'react-native-modal';
 import { useSelector, useDispatch } from 'react-redux';
 import { toggleEncountersMenu } from './encountersSlice';
-// import Realm from "realm"
+import { setEncounter } from './encounterSlice';
 
 export default function EncounterMenu({ navigation }) {
 
@@ -11,13 +11,16 @@ export default function EncounterMenu({ navigation }) {
   const visible = useSelector(state => (state.encounters.showEncounterModal))
   const encounters = useSelector(state => (state.encounters.encounters))
 
-  const handleClose = () => {
-    dispatch(toggleEncountersMenu())
+  const handleEncounter = async (encounter) => {
+    dispatch(setEncounter(encounter))
+    navigation.navigate('Encounter', { name: encounter.title })
   }
+
+
 
   //TODO: have list items navigate to Encounter screen and load their respective encounters
 
-  //TODO: make a "+" tile which navigates to the CampaignBuilder screen
+  //TODO: make a "+" tile which navigates to the EncounterBuilder screen
 
   //TODO: styling: modal card should grow to 400px and scroll after that, should start at just the size of the tiles present
 
@@ -28,7 +31,7 @@ export default function EncounterMenu({ navigation }) {
           <View style={styles.modalCard}>
             <ScrollView contentContainerStyle={styles.listContainer}>
               {!!encounters.length && encounters.map((encounter, index) => (
-                <TouchableOpacity style={styles.encounter} key={`encounter${index}`} onPress={handleClose}>
+                <TouchableOpacity style={styles.encounter} key={`encounter${index}`} onPress={() => handleEncounter(encounter)}>
                   <Text style={styles.text}>{encounter.title}</Text>
                 </TouchableOpacity>
               ))}

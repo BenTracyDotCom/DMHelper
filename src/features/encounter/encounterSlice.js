@@ -7,6 +7,11 @@ const encounterSlice = createSlice({
     name: 'encounter',
     initialState: sampleEncounter,
     reducers: {
+      setEncounter: (state, action) => {
+        Object.keys(action.payload).forEach(key => 
+          (state[key] = action.payload[key])
+        )
+      },
       nextChar: state => {
         state.active = (state.active + 1) % state.chars.length
       },
@@ -41,5 +46,5 @@ const encounterSlice = createSlice({
     }
 })
 
-export const { nextChar, statusAdded, statusRemoved, hpAdded, hpRemoved, targetDestroyed } = encounterSlice.actions
+export const { setEncounter, nextChar, statusAdded, statusRemoved, hpAdded, hpRemoved, targetDestroyed } = encounterSlice.actions
 export default encounterSlice.reducer

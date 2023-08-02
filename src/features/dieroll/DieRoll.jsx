@@ -99,13 +99,13 @@ export default function Dieroll() {
 
 const styles = StyleSheet.create({
   box: {
-    flex: 1
+    flex: 1,
   },
   resultBox: {
 
   },
   result: {
-    
+    textAlign: 'center'
   },
   dieContainer: {
     flexDirection: 'row',
@@ -114,8 +114,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%',
     // padding: 10,
-    backgroundColor: 'gray',
-    bottom: 0
+    bottom: 5
   },
   die: {
     width: 50,
