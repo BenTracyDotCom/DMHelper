@@ -1,21 +1,31 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, Text, TextInput, TouchableOpacity, Button, StyleSheet } from 'react-native'
 import {useSelector, useDispatch} from 'react-redux'
 import {currentQuestUpdated} from '../features/campaigns/campaignSlice.js'
 import {Encounter, Character} from '../data/encountersDB.js'
 import {storeEncounter, getEncounter, removeEncounter} from '../data/encountersDB.js'
 import MultiSelect from 'react-native-multiple-select';
+import {useNavigation} from '@react-navigation/native';
+import {MonsterAdding} from './MonsterAdding'
+import {selectMonster, clearMonsters} from '../features/encounter/encounterBuilderSlice.js'
 
-export default function EncounterBuilder() {
+export default function EncounterBuilder( {route} ) {
+  const navigation = useNavigation();
   const dispatch = useDispatch()
 
   const [title, setTitle] = useState('')
   const [target, setTarget] = useState('')
   const [xpEarned, setXpEarned] = useState('')
-  const [selectedChars, setSelectedChars] = useState([]);
+  const [selectedChars, setSelectedChars] = useState([])
+  const [monsters, setMonsters] = useState([])
 
   const currentQuest = useSelector((state) => state.campaign.currentQuest)
   const characters = useSelector((state) => state.campaign.characters)
+
+  const navigateToMonsterAdding = () => {
+    navigation.navigate('MonsterAdding')
+  }
+
 
   const submitEncounter = () => {
     const newEncounter = {
@@ -25,6 +35,7 @@ export default function EncounterBuilder() {
       xpEarned: Number(xpEarned),
       loot: [],
       chars: [],
+      monsters: selectedMonsters
     }
 
     storeEncounter(newEncounter)
@@ -36,6 +47,14 @@ export default function EncounterBuilder() {
     setXpEarned('')
     setSelectedChars([])
   }
+
+  const selectedMonsters = useSelector((state) => state.encounterBuilder.selectedMonsters)
+
+  useEffect(() => {
+    if (route.params?.selectedMonsters) {
+      setMonsters(route.params.selectedMonsters)
+    }
+  }, [route.params?.selectedMonsters])
 
   return (
     <View style={styles.container}>
@@ -76,6 +95,17 @@ export default function EncounterBuilder() {
         submitButtonColor="#CCC"
         submitButtonText="Submit"
       ></MultiSelect>
+      <View>
+        {selectedMonsters && Object.values(selectedMonsters).map((monster) => (
+          <View key={monster.url}>
+          <Text>{`${monster.url.split('/')[3]}: ${monster.count}`}</Text>
+          </View>
+        ))}
+      </View>
+      <Button
+      title="Add Monster"
+      onPress={() => navigation.navigate('MonsterAdding')}
+      ></Button>
       <Button
         title='Submit Encounter'
         onPress={submitEncounter}
@@ -104,4 +134,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     fontSize: 18,
   },
+  monsterCard: {
+    backgroundColor: 'crimson',
+    color: 'white',
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 5
+  }
 });
