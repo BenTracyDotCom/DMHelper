@@ -27,6 +27,8 @@ import Weapon from './src/screens/Weapon.jsx'
 import MagicItems from './src/screens/MagicItems.jsx'
 import MagicItem from './src/screens/MagicItem.jsx'
 
+import MonsterAdding from './src/screens/MonsterAdding.jsx'
+
 
 const Stack = createNativeStackNavigator();
 
@@ -62,6 +64,10 @@ export default function App() {
            <Stack.Screen
             name="Monsters"
             component={Monsters}
+          />
+          <Stack.Screen
+            name="MonsterAdding"
+            component={MonsterAdding}
           />
           <Stack.Screen
             name="Monster"
