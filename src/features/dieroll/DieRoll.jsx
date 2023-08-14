@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Animated } from 'react-native';
+import { useSelector } from 'react-redux';
 
 export default function Dieroll() {
 
@@ -10,8 +11,8 @@ export default function Dieroll() {
   const resultParser = (res) => (
     `${res.total} (${Object.keys(res.dice).map((die, i) => (`${i > 0 ? '+' : ''}${res.dice[die].length}d${die}`))})`.split('').filter(char => (char !== ',')).join('')
   )
+  const resetDelay = useSelector(state => state.dieroll.delay)
 
-  const resetDelay = 3000
   const non20ResetRef = useRef(null);
   const twunnyResetRef = useRef(null);
 
