@@ -4,7 +4,10 @@ import sampleCampaign from '../../../utilities/sampleData/sampleCampaign';
 
 const campaignSlice = createSlice({
   name: 'campaign',
-  initialState: sampleCampaign,
+  initialState: {
+    ...sampleCampaign,
+    npcs: [],
+  },
   reducers: {
     currentQuestUpdated: (state, action) => {
       state.currentQuest = action.payload
@@ -62,10 +65,22 @@ const campaignSlice = createSlice({
       Object.keys(state).forEach(key => [
         state[key] = action.payload[key]
       ])
+    },
+    addNPC: (state, action) => {
+      state.npcs.push(action.payload)
+    },
+    editNPC: (state, action) => {
+      const index = state.npcs.findIndex((npc) => npc.id === action.payload.id);
+      if (index !== -1) {
+        state.npcs[index] = action.payload;
+      }
+    },
+    deleteNPC: (state, action) => {
+      state.npcs = state.npcs.filter(npc => npc.id !== action.payload.id);
     }
   }
 })
 
-export const { currentQuestUpdated, addNote, deleteNote, editNote, addCharNote, editCharNote, setActiveNotes, setCurrentCampaign } = campaignSlice.actions
+export const { currentQuestUpdated, addNote, deleteNote, editNote, addCharNote, editCharNote, setActiveNotes, setCurrentCampaign, addNPC, editNPC, deleteNPC } = campaignSlice.actions
 
 export default campaignSlice.reducer

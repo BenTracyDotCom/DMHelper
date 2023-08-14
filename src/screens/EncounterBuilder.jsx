@@ -1,13 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text, TextInput, TouchableOpacity, Button, StyleSheet } from 'react-native'
-import {useSelector, useDispatch} from 'react-redux'
-import {currentQuestUpdated} from '../features/campaigns/campaignSlice.js'
-import {Encounter, Character} from '../data/encountersDB.js'
-import {storeEncounter, getEncounter, removeEncounter} from '../data/encountersDB.js'
+import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import { currentQuestUpdated } from '../features/campaigns/campaignSlice.js';
+import { storeEncounter } from '../data/encountersDB.js';
 import MultiSelect from 'react-native-multiple-select';
-import {useNavigation} from '@react-navigation/native';
-import {MonsterAdding} from './MonsterAdding'
-import {selectMonster, clearMonsters} from '../features/encounter/encounterBuilderSlice.js'
+import { useNavigation } from '@react-navigation/native';
+
 
 export default function EncounterBuilder( {route} ) {
   const navigation = useNavigation();
@@ -16,11 +14,11 @@ export default function EncounterBuilder( {route} ) {
   const [title, setTitle] = useState('')
   const [target, setTarget] = useState('')
   const [xpEarned, setXpEarned] = useState('')
-  const [selectedChars, setSelectedChars] = useState([])
   const [monsters, setMonsters] = useState([])
+  const [selectedNPCs, setSelectedNPCs] = useState([])
 
   const currentQuest = useSelector((state) => state.campaign.currentQuest)
-  const characters = useSelector((state) => state.campaign.characters)
+  const npcs = useSelector((state) => state.campaign.npcs)
 
   const navigateToMonsterAdding = () => {
     navigation.navigate('MonsterAdding')
@@ -34,13 +32,19 @@ export default function EncounterBuilder( {route} ) {
       target: Number(target),
       xpEarned: Number(xpEarned),
       loot: [],
-      chars: [],
+      npcs: [...selectedNPCs, ...selectedMonsters],
       monsters: selectedMonsters
-    }
+    };
+
+    selectedMonsters.forEach(monster => {
+      dispatch(addNPC(monster));
+    })
 
     storeEncounter(newEncounter)
+    addEncounter(newEncounter)
 
     dispatch(currentQuestUpdated({...currentQuest, encounter: newEncounter}))
+    dispatch(addNPC(selectedMonsters))
 
     setTitle('')
     setTarget('')
@@ -58,7 +62,6 @@ export default function EncounterBuilder( {route} ) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Encounter Builder</Text>
       <TextInput
         style={styles.input}
         placeholder="Title"
@@ -78,12 +81,12 @@ export default function EncounterBuilder( {route} ) {
         onChangeText={(text) => setXpEarned(text)}
       />
       <MultiSelect
-        items={characters}
-        uniqueKey="name"
-        onSelectedItemsChange={setSelectedChars}
-        selectedItems={selectedChars}
-        selectText="Pick Characters"
-        searchInputPlaceholderext="Search Characters..."
+        items={npcs}
+        uniqueKey="id"
+        onSelectedItemsChange={setSelectedNPCs}
+        selectedItems={selectedNPCs}
+        selectText="Pick NPCs"
+        searchInputPlaceholderext="Search NPCs..."
         tagRemoveIconColor="#CCC"
         tagBorderColor="#CCC"
         tagTextColor="#CCC"
