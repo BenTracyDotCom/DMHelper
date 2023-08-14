@@ -13,6 +13,7 @@ export default function EncounterMenu({ navigation }) {
 
   const handleEncounter = async (encounter) => {
     dispatch(setEncounter(encounter))
+    dispatch(toggleEncountersMenu())
     navigation.navigate('Encounter', { name: encounter.title })
   }
 
