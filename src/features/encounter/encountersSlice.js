@@ -13,6 +13,12 @@ const encountersSlice = createSlice({
     toggleEncountersMenu: state => {
       state.showEncounterModal = !state.showEncounterModal
     },
+    addEncounter: (state, action) => {
+      state.encounters.push(action.payload)
+    },
+    deleteEncounter: (state, action) => {
+      state.encounters = state.encounters.filter(encounter => (encounter !== action.payload))
+    }
 
   }
 })
