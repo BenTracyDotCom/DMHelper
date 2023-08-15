@@ -1,12 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 //sample for testing
 import sampleCampaign from '../../../utilities/sampleData/sampleCampaign';
+import sampleNPCs from '../../../utilities/sampleData/sampleNPCs'
 
 const campaignSlice = createSlice({
   name: 'campaign',
   initialState: {
     ...sampleCampaign,
-    npcs: [],
+    npcs: sampleNPCs,
   },
   reducers: {
     currentQuestUpdated: (state, action) => {
