@@ -122,6 +122,9 @@ export default function Dieroll() {
             onPress={reset20s}>
           </Button>
         </View>}
+        <TouchableOpacity style={styles.undo} onPress={handleUndo}>
+          <Text>Undo</Text>
+        </TouchableOpacity>
       <View style={styles.dieContainer}>
         {non20s.map(die => (
           <TouchableOpacity style={styles.die} onPress={() => handleNon20(die)} key={die}>
@@ -130,9 +133,6 @@ export default function Dieroll() {
         ))}
         <TouchableOpacity style={styles.die} onPress={handle20}>
           <Text style={styles.dieFace}>d20</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.result} onPress={handleUndo}>
-          <Text>Undo</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -170,4 +170,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Scada-Bold',
     color: 'white'
   },
+  undo: {
+    
+  }
 })
