@@ -24,7 +24,7 @@ export default function Campaign({ navigation }) {
       <Header />
       <View style={styles.content}>
         <AddNote />
-        <EncounterMenu navigation={navigation}/>
+        <EncounterMenu navigation={navigation} />
         <View style={styles.column}>
           <View style={styles.columnHeader}>
             <Text style={styles.columnTitle}>Party</Text>

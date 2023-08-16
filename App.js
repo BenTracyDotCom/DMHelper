@@ -47,9 +47,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <View>
       <Preferences />
-      </View>
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Launch">
           <Stack.Screen
@@ -126,7 +124,6 @@ export default function App() {
             component={MagicItem}
           />
         </Stack.Navigator>
-
       </NavigationContainer>
     </Provider>
   );

@@ -1,7 +1,7 @@
 import { Modal, View, Text, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import { useSelector, useDispatch } from 'react-redux';
 import { showPrefs } from "./preferencesSlice";
-
+import { toggle20Mode, toggleNon20Mode, setDelay, setLast20, setLastNon20 } from "../dieroll/dierollSlice";
 export default function Preferences() {
 
   const dispatch = useDispatch()
@@ -12,7 +12,6 @@ export default function Preferences() {
   }
 
   return(
-    <View>
       <Modal visible={visible} avoidKeyboard={true} >
       <View style={styles.modalBg}>
         <View style={styles.modalBase}>
@@ -24,7 +23,6 @@ export default function Preferences() {
         </View>
       </View>
         </Modal>
-    </View>
   )
 }
 
