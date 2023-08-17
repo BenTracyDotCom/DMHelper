@@ -1,4 +1,6 @@
 import { Text, View, TouchableOpacity } from 'react-native';
+import { useEffect } from 'react';
+import { getDiePrefs } from '../features/dieroll/dierollSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import NewCampaign from '../features/NewCampaign/NewCampaign';
 import { modalToggled } from '../features/NewCampaign/newCampaignSlice';
@@ -9,6 +11,9 @@ import { setNotes } from '../features/notes/notesSlice';
 export default function Launch({ navigation }) {
 
   const dispatch = useDispatch();
+
+  useEffect(() => {dispatch(getDiePrefs())}, [dispatch])
+  
   const campaigns = useSelector(state => state.campaigns)
 
   const handleCampaign = (title) => {

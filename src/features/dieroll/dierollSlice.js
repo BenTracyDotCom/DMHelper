@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const getPrefs = createAsyncThunk('dieroll/getPrefs', async () => {
+export const getDiePrefs = createAsyncThunk('dieroll/getPrefs', async () => {
   const storedPrefs = await AsyncStorage.getItem('dierollPrefs');
   if (storedPrefs) {
     return {
@@ -21,7 +21,7 @@ export const getPrefs = createAsyncThunk('dieroll/getPrefs', async () => {
 }
 )
 
-export const savePrefs = createAsyncThunk('dieroll/savePrefs', async newPrefs => {
+export const saveDiePrefs = createAsyncThunk('dieroll/savePrefs', async newPrefs => {
   const response = await AsyncStorage.setItem('dierollPrefs', JSON.stringify(newPrefs))
   return response;
 })
@@ -43,7 +43,7 @@ const dierollSlice = createSlice({
       state.twentyMode === 'delay' ? state.twentyMode = 'toggle' : state.twentyMode = 'delay'
     },
     toggleNon20Mode: state => {
-      state.nonTwentyMode === 'delay' ? state.twentyMode = 'toggle' : state.twentyMode = 'delay'
+      state.nonTwentyMode === 'delay' ? state.nonTwentyMode = 'toggle' : state.nonTwentyMode = 'delay'
     },
     setDelay: (state, action) => {
       state.delay = action.payload
