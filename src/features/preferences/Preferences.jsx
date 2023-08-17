@@ -48,11 +48,11 @@ export default function Preferences() {
               <Text>Prefs (tap to close)</Text>
             </TouchableOpacity>
             <Text>d20 display:</Text>
-            <TouchableOpacity style={styles.option} onPress={() => {handle20Mode}}>
+            <TouchableOpacity style={styles.option} onPress={handle20Mode}>
               <Text>{twentyMode}</Text>
             </TouchableOpacity>
             <Text>d4-d12 display:</Text>
-            <TouchableOpacity style={styles.option} onPress={() => {handleNon20Mode}}>
+            <TouchableOpacity style={styles.option} onPress={handleNon20Mode}>
               <Text>{nonTwentyMode}</Text>
             </TouchableOpacity>
             {(nonTwentyMode === 'delay' || twentyMode === 'delay') && <View>
@@ -61,7 +61,7 @@ export default function Preferences() {
                 data={['1s', '3s', '5s', '10s']}
                 onSelect={handleDelay}
                 defaultButtonText={`${(delay / 1000).toString()}s`}
-                buttonTextAfterSelection={item => `${item}s`}
+                buttonTextAfterSelection={item => `${item}`}
               />
             </View>}
           </View>

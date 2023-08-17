@@ -57,10 +57,10 @@ const dierollSlice = createSlice({
   },
   extraReducers: builder => {
     builder
-      .addCase(getPrefs.pending, (state) => {
+      .addCase(getDiePrefs.pending, (state) => {
       state.status = 'loading'
       })
-      .addCase(getPrefs.fulfilled, (state, action) => {
+      .addCase(getDiePrefs.fulfilled, (state, action) => {
         const returned = JSON.stringify(action.payload)
         if(returned){
           const newPrefs = {
