@@ -58,7 +58,7 @@ export default function Preferences() {
             {(nonTwentyMode === 'delay' || twentyMode === 'delay') && <View>
               <Text>Delay before reseting die:</Text>
               <SelectDropdown
-                data={['1s', '3s', '5s', '10s']}
+                data={['3s', '5s', '10s', '30s', '60s']}
                 onSelect={handleDelay}
                 defaultButtonText={`${(delay / 1000).toString()}s`}
                 buttonTextAfterSelection={item => `${item}`}
