@@ -1,22 +1,24 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+const defaultState = {
+  twentyMode: 'delay',
+  nonTwentyMode: 'delay',
+  delay: 3000,
+  non20s: null,
+  twunnies: null
+}
+
 export const getDiePrefs = createAsyncThunk('dieroll/getPrefs', async () => {
   const storedPrefs = await AsyncStorage.getItem('dierollPrefs');
   if (storedPrefs) {
     return {
-      ...storedPrefs,
+      ...(JSON.parse(storedPrefs)),
       non20s: null,
       twunnies: null
     }
   } else {
-    return {
-      twentyMode: 'delay',
-      nonTwentyMode: 'delay',
-      delay: 3000,
-      non20s: null,
-      twunnies: null
-    }
+    return defaultState
   }
 }
 )
@@ -28,14 +30,7 @@ export const saveDiePrefs = createAsyncThunk('dieroll/savePrefs', async newPrefs
 
 const dierollSlice = createSlice({
   name: 'dieroll',
-  initialState:
-  {
-    twentyMode: 'toggle',
-    nonTwentyMode: 'toggle',
-    delay: 3000,
-    non20s: null,
-    twunnies: null
-  },
+  initialState: defaultState,
 
   reducers: {
     //TODO: add function to reset defaults
@@ -61,7 +56,7 @@ const dierollSlice = createSlice({
       state.status = 'loading'
       })
       .addCase(getDiePrefs.fulfilled, (state, action) => {
-        const returned = JSON.stringify(action.payload)
+        const returned = JSON.parse(action.payload)
         if(returned){
           const newPrefs = {
             ...returned,
@@ -77,5 +72,5 @@ const dierollSlice = createSlice({
   }
 })
 
-export const { toggle20Mode, toggleNon20Mode, setDelay, setLast20, setLastNon20 } = dierollSlice.actions
-export default dierollSlice.reducer
+export const { toggle20Mode, toggleNon20Mode, setDelay, setLast20, setLastNon20 } = dierollSlice.actions;
+export default dierollSlice.reducer;
