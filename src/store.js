@@ -7,6 +7,8 @@ import encounterReducer from './features/encounter/encounterSlice';
 import encountersReducer from './features/encounter/encountersSlice';
 import notesReducer from './features/notes/notesSlice';
 import encounterBuilderReducer from './features/encounter/encounterBuilderSlice'
+import dierollReducer from './features/dieroll/dierollSlice';
+import prefsReducer from './features/preferences/preferencesSlice';
 
 export const store = configureStore({
   reducer: {
@@ -18,5 +20,7 @@ export const store = configureStore({
     encounters: encountersReducer,
     notes: notesReducer,
     encounterBuilder: encounterBuilderReducer,
+    dieroll: dierollReducer,
+    prefs: prefsReducer,
   }
 });
