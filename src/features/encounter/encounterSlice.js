@@ -5,10 +5,14 @@ import sampleEncounter from '../../../utilities/sampleData/sampleEncounter';
 
 const encounterSlice = createSlice({
     name: 'encounter',
-    initialState: sampleEncounter,
+    initialState: {
+      ...sampleEncounter,
+      location: 'Phandalin',
+      notes: ['Lets kill some Red Brands']
+    },
     reducers: {
       setEncounter: (state, action) => {
-        Object.keys(action.payload).forEach(key => 
+        Object.keys(action.payload).forEach(key =>
           (state[key] = action.payload[key])
         )
       },
@@ -42,9 +46,22 @@ const encounterSlice = createSlice({
         let target = state.chars[action.target];
         state.chars = state.chars.filter(char => (char !== target))
         state.xpEarned += await tallyXp(target.name)
-      }
+      },
+      setLocation: (state, action) => {
+        state.location = action.payload
+      },
+      addNote: (state, action) => {
+        state.notes.push(action.payload)
+      },
+      deleteNote: (state, action) => {
+        state.notes = state.notes.filter(note => note !== action.payload);
+      },
+      editNote: (state, action) => {
+        const {index, newNote} = action.payload;
+        state.notes[index] = newNote
+            }
     }
 })
 
-export const { setEncounter, nextChar, statusAdded, statusRemoved, hpAdded, hpRemoved, targetDestroyed } = encounterSlice.actions
+export const { setEncounter, nextChar, statusAdded, statusRemoved, hpAdded, hpRemoved, targetDestroye, setLocation, addNote, deleteNote, editNote } = encounterSlice.actions
 export default encounterSlice.reducer
