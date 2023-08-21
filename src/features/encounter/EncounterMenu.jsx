@@ -11,10 +11,14 @@ export default function EncounterMenu({ navigation }) {
   const visible = useSelector(state => (state.encounters.showEncounterModal))
   const encounters = useSelector(state => (state.encounters.encounters))
 
-  const handleEncounter = async (encounter) => {
+  const handleEncounter = (encounter) => {
     dispatch(setEncounter(encounter))
     dispatch(toggleEncountersMenu())
     navigation.navigate('Encounter', { name: encounter.title })
+  }
+
+  const handleAddEncounter = () => {
+    navigation.navigate('EncounterBuilder')
   }
 
 
@@ -36,8 +40,14 @@ export default function EncounterMenu({ navigation }) {
                   <Text style={styles.text}>{encounter.title}</Text>
                 </TouchableOpacity>
               ))}
+              <TouchableOpacity style={styles.encounter} onPress={handleAddEncounter}>
+                <Text style={styles.text}>+</Text>
+              </TouchableOpacity>
             </ScrollView>
           </View>
+            <TouchableOpacity style={styles.button} onPress={() => dispatch(toggleEncountersMenu())}>
+              <Text>X</Text>
+            </TouchableOpacity>
         </View>
       </View>
     </Modal>
@@ -69,10 +79,14 @@ const styles = StyleSheet.create({
   },
   encounter: {
     backgroundColor: 'white',
-    borderRadius: 12
+    borderRadius: 12,
+    borderStyle: 'solid',
+    borderColor: 'red',
+    borderWidth: 2,
   },
   text: {
     fontFamily: 'Scada',
+    textAlign: 'center',
   },
   button: {
     height: 40,
