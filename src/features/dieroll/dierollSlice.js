@@ -10,14 +10,16 @@ const defaultState = {
 }
 
 export const getDiePrefs = createAsyncThunk('dieroll/getPrefs', async () => {
-  const storedPrefs = await AsyncStorage.getItem('dierollPrefs');
+try {  const storedPrefs = await AsyncStorage.getItem('dierollPrefs');
   if (storedPrefs) {
     return {
-      ...(JSON.parse(storedPrefs)),
+      ...storedPrefs,
       non20s: null,
       twunnies: null
     }
   } else {
+    return defaultState
+  }} catch(err) {
     return defaultState
   }
 }
@@ -56,7 +58,7 @@ const dierollSlice = createSlice({
       state.status = 'loading'
       })
       .addCase(getDiePrefs.fulfilled, (state, action) => {
-        const returned = JSON.parse(action.payload)
+        const returned = action.payload
         if(returned){
           const newPrefs = {
             ...returned,

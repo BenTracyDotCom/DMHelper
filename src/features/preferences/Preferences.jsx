@@ -3,40 +3,43 @@ import { useState } from "react";
 import SelectDropdown from "react-native-select-dropdown";
 import { useSelector, useDispatch } from 'react-redux';
 import { showPrefs } from "./preferencesSlice";
-import { toggle20Mode, toggleNon20Mode, setDelay, saveDiePrefs, non20s, twunnies } from "../dieroll/dierollSlice";
-
+import { toggle20Mode, toggleNon20Mode, setDelay, saveDiePrefs } from "../dieroll/dierollSlice";
+import { unwrapResult } from "@reduxjs/toolkit";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Preferences() {
 
   const dispatch = useDispatch()
   const visible = useSelector(state => state.prefs.shown)
-  const { twentyMode, nonTwentyMode, delay } = useSelector(state => state.dieroll)
-  const encounters = useSelector(state => state.encounters.encounters)
+  const { twentyMode, nonTwentyMode, delay, non20s, twunnies } = useSelector(state => state.dieroll)
+  const currentPrefs = useSelector(state => state.dieroll)
   const handleClose = () => {
     dispatch(showPrefs())
   };
-  const [diePrefs, setDiePrefs] = useState({
-    twentyMode: twentyMode,
-    nonTwentyMode: nonTwentyMode,
-    delay: delay,
-    non20s: non20s,
-    twunnies: twunnies
-  });
+  // const [diePrefs, setDiePrefs] = useState({
+  //   twentyMode: twentyMode,
+  //   nonTwentyMode: nonTwentyMode,
+  //   delay: delay,
+  //   non20s: non20s,
+  //   twunnies: twunnies
+  // });
   const handle20Mode = () => {
     dispatch(toggle20Mode())
-    setDiePrefs({...diePrefs, twentyMode: !diePrefs.twentyMode})
-    dispatch(saveDiePrefs({...diePrefs, twentyMode: !diePrefs.twentyMode}))
+    // setDiePrefs({...diePrefs, twentyMode: !diePrefs.twentyMode})
+    // console.log(diePrefs, '20 dieprefs')
+    dispatch(saveDiePrefs(JSON.stringify(currentPrefs)))
   };
   const handleNon20Mode = () => {
     dispatch(toggleNon20Mode())
-    setDiePrefs({...diePrefs, nonTwentyMode: !diePrefs.nonTwentyMode})
-    dispatch(saveDiePrefs({...diePrefs, nonTwentyMode: !diePrefs.nonTwentyMode}))
+    // setDiePrefs({...diePrefs, nonTwentyMode: !diePrefs.nonTwentyMode})
+    // console.log(diePrefs, 'non20 diePrefs')
+    dispatch(saveDiePrefs(JSON.stringify(currentPrefs)))
   };
   const handleDelay = (item) => {
     const newDelay = parseInt(item) * 1000
     dispatch(setDelay(newDelay));
-    setDiePrefs({...diePrefs, delay: newDelay})
-    dispatch(saveDiePrefs({...diePrefs, delay: newDelay}))
+    //setDiePrefs({...diePrefs, delay: newDelay})
+    dispatch(saveDiePrefs(JSON.stringify(currentPrefs)))
   };
   
   return (
