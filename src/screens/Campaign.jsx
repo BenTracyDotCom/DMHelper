@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, Text, ScrollView, Dimensions, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, Dimensions, StyleSheet, Button } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useSelector } from 'react-redux';
 import Header from '../features/campaigns/Header';
@@ -8,12 +8,18 @@ import CharacterList from '../features/campaigns/CharacterList';
 import Notes from '../features/notes/Notes';
 import AddNote from '../features/notes/AddNote';
 import EncounterMenu from '../features/encounter/EncounterMenu';
+import QuestModal from '../features/quests/QuestModal.js'
 
 export default function Campaign({ navigation }) {
 
 
   const campaign = useSelector(state => (state.campaign))
   const [loading, setLoading] = useState(false)
+  const [isQuestModalVisible, setIsQuestModalVisible] = useState(false);
+
+  const toggleQuestModal = () => {
+    setIsQuestModalVisible(!isQuestModalVisible);
+  }
 
   if (loading) {
     return <StatusBar />
@@ -22,6 +28,7 @@ export default function Campaign({ navigation }) {
   return (
     <View style={styles.container}>
       <Header />
+      <Button title="Show Quests" onPress={toggleQuestModal}></Button>
       <View style={styles.content}>
         <AddNote />
         <EncounterMenu navigation={navigation} />
@@ -42,6 +49,11 @@ export default function Campaign({ navigation }) {
               <Notes />
             </ScrollView>
           </View>
+          <QuestModal
+            isVisible={isQuestModalVisible}
+            onClose={toggleQuestModal}
+            quests={campaign.quests}
+          ></QuestModal>
         </View>
       </View>
       <Footer />

@@ -36,7 +36,7 @@ import Preferences from './src/features/preferences/Preferences';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  
+
 
   const [fontsLoaded] = useFonts({
     'Scada': require('./assets/fonts/ScadaRegular400.ttf'),
