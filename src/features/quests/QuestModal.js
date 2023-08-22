@@ -1,8 +1,19 @@
 // QuestModal.js
-import React from 'react';
+import React, {useState} from 'react';
 import { Modal, FlatList, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 export default function QuestModal({ isVisible, onClose, quests }) {
+
+  const [selectedQuest, setSelectedQuest] = useState(null);
+
+  const handleQuestPress = (quest) => {
+    if (selectedQuest === quest.title) {
+      setSelectedQuest(null);
+    } else {
+      setSelectedQuest(quest.title);
+    }
+  }
+
   return (
     <Modal
       animationType="slide"
@@ -14,10 +25,21 @@ export default function QuestModal({ isVisible, onClose, quests }) {
         <View style={styles.modalBox}>
           <Text style={styles.title}>Quests</Text>
           <FlatList
-            data={quests}
-            renderItem={({ item }) => <Text>{item.title}</Text>}
-            keyExtractor={(item) => item.title}
-          />
+          data={quests}
+          renderItem={({item}) => (
+            <TouchableOpacity onPress={() => handleQuestPress(item)}>
+              <Text>{item.title}</Text>
+              {selectedQuest === item.title && (
+                <FlatList
+                data={item.objectives}
+                renderItem={({item}) => <Text style={styles.objective}>{item}</Text>}
+                keyExtractor={(item, index) => `${index}`}
+                ></FlatList>
+              )}
+            </TouchableOpacity>
+          )}
+          keyExtractor={(item) => item.title}
+          ></FlatList>
           <TouchableOpacity style={styles.closeButton} onPress={onClose}>
             <Text>Close</Text>
           </TouchableOpacity>
@@ -35,7 +57,7 @@ const styles = StyleSheet.create({
   },
   modalBox: {
     width: '80%',
-    height: '50%',
+    height: '60%',
     backgroundColor: 'white',
     padding: 20,
     borderRadius: 10,
@@ -48,4 +70,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
     alignSelf: 'center',
   },
+  objective: {
+    marginLeft: 20,
+    fontSize: 16,
+  }
 });

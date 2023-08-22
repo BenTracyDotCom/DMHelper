@@ -36,7 +36,7 @@ export default {
       race: 'Dwarf',
       class: 'Cleric',
       stats: {
-        
+
       },
       location: null
     }
@@ -44,7 +44,7 @@ export default {
   quests: [
     {
       title: 'Meet Me in Phandalin',
-      objectives: ['Escort Cart to Phandalin']
+      objectives: ['Escort Cart to Phandalin', 'Run to Phandolin', 'Defeat Redbrands', 'Seduce the barmaid']
     }
   ],
   currentQuest: 'Meet Me in Phandalin',
