@@ -2,7 +2,7 @@
 import React, {useState} from 'react';
 import { Modal, FlatList, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-export default function QuestModal({ isVisible, onClose, quests }) {
+export default function QuestModal({ isVisible, onClose, quests, setCurrentQuest }) {
 
   const [selectedQuest, setSelectedQuest] = useState(null);
 
@@ -11,6 +11,9 @@ export default function QuestModal({ isVisible, onClose, quests }) {
       setSelectedQuest(null);
     } else {
       setSelectedQuest(quest.title);
+      if (setCurrentQuest) {
+        setCurrentQuest(quest.title)
+      }
     }
   }
 

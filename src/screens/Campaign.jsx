@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { View, Text, ScrollView, Dimensions, StyleSheet, Button } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Header from '../features/campaigns/Header';
 import Footer from '../features/campaigns/Footer';
 import CharacterList from '../features/campaigns/CharacterList';
@@ -9,9 +9,11 @@ import Notes from '../features/notes/Notes';
 import AddNote from '../features/notes/AddNote';
 import EncounterMenu from '../features/encounter/EncounterMenu';
 import QuestModal from '../features/quests/QuestModal.js'
+import {currentQuestUpdated} from '../features/campaigns/campaignSlice.js'
 
 export default function Campaign({ navigation }) {
 
+  const dispatch = useDispatch();
 
   const campaign = useSelector(state => (state.campaign))
   const [loading, setLoading] = useState(false)
@@ -21,13 +23,20 @@ export default function Campaign({ navigation }) {
     setIsQuestModalVisible(!isQuestModalVisible);
   }
 
+  const setCurrentQuest = (questTitle) => {
+    dispatch(currentQuestUpdated(questTitle));
+  }
+
   if (loading) {
     return <StatusBar />
   }
 
+  const currentQuest = useSelector(state => state.campaign.currentQuest)
+
   return (
     <View style={styles.container}>
       <Header />
+      <Text style={styles.currentQuestTitle}>Current Quest: {currentQuest}</Text>
       <Button title="Show Quests" onPress={toggleQuestModal}></Button>
       <View style={styles.content}>
         <AddNote />
@@ -53,6 +62,7 @@ export default function Campaign({ navigation }) {
             isVisible={isQuestModalVisible}
             onClose={toggleQuestModal}
             quests={campaign.quests}
+            setCurrentQuest={setCurrentQuest}
           ></QuestModal>
         </View>
       </View>
@@ -92,5 +102,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 12,
     margin: 4
+  },
+  currentQuestTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'red',
+    textAlign: 'center',
+    marginVertical: 10,
   }
 });

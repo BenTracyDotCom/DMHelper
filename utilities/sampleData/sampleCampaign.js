@@ -45,6 +45,22 @@ export default {
     {
       title: 'Meet Me in Phandalin',
       objectives: ['Escort Cart to Phandalin', 'Run to Phandolin', 'Defeat Redbrands', 'Seduce the barmaid']
+    },
+    {
+      title: 'The Lost Mine of Wave Echo',
+      objectives: ['Locate the entrance to the mine', 'Defeat the Black Spider', 'Retrieve the Forge of Spells', 'Return to Gundren with news']
+    },
+    {
+     title: 'Dragon of Icespire Peak',
+     objectives: ['Investigate the dragon sightings', 'Protect the town of Phandalin', 'Drive the dragon from the region']
+    },
+    {
+      title: 'The Sunless Citadel',
+      objectives: ['Find the missing adventurers', 'Explore the citadel ruins', 'Defeat the evil druid Belak', 'Retrieve the Gulthias Tree fruit']
+    },
+    {
+      title: 'The Forge of Fury',
+      objectives: ['Investigate the haunted tower', 'Retrieve the fabled Soulgem', 'Uncover the mystery of the ghostly apparitions']
     }
   ],
   currentQuest: 'Meet Me in Phandalin',
