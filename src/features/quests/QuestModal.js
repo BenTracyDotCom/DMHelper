@@ -1,21 +1,20 @@
-// QuestModal.js
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Modal, FlatList, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-export default function QuestModal({ isVisible, onClose, quests, setCurrentQuest }) {
+export default function QuestModal({ isVisible, onClose, quests, setCurrentQuest, handleObjectivePress }) {
 
   const [selectedQuest, setSelectedQuest] = useState(null);
 
-  const handleQuestPress = (quest) => {
+  const handleQuestPressLocal = (quest) => {
     if (selectedQuest === quest.title) {
       setSelectedQuest(null);
     } else {
       setSelectedQuest(quest.title);
       if (setCurrentQuest) {
-        setCurrentQuest(quest.title)
+        setCurrentQuest(quest.title);
       }
     }
-  }
+  };
 
   return (
     <Modal
@@ -28,21 +27,25 @@ export default function QuestModal({ isVisible, onClose, quests, setCurrentQuest
         <View style={styles.modalBox}>
           <Text style={styles.title}>Quests</Text>
           <FlatList
-          data={quests}
-          renderItem={({item}) => (
-            <TouchableOpacity onPress={() => handleQuestPress(item)}>
-              <Text>{item.title}</Text>
-              {selectedQuest === item.title && (
-                <FlatList
-                data={item.objectives}
-                renderItem={({item}) => <Text style={styles.objective}>{item}</Text>}
-                keyExtractor={(item, index) => `${index}`}
-                ></FlatList>
-              )}
-            </TouchableOpacity>
-          )}
-          keyExtractor={(item) => item.title}
-          ></FlatList>
+            data={quests}
+            renderItem={({ item, index: questIndex }) => (
+              <TouchableOpacity onPress={() => handleQuestPressLocal(item)}>
+                <Text>{item.title}</Text>
+                {selectedQuest === item.title && (
+                  <FlatList
+                    data={item.objectives}
+                    renderItem={({ item: objective, index: objectiveIndex }) => (
+                      <TouchableOpacity onPress={() => handleObjectivePress(questIndex, objectiveIndex)}>
+                        <Text style={styles.objective}>{objective}</Text>
+                      </TouchableOpacity>
+                    )}
+                    keyExtractor={(item, index) => `${index}`}
+                  />
+                )}
+              </TouchableOpacity>
+            )}
+            keyExtractor={(item) => item.title}
+          />
           <TouchableOpacity style={styles.closeButton} onPress={onClose}>
             <Text>Close</Text>
           </TouchableOpacity>

@@ -8,6 +8,7 @@ const campaignSlice = createSlice({
   initialState: {
     ...sampleCampaign,
     npcs: sampleNPCs,
+    currentObjectiveIndex: 0
   },
   reducers: {
     currentQuestUpdated: (state, action) => {
@@ -78,10 +79,33 @@ const campaignSlice = createSlice({
     },
     deleteNPC: (state, action) => {
       state.npcs = state.npcs.filter(npc => npc.id !== action.payload.id);
+    },
+    setCurrentObjectiveIndex: (state, action) => {
+      state.currentObjectiveIndex = action.payload
+    },
+    nextObjective: (state) => {
+      const currentQuestData = state.quests.find(quest => quest.title === state.currentQuest)
+      if (!currentQuestData) {
+        console.error("Current quest data not found in state.quests");
+        return;
+      }
+      if (typeof state.currentObjectiveIndex !== 'number') {
+        state.currentObjectiveIndex = 0;
+      } else if (state.currentObjectiveIndex < currentQuestData.objectives.length - 1) {
+        state.currentObjectiveIndex += 1;
+      }
+      console.log(state.currentObjectiveIndex)
+  },
+    previousObjective: (state) => {
+      const currentQuestData = state.quests.find(quest => quest.title === state.currentQuest);
+      if (currentQuestData && state.currentObjectiveIndex > 0) {
+        state.currentObjectiveIndex -= 1;
+      }
+      console.log(state.currentObjectiveIndex)
     }
   }
 })
 
-export const { currentQuestUpdated, addNote, deleteNote, editNote, addCharNote, editCharNote, setActiveNotes, setCurrentCampaign, addNPC, editNPC, deleteNPC } = campaignSlice.actions
+export const { currentQuestUpdated, addNote, deleteNote, editNote, addCharNote, editCharNote, setActiveNotes, setCurrentCampaign, addNPC, editNPC, deleteNPC, setCurrentObjectiveIndex, nextObjective, previousObjective } = campaignSlice.actions
 
 export default campaignSlice.reducer

@@ -9,7 +9,7 @@ import Notes from '../features/notes/Notes';
 import AddNote from '../features/notes/AddNote';
 import EncounterMenu from '../features/encounter/EncounterMenu';
 import QuestModal from '../features/quests/QuestModal.js'
-import {currentQuestUpdated} from '../features/campaigns/campaignSlice.js'
+import {currentQuestUpdated, nextObjective, previousObjective} from '../features/campaigns/campaignSlice.js'
 
 export default function Campaign({ navigation }) {
 
@@ -27,6 +27,21 @@ export default function Campaign({ navigation }) {
     dispatch(currentQuestUpdated(questTitle));
   }
 
+  const campaignState = useSelector(state => state.campaign)
+
+  const currentObjectiveIndex = campaignState.currentObjectiveIndex
+  const currentQuestData = useSelector(state => state.campaign.quests.find(quest => quest.title === state.campaign.currentQuest));
+  const currentObjective = campaignState.quests.find(quest => quest.title === campaignState.currentQuest)
+
+  const handleNextObjective = () => {
+    console.log('next!')
+    dispatch(nextObjective());
+  }
+
+  const handlePreviousObjective = () => {
+    dispatch(previousObjective())
+  }
+
   if (loading) {
     return <StatusBar />
   }
@@ -37,7 +52,11 @@ export default function Campaign({ navigation }) {
     <View style={styles.container}>
       <Header />
       <Text style={styles.currentQuestTitle}>Current Quest: {currentQuest}</Text>
+      <Text>Current Objective: {currentQuestData && currentObjectiveIndex !== undefined ? currentQuestData.objectives[currentObjectiveIndex] : 'None'}</Text>
+      <Button title="Next Objective" onPress={handleNextObjective}></Button>
+      <Button title="Previous Objective" onPress={handlePreviousObjective}></Button>
       <Button title="Show Quests" onPress={toggleQuestModal}></Button>
+      <Button title="Log Current State" onPress={() => console.log(campaign)} />
       <View style={styles.content}>
         <AddNote />
         <EncounterMenu navigation={navigation} />
