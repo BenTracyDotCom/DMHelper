@@ -15,7 +15,7 @@ import Spell from './src/screens/Spell';
 import Encounter from './src/screens/Encounter';
 import EncounterBuilder from './src/screens/EncounterBuilder';
 import Campaign from './src/screens/Campaign';
-
+import Initiative from './src/screens/Initiative';
 import Monsters from './src/screens/Monsters.jsx'
 import Monster from './src/screens/Monster.jsx'
 import Debug from './src/screens/Debug';
@@ -69,6 +69,10 @@ export default function App() {
           <Stack.Screen
             name="Monsters"
             component={Monsters}
+          />
+          <Stack.Screen
+            name="Roll initiative!"
+            component={Initiative}
           />
           <Stack.Screen
             name="MonsterAdding"

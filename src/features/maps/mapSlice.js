@@ -33,7 +33,8 @@ export const saveMaps = createAsyncThunk('maps/saveMaps', async newMaps => {
     } else {
       toStore.push(newMaps);
     }
-    AsyncStorage.setItem('maps', JSON.stringify(toStore))
+    const response = await AsyncStorage.setItem('maps', JSON.stringify(toStore));
+    return response;
   }
 })
 

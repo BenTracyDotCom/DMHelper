@@ -25,8 +25,6 @@ export default function EncounterMenu({ navigation }) {
 
   //TODO: have list items navigate to Encounter screen and load their respective encounters
 
-  //TODO: make a "+" tile which navigates to the EncounterBuilder screen
-
   //TODO: styling: modal card should grow to 400px and scroll after that, should start at just the size of the tiles present
 
   return (
