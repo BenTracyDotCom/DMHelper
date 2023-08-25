@@ -23,6 +23,6 @@ const encountersSlice = createSlice({
   }
 })
 
-export const { toggleEncountersMenu } = encountersSlice.actions
+export const { toggleEncountersMenu, addEncounter } = encountersSlice.actions
 
 export default encountersSlice.reducer

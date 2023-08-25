@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { currentQuestUpdated } from '../features/campaigns/campaignSlice.js';
 import { storeEncounter } from '../data/encountersDB.js';
 import MultiSelect from 'react-native-multiple-select';
-import { useNavigation } from '@react-navigation/native';
-import { addNote, deleteNote, editNote } from '../features/encounter/encounterSlice.js'
-import CustomButton from '../models/CustomButton.jsx'
-import { addEncounter } from '../features/encounter/encountersSlice.js'
-
+import {useNavigation} from '@react-navigation/native';
+import {MonsterAdding} from './MonsterAdding'
+import {selectMonster, clearMonsters} from '../features/encounter/encounterBuilderSlice.js'
 
 export default function EncounterBuilder({ route }) {
   const navigation = useNavigation();
@@ -36,7 +34,7 @@ export default function EncounterBuilder({ route }) {
   }
 
   const saveEditNote = () => {
-    dispatch(editNote({ index: selectedNoteIndex, newNote: note }));
+    dispatch(editNote({index: selectedNoteIndex, newNote: note}));
     setNote('');
     setSelectedNoteIndex(null);
   }
@@ -116,58 +114,16 @@ export default function EncounterBuilder({ route }) {
       ></MultiSelect>
       <View>
         {selectedMonsters && Object.values(selectedMonsters).map((monster) => (
-          <View key={monster.url} style={styles.monsterCard}>
-            <Text style={styles.monsterCardText}>{`${monster.url.split('/')[3]}: ${monster.count}`}</Text>
+          <View key={monster.url}>
+          <Text>{`${monster.url.split('/')[3]}: ${monster.count}`}</Text>
           </View>
         ))}
       </View>
-      <CustomButton
-        title="Add Monster"
-        onPress={() => navigation.navigate('MonsterAdding')}
-        style={styles.button}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder='Add a note'
-        value={note}
-        onChangeText={(text) => setNote(text)}
-      ></TextInput>
-      {selectedNoteIndex === null ? (
-        <CustomButton
-          title='Add Note'
-          onPress={handleAddNote}
-          style={styles.button}
-        />
-      ) : (
-        <>
-          <CustomButton
-            title="Save Edit"
-            onPress={saveEditNote}
-            style={styles.button}
-          />
-          <CustomButton
-            title="Cancel Edit"
-            onPress={cancelEditNote}
-            style={styles.button}
-          />
-        </>
-      )}
-      <View>
-        {encounterNotes.map((note, index) => (
-          <View key={index} style={styles.noteCard}>
-            <Text style={styles.noteCardText}>{note}</Text>
-            <Button
-              title="Edit"
-              onPress={() => startEditNote(index)}
-            />
-            <Button
-              title="Delete"
-              onPress={() => dispatch(deleteNote(note))}
-            />
-          </View>
-        ))}
-      </View>
-      <CustomButton
+      <Button
+      title="Add Monster"
+      onPress={() => navigation.navigate('MonsterAdding')}
+      ></Button>
+      <Button
         title='Submit Encounter'
         onPress={submitEncounter}
         style={styles.button}
@@ -211,47 +167,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   monsterCard: {
-    backgroundColor: '#F7FAFC',
-    padding: 15,
+    backgroundColor: 'crimson',
+    color: 'white',
+    padding: 10,
     marginVertical: 5,
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-  },
-  monsterCardText: {
-    color: '#E53E3E',
-    fontSize: 18,
-  },
-  notesList: {
-    marginBottom: 20,
-  },
-  noteCard: {
-    backgroundColor: '#F7FAFC',
-    padding: 15,
-    marginVertical: 5,
-    borderRadius: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-  },
-  noteCardText: {
-    color: '#4A5568',
-    fontSize: 18,
-  },
-  button: {
-    backgroundColor: '#DC143C',
-    padding: 15,
-    borderRadius: 10,
-    textAlign: 'center',
-    marginBottom: 20,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84
-  },
+    borderRadius: 5
+  }
 });
