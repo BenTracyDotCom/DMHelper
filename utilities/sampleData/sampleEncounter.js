@@ -1,4 +1,5 @@
 import goblin from './goblin'
+import quasit from './sampleMonster'
 
 export default {
     title: "Goblin Ambush",
@@ -56,6 +57,16 @@ export default {
               int: '-1',
               cha: '3'
             },
-        }
+        },
+        {
+          name: 'Quasit',
+          ac: 13,
+          hp: 7,
+          status: [],
+          type: 'enemy',
+          cr: 0.25,
+          initiative: 0,
+          data: quasit
+      },
     ]
 }

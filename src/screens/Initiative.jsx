@@ -3,7 +3,7 @@ import { UseSelector, useDispatch, useSelector } from 'react-redux';
 import InitiativeChar from '../features/initiative/InitiativeChar';
 import { cycleGroupMode } from '../features/initiative/initiativeSlice';
 import { useEffect } from 'react';
-import { setInitiative, sortByInitiative } from '../features/encounter/encounterSlice';
+import { setInitiative, sortByInitiative, setAllEnemies, setEnemiesByType } from '../features/encounter/encounterSlice';
 
 export default function Initiative({ navigation}) {
   const groupModes = ['all', 'by type', 'none']
@@ -26,16 +26,22 @@ export default function Initiative({ navigation}) {
   const handleGrouping = () => {
     if (groupMode === 2) {
       const firstEnemy = chars.find(char => char.type === 'enemy')
-      chars.forEach(char => {
-        if(char.type === 'enemy'){
-          dispatch(setInitiative({
-            name: char.name,
-            initiative: firstEnemy.initiative ? firstEnemy.initiative : -1
-          }))
-        }
-      })
+      dispatch(setAllEnemies(-1))
       dispatch(cycleGroupMode())
     } else if (groupMode === 0) {
+      const found = {}
+      let currentInit = -1
+      chars.forEach(char => {
+        const toMatch = char.name.slice(0, 3)
+        if(char.type === 'enemy' && !found[toMatch]){
+          found[toMatch] = true
+          dispatch(setEnemiesByType({
+            name: char.name,
+            init: currentInit
+          }))
+          currentInit --
+        }
+      })
       //TODO: separate enemy initiative by NAME, with last 2 characters trimmed off (goblin A, goblin B, goblin AA)
       dispatch(cycleGroupMode())
     } else {
@@ -46,6 +52,8 @@ export default function Initiative({ navigation}) {
 
   const handleContinue = () => {
     //TODO: either toggle tiebreak modal or navigate to encounter screen
+
+    //TODO: VALIDATE before navigating
     dispatch(sortByInitiative())
     navigation.navigate('Encounter', { name: encounter.title })
   }
