@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, TextInput } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import { setInitiative } from "../encounter/encounterSlice";
+import { setInitiative, sortByInitiative } from "../encounter/encounterSlice";
 
 export default function InitiativeChar({ char }) {
   
@@ -17,6 +17,10 @@ export default function InitiativeChar({ char }) {
     }))
   }
 
+  const resort = () => {
+    dispatch(sortByInitiative())
+  }
+
   return (
     <View style={styles.container}>
       <View style={[styles.button, { backgroundColor: bg }]}>
@@ -24,7 +28,7 @@ export default function InitiativeChar({ char }) {
       </View>
       <View style={styles.secondaryContainer}>
         <View style={[styles.secondaryButton, { backgroundColor: bg }]}>
-          <TextInput style={styles.input} onChangeText={onChangeText}/>
+          <TextInput style={styles.input} onChangeText={onChangeText} onEndEditing={resort}/>
         </View>
 
       </View>

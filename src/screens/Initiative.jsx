@@ -19,27 +19,29 @@ export default function Initiative() {
         name: char.name,
         initiative: 0
       }))
-      dispatch(sortByInitiative())
     })
+    dispatch(sortByInitiative())
   }, [dispatch])
 
   const handleGrouping = () => {
-    dispatch(cycleGroupMode())
-    if (groupMode === 0) {
+    if (groupMode === 2) {
       const firstEnemy = encounter.chars.find(char => char.type === 'enemy')
       encounter.chars.forEach(char => {
-        if(char.type === enemy){
+        if(char.type === 'enemy'){
           dispatch(setInitiative({
             name: char.name,
-            initiative: firstEnemy.initiative
+            initiative: firstEnemy.initiative ? firstEnemy.initiative : 30
           }))
         }
       })
+      dispatch(cycleGroupMode())
       dispatch(sortByInitiative())
-    } else if (groupMode === 1) {
-      //TODO: separate enemy initiative by NAME
+    } else if (groupMode === 0) {
+      //TODO: separate enemy initiative by NAME, with last 2 characters trimmed off (goblin A, goblin B, goblin AA)
+      dispatch(cycleGroupMode())
     } else {
       //TODO: give all un-rolled enemies their own initiative
+      dispatch(cycleGroupMode())
     }
   }
 

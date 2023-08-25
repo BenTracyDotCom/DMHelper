@@ -25,9 +25,13 @@ const encounterSlice = createSlice({
       setInitiative: (state, action) => {
         const index = state.chars.findIndex(char => char.name === action.payload.name)
         state.chars[index].initiative = action.payload.initiative
+        console.log(action.payload.initiative + ' initiative set for ' + action.payload.name + ' at index ' + index + ':')
+        //console.log(state.chars[index])
       },
       sortByInitiative: (state) => {
-        state.chars = state.chars.sort((a, b) => ( a.initiative - b.initiative ))
+        const sortedChars = state.chars.sort((a, b) => ( b.initiative - a.initiative ))
+        state.chars = sortedChars
+        console.log(state.chars.map(char => ([char.name, char.initiative])))
       },
       //the following actions require a "target" integer corresponding to an index in the encounter's "chars" array
       statusAdded: (state, action) => {

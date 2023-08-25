@@ -1,3 +1,5 @@
+import goblin from './goblin'
+
 export default {
     title: "Goblin Ambush",
     active: 0,
@@ -13,13 +15,14 @@ export default {
             initiative: 22 
         },
         {
-            name: 'Goblin Shmn',
+            name: 'Goblin B',
             ac: 12,
             hp: 30,
             status: [],
             type: 'enemy',
             initiative: 21,
-            cr: 3
+            cr: 3,
+            data: goblin,
         },
         {
             name: 'Jealdor',
@@ -36,7 +39,8 @@ export default {
             status: [],
             type: 'enemy',
             cr: 0.25,
-            initiative: 13
+            initiative: 13,
+            data: goblin
         },
         {
             name: 'Boxbix',
