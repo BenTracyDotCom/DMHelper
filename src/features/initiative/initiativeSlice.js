@@ -3,10 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 const initiativeSlice = createSlice({
   name: 'initiative', 
   initialState: {
-    groupMode: 1,
+    groupMode: 0,
   },
   reducers: {
-    cycleGroupMode: state => state.groupMode = (state.groupMode + 1) % 3
+    cycleGroupMode: state => {
+      const newIndex = state.groupMode + 1
+      state.groupMode = newIndex % 3
+    }
   }
 })
 
