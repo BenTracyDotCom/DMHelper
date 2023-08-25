@@ -27,7 +27,6 @@ const encounterSlice = createSlice({
         state.chars[index].initiative = action.payload.initiative
       },
       setAllEnemies: (state, action) => {
-        //TODO: set all 'enemy' type chars to input initiative
         state.chars.forEach(char => {
           if(char.type === 'enemy'){
             char.initiative = action.payload
@@ -35,7 +34,13 @@ const encounterSlice = createSlice({
         })
       },
       setEnemiesByType: (state, action) => {
-        //TODO: set all enemies matching all but last two chars to the input initiative
+        const sliceTo = action.payload.name.length - 3
+        const toMatch = action.payload.name.slice(0, sliceTo)
+        state.chars.forEach(char => {
+          if(char.type === 'enemy' && char.name.slice(0, sliceTo) === toMatch){
+            char.initiative = action.payload.initiative
+          }
+        })
       },
       sortByInitiative: (state) => {
         const sortedChars = state.chars.sort((a, b) => ( b.initiative - a.initiative ))

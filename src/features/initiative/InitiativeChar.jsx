@@ -2,14 +2,28 @@ import { View, Text, StyleSheet, TextInput } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { setInitiative, sortByInitiative } from "../encounter/encounterSlice";
 import { setAllEnemies, setEnemiesByType } from "../encounter/encounterSlice";
+import { useState } from "react";
 
 export default function InitiativeChar({ char }) {
 
   const dispatch = useDispatch()
+  const [value, setValue] = useState(null)
 
   const groupMode = useSelector(state => state.initiative.groupMode)
 
   const bg = char.type === 'enemy' ? '#fecaca' : char.type === 'npc' ? '#a5f3fc' : 'white'
+
+  let placeholder = ''
+  if(char.type === 'enemy'){
+    let modifier = Math.floor((char.data.dexterity - 10) / 2)
+    if(modifier > 0){
+      placeholder = `+${modifier.toString()}`
+    } else {
+      placeholder = modifier.toString()
+    }
+  } else if (char.type === 'npc'){
+    placeholder = char.stats.dex
+  }
 
   const onSubmitEditing = (e) => {
     const { text } = e.nativeEvent
@@ -31,10 +45,6 @@ export default function InitiativeChar({ char }) {
     }
   }
 
-    const resort = () => {
-      dispatch(sortByInitiative())
-    }
-
     return (
       <View style={styles.container}>
         <View style={[styles.button, { backgroundColor: bg }]}>
@@ -43,8 +53,12 @@ export default function InitiativeChar({ char }) {
         <View style={styles.secondaryContainer}>
           <View style={[styles.secondaryButton, { backgroundColor: bg }]}>
             <TextInput style={styles.input} 
-            // onChangeText={onChangeText} 
-            onSubmitEditing={onSubmitEditing} placeholder={char.initiative.toString()}/>
+            onSubmitEditing={onSubmitEditing} 
+            placeholder={placeholder}
+            keyboardType="numeric"
+            value={char.initiative > 0 ? char.initiative.toString() : value}
+            onChangeText={setValue}
+            />
           </View>
 
         </View>

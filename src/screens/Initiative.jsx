@@ -17,7 +17,7 @@ export default function Initiative() {
     encounter.chars.forEach(char => {
       dispatch(setInitiative({
         name: char.name,
-        initiative: 0
+        initiative: char.type === 'enemy' ? -1 : 0
       }))
     })
     dispatch(sortByInitiative())

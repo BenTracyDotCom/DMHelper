@@ -48,7 +48,14 @@ export default {
             hp: 32,
             status: [],
             type: 'npc',
-            initiative: 8
+            initiative: 8,
+            stats: {
+              str: '+2',
+              dex: '+2',
+              con: '0',
+              int: '-1',
+              cha: '3'
+            },
         }
     ]
 }
