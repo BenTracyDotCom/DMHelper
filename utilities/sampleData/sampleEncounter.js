@@ -12,7 +12,7 @@ export default {
             hp: 123,
             status: [],
             type: 'pc',
-            initiative: 22 
+            initiative: 0 
         },
         {
             name: 'Goblin B',
@@ -20,7 +20,7 @@ export default {
             hp: 30,
             status: [],
             type: 'enemy',
-            initiative: 21,
+            initiative: 0,
             cr: 3,
             data: goblin,
         },
@@ -30,7 +30,7 @@ export default {
             hp: 30,
             status: [],
             type: 'pc',
-            initiative: 18,
+            initiative: 0,
         },
         {
             name: 'Goblin A',
@@ -39,7 +39,7 @@ export default {
             status: [],
             type: 'enemy',
             cr: 0.25,
-            initiative: 13,
+            initiative: 0,
             data: goblin
         },
         {
@@ -48,7 +48,7 @@ export default {
             hp: 32,
             status: [],
             type: 'npc',
-            initiative: 8,
+            initiative: 0,
             stats: {
               str: '+2',
               dex: '+2',

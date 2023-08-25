@@ -5,16 +5,16 @@ import { cycleGroupMode } from '../features/initiative/initiativeSlice';
 import { useEffect } from 'react';
 import { setInitiative, sortByInitiative } from '../features/encounter/encounterSlice';
 
-export default function Initiative() {
+export default function Initiative({ navigation}) {
   const groupModes = ['all', 'by type', 'none']
-  const encounter = useSelector(state => state.encounter)
-  const campaign = useSelector(state => state.campaign)
+  const chars = useSelector(state => state.encounter.chars)
   const groupMode = useSelector(state => state.initiative.groupMode)
 
   const dispatch = useDispatch()
+  const encounter = useSelector(state => state.encounter)
 
   useEffect(() => {
-    encounter.chars.forEach(char => {
+    chars.forEach(char => {
       dispatch(setInitiative({
         name: char.name,
         initiative: char.type === 'enemy' ? -1 : 0
@@ -25,17 +25,16 @@ export default function Initiative() {
 
   const handleGrouping = () => {
     if (groupMode === 2) {
-      const firstEnemy = encounter.chars.find(char => char.type === 'enemy')
-      encounter.chars.forEach(char => {
+      const firstEnemy = chars.find(char => char.type === 'enemy')
+      chars.forEach(char => {
         if(char.type === 'enemy'){
           dispatch(setInitiative({
             name: char.name,
-            initiative: firstEnemy.initiative ? firstEnemy.initiative : 30
+            initiative: firstEnemy.initiative ? firstEnemy.initiative : -1
           }))
         }
       })
       dispatch(cycleGroupMode())
-      dispatch(sortByInitiative())
     } else if (groupMode === 0) {
       //TODO: separate enemy initiative by NAME, with last 2 characters trimmed off (goblin A, goblin B, goblin AA)
       dispatch(cycleGroupMode())
@@ -47,13 +46,15 @@ export default function Initiative() {
 
   const handleContinue = () => {
     //TODO: either toggle tiebreak modal or navigate to encounter screen
+    dispatch(sortByInitiative())
+    navigation.navigate('Encounter', { name: encounter.title })
   }
 
   return (
 
     <View style={styles.container}>
         <View style={styles.chars}>
-          {!!encounter.chars && encounter.chars.map((char, i) => (
+          {!!chars && chars.map((char, i) => (
             <InitiativeChar char={char} key={i} />
           ))}
         </View>

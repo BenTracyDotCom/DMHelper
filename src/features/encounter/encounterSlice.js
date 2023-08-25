@@ -43,7 +43,15 @@ const encounterSlice = createSlice({
         })
       },
       sortByInitiative: (state) => {
-        const sortedChars = state.chars.sort((a, b) => ( b.initiative - a.initiative ))
+        const sortedChars = state.chars.slice(0).sort((a, b) => {
+          if(a.initiative > b.initiative){
+            return -1
+          } else if (a.initiative < b.initiative){
+            return 1
+          } else {
+            return a.name.localeCompare(b.name)
+          }
+        })
         state.chars = sortedChars
       },
       //the following actions require a "target" integer corresponding to an index in the encounter's "chars" array
