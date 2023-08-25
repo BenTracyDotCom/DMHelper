@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import { setNotes } from '../notes/notesSlice';
-import { setActive } from './campaignSlice';
+import { setActiveNotes } from './campaignSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function Character({ character }) {
@@ -13,10 +13,10 @@ export default function Character({ character }) {
 
   const handlePress = () => {
     if(isActive){
-      dispatch(setActive(null))
+      dispatch(setActiveNotes(null))
       dispatch(setNotes(campaignNotes))
     } else {
-      dispatch(setActive(character))
+      dispatch(setActiveNotes(character))
       dispatch(setNotes(character.notes.length ? character.notes : [`No notes to display for ${character.name}.`]))
     }
   }
