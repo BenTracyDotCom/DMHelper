@@ -24,6 +24,10 @@ const encounterSlice = createSlice({
       },
       setInitiative: (state, action) => {
         const index = state.chars.findIndex(char => char.name === action.payload.name)
+        state.chars[index].initiative = action.payload.initiative
+      },
+      sortByInitiative: (state) => {
+        state.chars = state.chars.sort((a, b) => ( a.initiative - b.initiative ))
       },
       //the following actions require a "target" integer corresponding to an index in the encounter's "chars" array
       statusAdded: (state, action) => {
@@ -63,5 +67,5 @@ const encounterSlice = createSlice({
     }
 })
 
-export const { setEncounter, nextChar, statusAdded, statusRemoved, hpAdded, hpRemoved, targetDestroye, setLocation, addNote, deleteNote, editNote } = encounterSlice.actions
+export const { setEncounter, nextChar, statusAdded, statusRemoved, hpAdded, hpRemoved, targetDestroye, setLocation, addNote, deleteNote, editNote, setInitiative, sortByInitiative } = encounterSlice.actions
 export default encounterSlice.reducer

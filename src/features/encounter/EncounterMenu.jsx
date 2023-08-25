@@ -14,7 +14,8 @@ export default function EncounterMenu({ navigation }) {
   const handleEncounter = (encounter) => {
     dispatch(setEncounter(encounter))
     dispatch(toggleEncountersMenu())
-    navigation.navigate('Encounter', { name: encounter.title })
+    navigation.navigate('Initiative')
+    //navigation.navigate('Encounter', { name: encounter.title })
   }
 
   const handleAddEncounter = () => {

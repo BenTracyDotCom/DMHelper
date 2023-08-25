@@ -71,8 +71,9 @@ export default function App() {
             component={Monsters}
           />
           <Stack.Screen
-            name="Roll initiative!"
+            name="Initiative"
             component={Initiative}
+            options={{title: 'Roll initiative!'}}
           />
           <Stack.Screen
             name="MonsterAdding"
