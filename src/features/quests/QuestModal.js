@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import { Modal, FlatList, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
 
 export default function QuestModal({ isVisible, onClose, quests, setCurrentQuest, handleObjectivePress }) {
 
-  const [selectedQuest, setSelectedQuest] = useState(null);
+  const dispatch = useDispatch()
+  const currentQuest = useSelector(state => state.campaign.currentQuest);
 
-  const handleQuestPressLocal = (quest) => {
-    if (selectedQuest === quest.title) {
-      setSelectedQuest(null);
+  const handleQuestPress = (quest) => {
+    if (currentQuest === quest.title) {
+      console.log(currentQuest, quest.title, 'currentQuest === quest.title')
+      setCurrentQuest(null);
     } else {
-      setSelectedQuest(quest.title);
-      if (setCurrentQuest) {
-        setCurrentQuest(quest.title);
-      }
+      console.log(currentQuest, quest.title, 'else block')
+      setCurrentQuest(quest.title)
     }
+    onClose()
   };
 
   return (
@@ -29,9 +31,9 @@ export default function QuestModal({ isVisible, onClose, quests, setCurrentQuest
           <FlatList
             data={quests}
             renderItem={({ item, index: questIndex }) => (
-              <TouchableOpacity onPress={() => handleQuestPressLocal(item)}>
+              <TouchableOpacity onPress={() => handleQuestPress(item)}>
                 <Text>{item.title}</Text>
-                {selectedQuest === item.title && (
+                {currentQuest === item.title && (
                   <FlatList
                     data={item.objectives}
                     renderItem={({ item: objective, index: objectiveIndex }) => (

@@ -8,11 +8,13 @@ const campaignSlice = createSlice({
   initialState: {
     ...sampleCampaign,
     npcs: sampleNPCs,
+    currentQuest: 'Meet Me in Phandalin',
     currentObjectiveIndex: 0
   },
   reducers: {
     currentQuestUpdated: (state, action) => {
       state.currentQuest = action.payload
+      console.log(state.currentQuest, 'currentQuest')
     },
     addNote: (state, action) => {
       newNotes = state.notes
@@ -94,18 +96,21 @@ const campaignSlice = createSlice({
       } else if (state.currentObjectiveIndex < currentQuestData.objectives.length - 1) {
         state.currentObjectiveIndex += 1;
       }
-      console.log(state.currentObjectiveIndex)
   },
     previousObjective: (state) => {
       const currentQuestData = state.quests.find(quest => quest.title === state.currentQuest);
       if (currentQuestData && state.currentObjectiveIndex > 0) {
         state.currentObjectiveIndex -= 1;
       }
-      console.log(state.currentObjectiveIndex)
+    },
+    setCurrentQuest: (state, action) => {
+      console.log(state, 'state in setCurrentQuest')
+      const selectedQuestTitle = action.payload;
+      state.currentQuest = selectedQuestTitle;
     }
   }
 })
 
-export const { currentQuestUpdated, addNote, deleteNote, editNote, addCharNote, editCharNote, setActiveNotes, setCurrentCampaign, addNPC, editNPC, deleteNPC, setCurrentObjectiveIndex, nextObjective, previousObjective } = campaignSlice.actions
+export const { currentQuestUpdated, addNote, deleteNote, editNote, addCharNote, editCharNote, setActiveNotes, setCurrentCampaign, addNPC, editNPC, deleteNPC, setCurrentObjectiveIndex, nextObjective, previousObjective, setCurrentQuest } = campaignSlice.actions
 
 export default campaignSlice.reducer

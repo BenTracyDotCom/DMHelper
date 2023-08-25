@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, Text, ScrollView, Dimensions, StyleSheet, Button } from 'react-native';
+import { View, Text, ScrollView, Dimensions, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useSelector, useDispatch } from 'react-redux';
 import Header from '../features/campaigns/Header';
@@ -9,7 +9,7 @@ import Notes from '../features/notes/Notes';
 import AddNote from '../features/notes/AddNote';
 import EncounterMenu from '../features/encounter/EncounterMenu';
 import QuestModal from '../features/quests/QuestModal.js'
-import {currentQuestUpdated, nextObjective, previousObjective} from '../features/campaigns/campaignSlice.js'
+import {currentQuestUpdated, setCurrentObjectiveIndex, nextObjective, previousObjective} from '../features/campaigns/campaignSlice.js'
 
 export default function Campaign({ navigation }) {
 
@@ -24,6 +24,7 @@ export default function Campaign({ navigation }) {
   }
 
   const setCurrentQuest = (questTitle) => {
+    console.log(questTitle, 'questTitle', typeof questTitle)
     dispatch(currentQuestUpdated(questTitle));
   }
 
@@ -34,12 +35,20 @@ export default function Campaign({ navigation }) {
   const currentObjective = campaignState.quests.find(quest => quest.title === campaignState.currentQuest)
 
   const handleNextObjective = () => {
-    console.log('next!')
     dispatch(nextObjective());
   }
 
   const handlePreviousObjective = () => {
     dispatch(previousObjective())
+  }
+
+  const handleObjectivePress = (questIndex, objectiveIndex) => {
+    const selectedQuest = campaign.quests[questIndex]
+
+    if (selectedQuest) {
+      dispatch(currentQuestUpdated(selectedQuest.title));
+    }
+    dispatch(setCurrentObjectiveIndex(objectiveIndex))
   }
 
   if (loading) {
@@ -48,13 +57,22 @@ export default function Campaign({ navigation }) {
 
   const currentQuest = useSelector(state => state.campaign.currentQuest)
 
+  // TODO: Add Quest Management Screen ("Journal")
   return (
     <View style={styles.container}>
       <Header />
-      <Text style={styles.currentQuestTitle}>Current Quest: {currentQuest}</Text>
-      <Text>Current Objective: {currentQuestData && currentObjectiveIndex !== undefined ? currentQuestData.objectives[currentObjectiveIndex] : 'None'}</Text>
-      <Button title="Next Objective" onPress={handleNextObjective}></Button>
-      <Button title="Previous Objective" onPress={handlePreviousObjective}></Button>
+      <TouchableOpacity onPress={toggleQuestModal}>
+        <Text style={styles.currentQuestTitle}>Current Quest: {currentQuest ? currentQuest : 'Loading...'}</Text>
+      </TouchableOpacity>
+      <Text style={styles.currentObjectiveText}>Current Objective: {currentQuestData && currentObjectiveIndex !== undefined ? currentQuestData.objectives[currentObjectiveIndex] : 'None'}</Text>
+      <View style={styles.objectiveButtonsContainer}>
+      <TouchableOpacity style={styles.objectiveButton} onPress={handlePreviousObjective}>
+          <Text style={styles.objectiveButtonText}>Previous Objective</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.objectiveButton} onPress={handleNextObjective}>
+          <Text style={styles.objectiveButtonText}>Next Objective</Text>
+        </TouchableOpacity>
+      </View>
       <Button title="Show Quests" onPress={toggleQuestModal}></Button>
       <Button title="Log Current State" onPress={() => console.log(campaign)} />
       <View style={styles.content}>
@@ -82,6 +100,7 @@ export default function Campaign({ navigation }) {
             onClose={toggleQuestModal}
             quests={campaign.quests}
             setCurrentQuest={setCurrentQuest}
+            handleObjectivePress={handleObjectivePress}
           ></QuestModal>
         </View>
       </View>
@@ -128,5 +147,30 @@ const styles = StyleSheet.create({
     color: 'red',
     textAlign: 'center',
     marginVertical: 10,
-  }
+  },
+  currentObjectiveText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'blue',
+    textAlign: 'center',
+    marginVertical: 5,
+  },
+  objectiveButtonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    marginBottom: 10,
+  },
+  objectiveButton: {
+    padding: 10,
+    backgroundColor: '#f5f5f5',
+    borderRadius: 5,
+    flex: 1,
+    marginHorizontal: 5,
+    alignItems: 'center',
+  },
+  objectiveButtonText: {
+    fontSize: 16,
+    color: 'blue',
+  },
 });
