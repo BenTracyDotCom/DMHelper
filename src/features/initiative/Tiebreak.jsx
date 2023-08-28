@@ -11,6 +11,10 @@ export default function Tiebreak({ navigation }) {
 
   const handleCancel = () => dispatch(toggleTiebreak())
 
+  const insertChar = (name) => {
+    //TODO: give the character an incrementing percentage of its initiative; i.e. first "17" will be "17.0", next will be "17.1", etc. and will be removed from "ties" list as this happens
+  }
+
   useEffect(() => {console.log(ties[activeTie], 's/b array')}, [ties])
 
   return (
@@ -19,7 +23,9 @@ export default function Tiebreak({ navigation }) {
         <View style={styles.modalCard}>
           <View style={styles.buttonbar}>
             {!!ties[activeTie] && ties[activeTie].map((char, i) => (
-              <Text key={i}>{char.name}</Text>
+              <TouchableOpacity onPress={() => insertChar(char)}>
+                <Text key={i}>{char.name}</Text>
+              </TouchableOpacity>
             ))}
             <TouchableOpacity style={{ ...styles.button, backgroundColor: '#ef4444' }} onPress={handleCancel}>
               <Text>X</Text>

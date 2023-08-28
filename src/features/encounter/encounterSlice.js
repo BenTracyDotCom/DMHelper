@@ -77,7 +77,7 @@ const encounterSlice = createSlice({
         if (inits[key].length > 1) {
           if (state.groupMode === 0) {
             //Case: duplicates for this initiative, all enemies grouped together
-            const enemy = state.chars.find(char => (char.type === 'enemy' && char.initiative === parseInt(key)))
+            const enemy = state.chars.find(char => (char.type === 'enemy' && char.initiative === parseFloat(key)))
             
             const oneEnemyInits = inits[key].filter(char => char.type !== 'enemy')
             oneEnemyInits.push(enemy)

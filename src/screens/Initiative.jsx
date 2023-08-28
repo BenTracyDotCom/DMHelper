@@ -7,10 +7,9 @@ import { setInitiative, sortByInitiative, setAllEnemies, setEnemiesByType, cycle
 
 export default function Initiative({ navigation }) {
   const groupModes = ['all', 'by type', 'none']
-  const { chars, groupMode, tiebreak, ties } = useSelector(state => state.encounter)
+  const { title, chars, groupMode, tiebreak, ties, activeTie } = useSelector(state => state.encounter)
 
   const dispatch = useDispatch()
-  const encounter = useSelector(state => state.encounter)
 
   useEffect(() => {
     chars.forEach(char => {
@@ -27,10 +26,11 @@ export default function Initiative({ navigation }) {
     if (JSON.stringify(ties) !== JSON.stringify({})) {
       dispatch(setActiveTie(Object.keys(ties)[0]))
       dispatch(toggleTiebreak())
-      console.log(ties, 'ties')
-      //dispatch(toggleTiebreak())
+    } else if (activeTie !== null && JSON.stringify(ties) === JSON.stringify({})){
+      dispatch(sortByInitiative());
+      navigation.navigate('Encounter', { name: title })
     }
-  }, [ties] )
+  }, [ties])
 
   const handleGrouping = () => {
     if (groupMode === 2) {
@@ -58,12 +58,9 @@ export default function Initiative({ navigation }) {
   }
 
   const handleContinue = () => {
-    //TODO: either toggle tiebreak modal or navigate to encounter screen
     dispatch(validateInitiative())
-
-    //TODO: VALIDATE before navigating
-    // dispatch(sortByInitiative())
-    // navigation.navigate('Encounter', { name: encounter.title })
+    dispatch(sortByInitiative());
+    //Actual continue depends on encounter.ties-triggered useEffect
   }
 
   return (
