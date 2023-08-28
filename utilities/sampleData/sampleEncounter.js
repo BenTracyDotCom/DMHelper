@@ -16,7 +16,7 @@ export default {
             initiative: 0 
         },
         {
-            name: 'Goblin B',
+            name: 'Goblin',
             ac: 12,
             hp: 30,
             status: [],
@@ -34,7 +34,7 @@ export default {
             initiative: 0,
         },
         {
-            name: 'Goblin A',
+            name: 'Goblin',
             ac: 12,
             hp: 24,
             status: [],

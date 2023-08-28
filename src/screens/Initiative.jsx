@@ -1,14 +1,13 @@
 import { View, Text, TouchableOpacity, ScrollView, StyleSheet } from 'react-native';
-import { UseSelector, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import Tiebreak from '../features/initiative/Tiebreak';
 import InitiativeChar from '../features/initiative/InitiativeChar';
-import { cycleGroupMode } from '../features/initiative/initiativeSlice';
 import { useEffect } from 'react';
-import { setInitiative, sortByInitiative, setAllEnemies, setEnemiesByType } from '../features/encounter/encounterSlice';
+import { setInitiative, sortByInitiative, setAllEnemies, setEnemiesByType, cycleGroupMode, toggleTiebreak, validateInitiative } from '../features/encounter/encounterSlice';
 
 export default function Initiative({ navigation}) {
   const groupModes = ['all', 'by type', 'none']
-  const chars = useSelector(state => state.encounter.chars)
-  const groupMode = useSelector(state => state.initiative.groupMode)
+  const { chars, groupMode, tiebreak, ties } = useSelector(state => state.encounter)
 
   const dispatch = useDispatch()
   const encounter = useSelector(state => state.encounter)
@@ -42,16 +41,20 @@ export default function Initiative({ navigation}) {
           currentInit --
         }
       })
-      //TODO: separate enemy initiative by NAME, with last 2 characters trimmed off (goblin A, goblin B, goblin AA)
       dispatch(cycleGroupMode())
     } else {
-      //TODO: give all un-rolled enemies their own initiative
       dispatch(cycleGroupMode())
     }
   }
 
   const handleContinue = () => {
     //TODO: either toggle tiebreak modal or navigate to encounter screen
+    dispatch(validateInitiative())
+    if(ties){
+      console.log(ties, 'ties')
+      dispatch(toggleTiebreak)
+    }
+
 
     //TODO: VALIDATE before navigating
     dispatch(sortByInitiative())
