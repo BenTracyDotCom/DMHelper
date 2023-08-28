@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, Text, ScrollView, Dimensions, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { useSelector, useDispatch } from 'react-redux';
 import Header from '../features/campaigns/Header';
@@ -9,7 +9,7 @@ import Notes from '../features/notes/Notes';
 import AddNote from '../features/notes/AddNote';
 import EncounterMenu from '../features/encounter/EncounterMenu';
 import QuestModal from '../features/quests/QuestModal.js'
-import {currentQuestUpdated, setCurrentObjectiveIndex, nextObjective, previousObjective} from '../features/campaigns/campaignSlice.js'
+import {currentQuestUpdated, setCurrentObjectiveIndex} from '../features/campaigns/campaignSlice.js'
 
 export default function Campaign({ navigation }) {
 
@@ -32,7 +32,6 @@ export default function Campaign({ navigation }) {
 
   const currentObjectiveIndex = campaignState.currentObjectiveIndex
   const currentQuestData = useSelector(state => state.campaign.quests.find(quest => quest.title === state.campaign.currentQuest));
-  const currentObjective = campaignState.quests.find(quest => quest.title === campaignState.currentQuest)
 
 
 
