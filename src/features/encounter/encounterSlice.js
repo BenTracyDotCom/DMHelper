@@ -12,6 +12,7 @@ const encounterSlice = createSlice({
     groupMode: 0,
     tiebreak: false,
     ties: {},
+    activeTie: null
   },
   reducers: {
     setEncounter: (state, action) => {
@@ -31,6 +32,9 @@ const encounterSlice = createSlice({
     },
     toggleTiebreak: state => {
       state.tiebreak = !state.tiebreak
+    },
+    setActiveTie: (state, action) => {
+      state.activeTie = action.payload
     },
     setInitiative: (state, action) => {
       const index = state.chars.findIndex(char => char.name === action.payload.name)
@@ -63,7 +67,6 @@ const encounterSlice = createSlice({
       state.chars = sortedChars
     },
     validateInitiative: (state) => {
-      console.log(['all','by type','none'][state.groupMode])
       const inits = {};
       state.chars.forEach(char => {
         //Create an array for each initiative
@@ -154,9 +157,40 @@ const encounterSlice = createSlice({
     editNote: (state, action) => {
       const { index, newNote } = action.payload;
       state.notes[index] = newNote
+    },
+    autoResolveTies: (state) => {
+      //Buggy, needs work
+      const highToLowTies = Object.keys(state.ties).sort((a,b) => (parseFloat(b) - parseFloat(a)))
+      console.log(highToLowTies, 'sorted tied inits')
+      highToLowTies.forEach(init => {
+        const theseChars = state.ties[init]
+        //console.log(theseChars, 'theseChars')
+        let nonPCs = theseChars.filter(char => (char.type !== 'pc'))
+        if(nonPCs.length === state.ties[init].length){1
+          nonPCs.sort((a, b) => {
+            if(a.type === 'npc'){
+               if(b.type === 'enemy'){
+                return b.data.dexterity - (parseInt(a.stats.dex) * 2 + 10)
+               } else {
+                return b.stats.dex - a.stats.dex
+               }
+            } else if(a.type === 'enemy'){
+              if(b.type === 'enemy'){
+                return b.data.dexterity - a.data.dexterity
+              } else {
+                return (parseInt(b.stats.dex) * 2 + 10) - a.data.dexterity
+              }
+            }
+          })
+        }
+        nonPCs.forEach((char, i) => {
+          char.initiative = parseFloat(`${init}.${i}`)
+        })
+        delete state.ties[init]
+      })
     }
   }
 })
 
-export const { setEncounter, nextChar, statusAdded, statusRemoved, hpAdded, hpRemoved, targetDestroye, setLocation, addNote, deleteNote, editNote, setInitiative, setAllEnemies, setEnemiesByType, sortByInitiative, cycleGroupMode, toggleTiebreak, validateInitiative } = encounterSlice.actions
+export const { setEncounter, nextChar, statusAdded, statusRemoved, hpAdded, hpRemoved, targetDestroye, setLocation, addNote, deleteNote, editNote, setInitiative, setAllEnemies, setEnemiesByType, sortByInitiative, cycleGroupMode, toggleTiebreak, validateInitiative, autoResolveTies, setActiveTie } = encounterSlice.actions
 export default encounterSlice.reducer

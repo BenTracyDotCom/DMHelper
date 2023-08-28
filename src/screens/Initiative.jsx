@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Tiebreak from '../features/initiative/Tiebreak';
 import InitiativeChar from '../features/initiative/InitiativeChar';
 import { useEffect } from 'react';
-import { setInitiative, sortByInitiative, setAllEnemies, setEnemiesByType, cycleGroupMode, toggleTiebreak, validateInitiative } from '../features/encounter/encounterSlice';
+import { setInitiative, sortByInitiative, setAllEnemies, setEnemiesByType, cycleGroupMode, toggleTiebreak, validateInitiative, autoResolveTies, setActiveTie } from '../features/encounter/encounterSlice';
 
 export default function Initiative({ navigation }) {
   const groupModes = ['all', 'by type', 'none']
@@ -23,7 +23,10 @@ export default function Initiative({ navigation }) {
   }, [dispatch])
 
   useEffect(() => {
+    //dispatch(autoResolveTies())
     if (JSON.stringify(ties) !== JSON.stringify({})) {
+      dispatch(setActiveTie(Object.keys(ties)[0]))
+      dispatch(toggleTiebreak())
       console.log(ties, 'ties')
       //dispatch(toggleTiebreak())
     }
@@ -57,11 +60,6 @@ export default function Initiative({ navigation }) {
   const handleContinue = () => {
     //TODO: either toggle tiebreak modal or navigate to encounter screen
     dispatch(validateInitiative())
-    // console.log(ties, 'ties')
-    // if (ties) {
-    //   dispatch(toggleTiebreak())
-    // }
-
 
     //TODO: VALIDATE before navigating
     // dispatch(sortByInitiative())

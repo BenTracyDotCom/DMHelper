@@ -2,19 +2,25 @@ import Modal from 'react-native-modal';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { setInitiative, setAllEnemies, setEnemiesByType, toggleTiebreak } from '../encounter/encounterSlice';
+import { useEffect } from 'react';
 
 export default function Tiebreak({ navigation }) {
   const dispatch = useDispatch()
   const visible = useSelector(state => state.encounter.tiebreak)
-  const { grouping, chars } = useSelector(state => state.encounter)
+  const { grouping, chars, ties, activeTie } = useSelector(state => state.encounter)
 
   const handleCancel = () => dispatch(toggleTiebreak())
+
+  useEffect(() => {console.log(ties[activeTie], 's/b array')}, [ties])
 
   return (
     <Modal isVisible={visible} avoidKeyboard={true} style={styles.modalBg}>
       <View style={styles.modalBase}>
         <View style={styles.modalCard}>
           <View style={styles.buttonbar}>
+            {!!ties[activeTie] && ties[activeTie].map((char, i) => (
+              <Text key={i}>{char.name}</Text>
+            ))}
             <TouchableOpacity style={{ ...styles.button, backgroundColor: '#ef4444' }} onPress={handleCancel}>
               <Text>X</Text>
             </TouchableOpacity>
