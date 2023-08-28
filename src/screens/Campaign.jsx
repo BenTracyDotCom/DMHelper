@@ -34,13 +34,7 @@ export default function Campaign({ navigation }) {
   const currentQuestData = useSelector(state => state.campaign.quests.find(quest => quest.title === state.campaign.currentQuest));
   const currentObjective = campaignState.quests.find(quest => quest.title === campaignState.currentQuest)
 
-  const handleNextObjective = () => {
-    dispatch(nextObjective());
-  }
 
-  const handlePreviousObjective = () => {
-    dispatch(previousObjective())
-  }
 
   const handleObjectivePress = (questIndex, objectiveIndex) => {
     const selectedQuest = campaign.quests[questIndex]
@@ -61,18 +55,6 @@ export default function Campaign({ navigation }) {
   return (
     <View style={styles.container}>
       <Header />
-      <TouchableOpacity onPress={toggleQuestModal}>
-        <Text style={styles.currentQuestTitle}>Current Quest: {currentQuest ? currentQuest : 'Loading...'}</Text>
-      </TouchableOpacity>
-      <Text style={styles.currentObjectiveText}>Current Objective: {currentQuestData && currentObjectiveIndex !== undefined ? currentQuestData.objectives[currentObjectiveIndex] : 'None'}</Text>
-      <View style={styles.objectiveButtonsContainer}>
-      <TouchableOpacity style={styles.objectiveButton} onPress={handlePreviousObjective}>
-          <Text style={styles.objectiveButtonText}>Previous Objective</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.objectiveButton} onPress={handleNextObjective}>
-          <Text style={styles.objectiveButtonText}>Next Objective</Text>
-        </TouchableOpacity>
-      </View>
       <Button title="Show Quests" onPress={toggleQuestModal}></Button>
       <Button title="Log Current State" onPress={() => console.log(campaign)} />
       <View style={styles.content}>
@@ -155,22 +137,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginVertical: 5,
   },
-  objectiveButtonsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    marginBottom: 10,
-  },
-  objectiveButton: {
-    padding: 10,
-    backgroundColor: '#f5f5f5',
-    borderRadius: 5,
-    flex: 1,
-    marginHorizontal: 5,
-    alignItems: 'center',
-  },
-  objectiveButtonText: {
-    fontSize: 16,
-    color: 'blue',
-  },
+
 });

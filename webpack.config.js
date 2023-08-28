@@ -9,7 +9,7 @@ module.exports = async function (env, argv) {
         dangerouslyAddModulePathsToTranspile: ["nativewind"],
       },
     },
-    argv
+    argv,
   );
 
   config.module.rules.push({

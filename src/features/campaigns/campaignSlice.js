@@ -1,77 +1,83 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 //sample for testing
-import sampleCampaign from '../../../utilities/sampleData/sampleCampaign';
-import sampleNPCs from '../../../utilities/sampleData/sampleNPCs'
+import sampleCampaign from "../../../utilities/sampleData/sampleCampaign";
+import sampleNPCs from "../../../utilities/sampleData/sampleNPCs";
 
 const campaignSlice = createSlice({
-  name: 'campaign',
+  name: "campaign",
   initialState: {
     ...sampleCampaign,
     npcs: sampleNPCs,
-    currentQuest: 'Meet Me in Phandalin',
-    currentObjectiveIndex: 0
+    currentQuest: "Meet Me in Phandalin",
+    currentObjectiveIndex: 0,
   },
   reducers: {
     currentQuestUpdated: (state, action) => {
-      state.currentQuest = action.payload
-      console.log(state.currentQuest, 'currentQuest')
+      state.currentQuest = action.payload;
+      console.log(state.currentQuest, "currentQuest");
     },
     addNote: (state, action) => {
-      newNotes = state.notes
-      newNotes.push(action.payload)
-      state.notes = newNotes
+      newNotes = state.notes;
+      newNotes.push(action.payload);
+      state.notes = newNotes;
     },
     deleteNote: (state, action) => {
-      state.notes = state.notes.filter(note => (note !== action.payload))
+      state.notes = state.notes.filter((note) => note !== action.payload);
     },
     /*requires payload to include:
     { old: noteToUpdate, new: noteToReplaceItWith }
     */
     editNote: (state, action) => {
-      const index = state.notes.findIndex((note) => note === action.payload.old)
+      const index = state.notes.findIndex(
+        (note) => note === action.payload.old,
+      );
       if (action.payload.new) {
-        state.notes.splice(index, 1, action.payload.new)
+        state.notes.splice(index, 1, action.payload.new);
       } else {
-        state.notes.splice(index, 1)
+        state.notes.splice(index, 1);
       }
     },
     /*requires payload to include:
     { name: string, note: string }
     */
     addCharNote: (state, action) => {
-      const charIndex = state.characters.findIndex((char) => char.name === action.payload.name)
-      const charToUpdate = state.characters[charIndex]
-      charToUpdate.notes.push(action.payload.note)
-      const chars = state.characters
-      chars.splice(charIndex, 1, charToUpdate)
-      state.characters = chars
+      const charIndex = state.characters.findIndex(
+        (char) => char.name === action.payload.name,
+      );
+      const charToUpdate = state.characters[charIndex];
+      charToUpdate.notes.push(action.payload.note);
+      const chars = state.characters;
+      chars.splice(charIndex, 1, charToUpdate);
+      state.characters = chars;
     },
     /*requires payload to include:
     { name: string, old: noteToUpdate, new: noteToReplaceItWith }
     */
     editCharNote: (state, action) => {
-      const charIndex = state.characters.findIndex((char) => char.name === action.payload.name)
-      const charToUpdate = state.characters[charIndex]
-      const noteIndex = charToUpdate.notes.findIndex((note) => note === action.payload.old)
-      if(action.payload.new){
-        charToUpdate.notes.splice(noteIndex, 1, action.payload.new)
+      const charIndex = state.characters.findIndex(
+        (char) => char.name === action.payload.name,
+      );
+      const charToUpdate = state.characters[charIndex];
+      const noteIndex = charToUpdate.notes.findIndex(
+        (note) => note === action.payload.old,
+      );
+      if (action.payload.new) {
+        charToUpdate.notes.splice(noteIndex, 1, action.payload.new);
       } else {
-        charToUpdate.notes.splice(noteIndex, 1)
+        charToUpdate.notes.splice(noteIndex, 1);
       }
-      const chars = state.characters
-      chars.splice(charIndex, 1, charToUpdate)
-      state.characters = chars
+      const chars = state.characters;
+      chars.splice(charIndex, 1, charToUpdate);
+      state.characters = chars;
     },
     setActiveNotes: (state, action) => {
-      state.activeNotes = action.payload
+      state.activeNotes = action.payload;
     },
     setCurrentCampaign: (state, action) => {
-      Object.keys(state).forEach(key => [
-        state[key] = action.payload[key]
-      ])
+      Object.keys(state).forEach((key) => [(state[key] = action.payload[key])]);
     },
     addNPC: (state, action) => {
-      state.npcs.push(action.payload)
+      state.npcs.push(action.payload);
     },
     editNPC: (state, action) => {
       const index = state.npcs.findIndex((npc) => npc.id === action.payload.id);
@@ -80,37 +86,60 @@ const campaignSlice = createSlice({
       }
     },
     deleteNPC: (state, action) => {
-      state.npcs = state.npcs.filter(npc => npc.id !== action.payload.id);
+      state.npcs = state.npcs.filter((npc) => npc.id !== action.payload.id);
     },
     setCurrentObjectiveIndex: (state, action) => {
-      state.currentObjectiveIndex = action.payload
+      state.currentObjectiveIndex = action.payload;
     },
     nextObjective: (state) => {
-      const currentQuestData = state.quests.find(quest => quest.title === state.currentQuest)
+      const currentQuestData = state.quests.find(
+        (quest) => quest.title === state.currentQuest,
+      );
       if (!currentQuestData) {
         console.error("Current quest data not found in state.quests");
         return;
       }
-      if (typeof state.currentObjectiveIndex !== 'number') {
+      if (typeof state.currentObjectiveIndex !== "number") {
         state.currentObjectiveIndex = 0;
-      } else if (state.currentObjectiveIndex < currentQuestData.objectives.length - 1) {
+      } else if (
+        state.currentObjectiveIndex <
+        currentQuestData.objectives.length - 1
+      ) {
         state.currentObjectiveIndex += 1;
       }
-  },
+    },
     previousObjective: (state) => {
-      const currentQuestData = state.quests.find(quest => quest.title === state.currentQuest);
+      const currentQuestData = state.quests.find(
+        (quest) => quest.title === state.currentQuest,
+      );
       if (currentQuestData && state.currentObjectiveIndex > 0) {
         state.currentObjectiveIndex -= 1;
       }
     },
     setCurrentQuest: (state, action) => {
-      console.log(state, 'state in setCurrentQuest')
+      console.log(state, "state in setCurrentQuest");
       const selectedQuestTitle = action.payload;
       state.currentQuest = selectedQuestTitle;
-    }
-  }
-})
+    },
+  },
+});
 
-export const { currentQuestUpdated, addNote, deleteNote, editNote, addCharNote, editCharNote, setActiveNotes, setCurrentCampaign, addNPC, editNPC, deleteNPC, setCurrentObjectiveIndex, nextObjective, previousObjective, setCurrentQuest } = campaignSlice.actions
+export const {
+  currentQuestUpdated,
+  addNote,
+  deleteNote,
+  editNote,
+  addCharNote,
+  editCharNote,
+  setActiveNotes,
+  setCurrentCampaign,
+  addNPC,
+  editNPC,
+  deleteNPC,
+  setCurrentObjectiveIndex,
+  nextObjective,
+  previousObjective,
+  setCurrentQuest,
+} = campaignSlice.actions;
 
-export default campaignSlice.reducer
+export default campaignSlice.reducer;

@@ -1,21 +1,33 @@
-import React, { useState } from 'react';
-import { Modal, FlatList, View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import {useSelector, useDispatch} from 'react-redux';
+import React, { useState } from "react";
+import {
+  Modal,
+  FlatList,
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 
-export default function QuestModal({ isVisible, onClose, quests, setCurrentQuest, handleObjectivePress }) {
-
-  const dispatch = useDispatch()
-  const currentQuest = useSelector(state => state.campaign.currentQuest);
+export default function QuestModal({
+  isVisible,
+  onClose,
+  quests,
+  setCurrentQuest,
+  handleObjectivePress,
+}) {
+  const dispatch = useDispatch();
+  const currentQuest = useSelector((state) => state.campaign.currentQuest);
 
   const handleQuestPress = (quest) => {
     if (currentQuest === quest.title) {
-      console.log(currentQuest, quest.title, 'currentQuest === quest.title')
+      console.log(currentQuest, quest.title, "currentQuest === quest.title");
       setCurrentQuest(null);
     } else {
-      console.log(currentQuest, quest.title, 'else block')
-      setCurrentQuest(quest.title)
+      console.log(currentQuest, quest.title, "else block");
+      setCurrentQuest(quest.title);
     }
-    onClose()
+    onClose();
   };
 
   return (
@@ -36,8 +48,15 @@ export default function QuestModal({ isVisible, onClose, quests, setCurrentQuest
                 {currentQuest === item.title && (
                   <FlatList
                     data={item.objectives}
-                    renderItem={({ item: objective, index: objectiveIndex }) => (
-                      <TouchableOpacity onPress={() => handleObjectivePress(questIndex, objectiveIndex)}>
+                    renderItem={({
+                      item: objective,
+                      index: objectiveIndex,
+                    }) => (
+                      <TouchableOpacity
+                        onPress={() =>
+                          handleObjectivePress(questIndex, objectiveIndex)
+                        }
+                      >
                         <Text style={styles.objective}>{objective}</Text>
                       </TouchableOpacity>
                     )}
@@ -60,26 +79,26 @@ export default function QuestModal({ isVisible, onClose, quests, setCurrentQuest
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   modalBox: {
-    width: '80%',
-    height: '60%',
-    backgroundColor: 'white',
+    width: "80%",
+    height: "60%",
+    backgroundColor: "white",
     padding: 20,
     borderRadius: 10,
   },
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   closeButton: {
     marginTop: 20,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   objective: {
     marginLeft: 20,
     fontSize: 16,
-  }
+  },
 });
