@@ -63,6 +63,7 @@ const encounterSlice = createSlice({
       state.chars = sortedChars
     },
     validateInitiative: (state) => {
+      console.log(['all','by type','none'][state.groupMode])
       const inits = {};
       state.chars.forEach(char => {
         //Create an array for each initiative
@@ -74,11 +75,17 @@ const encounterSlice = createSlice({
           if (state.groupMode === 0) {
             //Case: duplicates for this initiative, all enemies grouped together
             const enemy = state.chars.find(char => (char.type === 'enemy' && char.initiative === parseInt(key)))
-            const oneEnemyInits = inits[key].filter(char => (char.type !== 'enemy')).push(enemy)
+            
+            const oneEnemyInits = inits[key].filter(char => char.type !== 'enemy')
+            oneEnemyInits.push(enemy)
+            
             //ONLY add this value to ties if there's more than one left after reducing to a single enemy value
             if (oneEnemyInits.length > 1) {
-              state.ties[key] = oneEnemyInits
+              const toSet = {...state.ties}
+              toSet[key] = oneEnemyInits
+              state.ties = toSet
             }
+            console.log(state.ties, 'ties in state')
           } else if (state.groupMode === 1) {
             //Case: duplicates for this initiative, enemies grouped by type
             const reducedByName = inits[key].filter((char, index) => inits[key].indexOf(char) === index);

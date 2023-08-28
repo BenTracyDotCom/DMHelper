@@ -5,7 +5,7 @@ import InitiativeChar from '../features/initiative/InitiativeChar';
 import { useEffect } from 'react';
 import { setInitiative, sortByInitiative, setAllEnemies, setEnemiesByType, cycleGroupMode, toggleTiebreak, validateInitiative } from '../features/encounter/encounterSlice';
 
-export default function Initiative({ navigation}) {
+export default function Initiative({ navigation }) {
   const groupModes = ['all', 'by type', 'none']
   const { chars, groupMode, tiebreak, ties } = useSelector(state => state.encounter)
 
@@ -22,6 +22,13 @@ export default function Initiative({ navigation}) {
     dispatch(sortByInitiative())
   }, [dispatch])
 
+  useEffect(() => {
+    if (JSON.stringify(ties) !== JSON.stringify({})) {
+      console.log(ties, 'ties')
+      //dispatch(toggleTiebreak())
+    }
+  }, [ties] )
+
   const handleGrouping = () => {
     if (groupMode === 2) {
       const firstEnemy = chars.find(char => char.type === 'enemy')
@@ -32,13 +39,13 @@ export default function Initiative({ navigation}) {
       let currentInit = -1
       chars.forEach(char => {
         const toMatch = char.name.slice(0, 3)
-        if(char.type === 'enemy' && !found[toMatch]){
+        if (char.type === 'enemy' && !found[toMatch]) {
           found[toMatch] = true
           dispatch(setEnemiesByType({
             name: char.name,
             init: currentInit
           }))
-          currentInit --
+          currentInit--
         }
       })
       dispatch(cycleGroupMode())
@@ -50,31 +57,32 @@ export default function Initiative({ navigation}) {
   const handleContinue = () => {
     //TODO: either toggle tiebreak modal or navigate to encounter screen
     dispatch(validateInitiative())
-    if(ties){
-      console.log(ties, 'ties')
-      dispatch(toggleTiebreak)
-    }
+    // console.log(ties, 'ties')
+    // if (ties) {
+    //   dispatch(toggleTiebreak())
+    // }
 
 
     //TODO: VALIDATE before navigating
-    dispatch(sortByInitiative())
-    navigation.navigate('Encounter', { name: encounter.title })
+    // dispatch(sortByInitiative())
+    // navigation.navigate('Encounter', { name: encounter.title })
   }
 
   return (
 
     <View style={styles.container}>
-        <View style={styles.chars}>
-          {!!chars && chars.map((char, i) => (
-            <InitiativeChar char={char} key={i} />
-          ))}
-        </View>
-        <View style={styles.aux}>
-          <Text>Group enemies by:</Text>
-          <TouchableOpacity onPress={handleGrouping} style={styles.groupBtn}>
-            <Text>{groupModes[groupMode]}</Text>
-          </TouchableOpacity>
-        </View>
+      {tiebreak && <Tiebreak navigation={navigation} />}
+      <View style={styles.chars}>
+        {!!chars && chars.map((char, i) => (
+          <InitiativeChar char={char} key={i} />
+        ))}
+      </View>
+      <View style={styles.aux}>
+        <Text>Group enemies by:</Text>
+        <TouchableOpacity onPress={handleGrouping} style={styles.groupBtn}>
+          <Text>{groupModes[groupMode]}</Text>
+        </TouchableOpacity>
+      </View>
       <View style={styles.buttonBar}>
         <TouchableOpacity onPress={handleContinue} style={styles.continue}>
           <Text style={styles.continueText}>→</Text>
