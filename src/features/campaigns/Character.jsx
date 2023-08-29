@@ -1,7 +1,7 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import { setNotes } from "../notes/notesSlice";
-import { setActive } from "./campaignSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { View, Text, TouchableOpacity } from 'react-native';
+import { setNotes } from '../notes/notesSlice';
+import { setActiveNotes } from './campaignSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function Character({ character }) {
   const dispatch = useDispatch();

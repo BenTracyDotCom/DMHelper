@@ -181,7 +181,7 @@ export default function EncounterBuilder({ route }) {
         onPress={submitEncounter}
         style={styles.button}
       />
-    </ScrollView>
+    </ScrollView >
   );
 }
 

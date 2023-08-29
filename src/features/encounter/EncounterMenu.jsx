@@ -16,15 +16,20 @@ export default function EncounterMenu({ navigation }) {
   const visible = useSelector((state) => state.encounters.showEncounterModal);
   const encounters = useSelector((state) => state.encounters.encounters);
 
-  const handleEncounter = async (encounter) => {
-    dispatch(setEncounter(encounter));
-    dispatch(toggleEncountersMenu());
-    navigation.navigate("Encounter", { name: encounter.title });
-  };
+  const handleEncounter = (encounter) => {
+    dispatch(setEncounter(encounter))
+    dispatch(toggleEncountersMenu())
+    navigation.navigate('Initiative')
+    //navigation.navigate('Encounter', { name: encounter.title })
+  }
+
+  const handleAddEncounter = () => {
+    navigation.navigate('EncounterBuilder')
+  }
+
+
 
   //TODO: have list items navigate to Encounter screen and load their respective encounters
-
-  //TODO: make a "+" tile which navigates to the EncounterBuilder screen
 
   //TODO: styling: modal card should grow to 400px and scroll after that, should start at just the size of the tiles present
 
@@ -34,18 +39,19 @@ export default function EncounterMenu({ navigation }) {
         <View style={styles.modalBase}>
           <View style={styles.modalCard}>
             <ScrollView contentContainerStyle={styles.listContainer}>
-              {!!encounters.length &&
-                encounters.map((encounter, index) => (
-                  <TouchableOpacity
-                    style={styles.encounter}
-                    key={`encounter${index}`}
-                    onPress={() => handleEncounter(encounter)}
-                  >
-                    <Text style={styles.text}>{encounter.title}</Text>
-                  </TouchableOpacity>
-                ))}
+              {!!encounters.length && encounters.map((encounter, index) => (
+                <TouchableOpacity style={styles.encounter} key={`encounter${index}`} onPress={() => handleEncounter(encounter)}>
+                  <Text style={styles.text}>{encounter.title}</Text>
+                </TouchableOpacity>
+              ))}
+              <TouchableOpacity style={styles.encounter} onPress={handleAddEncounter}>
+                <Text style={styles.text}>+</Text>
+              </TouchableOpacity>
             </ScrollView>
           </View>
+            <TouchableOpacity style={styles.button} onPress={() => dispatch(toggleEncountersMenu())}>
+              <Text>X</Text>
+            </TouchableOpacity>
         </View>
       </View>
     </Modal>
@@ -76,11 +82,15 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   encounter: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
     borderRadius: 12,
+    borderStyle: 'solid',
+    borderColor: 'red',
+    borderWidth: 2,
   },
   text: {
-    fontFamily: "Scada",
+    fontFamily: 'Scada',
+    textAlign: 'center',
   },
   button: {
     height: 40,

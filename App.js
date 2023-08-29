@@ -8,17 +8,17 @@ import { View } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import PrefsButton from "./src/features/preferences/PrefsButton";
 
-import Launch from "./src/screens/Launch";
-import Home from "./src/screens/Home";
-import Spells from "./src/screens/Spells";
-import Spell from "./src/screens/Spell";
-import Encounter from "./src/screens/Encounter";
-import EncounterBuilder from "./src/screens/EncounterBuilder";
-import Campaign from "./src/screens/Campaign";
-
-import Monsters from "./src/screens/Monsters.jsx";
-import Monster from "./src/screens/Monster.jsx";
-import Debug from "./src/screens/Debug";
+import Launch from './src/screens/Launch';
+import Home from './src/screens/Home';
+import Spells from './src/screens/Spells';
+import Spell from './src/screens/Spell';
+import Encounter from './src/screens/Encounter';
+import EncounterBuilder from './src/screens/EncounterBuilder';
+import Campaign from './src/screens/Campaign';
+import Initiative from './src/screens/Initiative';
+import Monsters from './src/screens/Monsters.jsx'
+import Monster from './src/screens/Monster.jsx'
+import Debug from './src/screens/Debug';
 
 import Equipments from "./src/screens/Equipments.jsx";
 import Equipment from "./src/screens/Equipment.jsx";
@@ -47,14 +47,43 @@ export default function App() {
       <Preferences />
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Launch">
-          <Stack.Screen name="Launch" component={Launch} />
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Spells" component={Spells} />
-          <Stack.Screen name="Spell" component={Spell} />
-          <Stack.Screen name="Monsters" component={Monsters} />
-          <Stack.Screen name="MonsterAdding" component={MonsterAdding} />
-          <Stack.Screen name="Monster" component={Monster} />
-          <Stack.Screen name="Encounter" component={Encounter} />
+          <Stack.Screen
+            name="Launch"
+            component={Launch}
+          />
+          <Stack.Screen
+            name="Home"
+            component={Home}
+          />
+          <Stack.Screen
+            name="Spells"
+            component={Spells}
+          />
+          <Stack.Screen
+            name="Spell"
+            component={Spell}
+          />
+          <Stack.Screen
+            name="Monsters"
+            component={Monsters}
+          />
+          <Stack.Screen
+            name="Initiative"
+            component={Initiative}
+            options={{title: 'Roll initiative!'}}
+          />
+          <Stack.Screen
+            name="MonsterAdding"
+            component={MonsterAdding}
+          />
+          <Stack.Screen
+            name="Monster"
+            component={Monster}
+          />
+          <Stack.Screen
+            name="Encounter"
+            component={Encounter}
+          />
           <Stack.Screen
             name="EncounterBuilder"
             component={EncounterBuilder}
