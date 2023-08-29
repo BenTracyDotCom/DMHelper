@@ -1,14 +1,7 @@
-<<<<<<< HEAD
 import { View, Text, TouchableOpacity } from 'react-native';
 import { setNotes } from '../notes/notesSlice';
 import { setActiveNotes } from './campaignSlice';
 import { useDispatch, useSelector } from 'react-redux';
-=======
-import { View, Text, TouchableOpacity } from "react-native";
-import { setNotes } from "../notes/notesSlice";
-import { setActive } from "./campaignSlice";
-import { useDispatch, useSelector } from "react-redux";
->>>>>>> main
 
 export default function Character({ character }) {
   const dispatch = useDispatch();
@@ -17,14 +10,6 @@ export default function Character({ character }) {
   const campaignNotes = useSelector((state) => state.campaign.notes);
 
   const handlePress = () => {
-<<<<<<< HEAD
-    if(isActive){
-      dispatch(setActiveNotes(null))
-      dispatch(setNotes(campaignNotes))
-    } else {
-      dispatch(setActiveNotes(character))
-      dispatch(setNotes(character.notes.length ? character.notes : [`No notes to display for ${character.name}.`]))
-=======
     if (isActive) {
       dispatch(setActive(null));
       dispatch(setNotes(campaignNotes));
@@ -37,7 +22,6 @@ export default function Character({ character }) {
             : [`No notes to display for ${character.name}.`],
         ),
       );
->>>>>>> main
     }
   };
 

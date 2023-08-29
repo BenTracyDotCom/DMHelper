@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-import React, {useState, useEffect} from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ScrollView } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
-import { currentQuestUpdated } from '../features/campaigns/campaignSlice.js';
-import { storeEncounter } from '../data/encountersDB.js';
-import MultiSelect from 'react-native-multiple-select';
-import {useNavigation} from '@react-navigation/native';
-import {MonsterAdding} from './MonsterAdding'
-import {selectMonster, clearMonsters} from '../features/encounter/encounterBuilderSlice.js'
-=======
 import React, { useState, useEffect } from "react";
 import {
   View,
@@ -30,7 +19,6 @@ import {
 } from "../features/encounter/encounterSlice.js";
 import CustomButton from "../models/CustomButton.jsx";
 import { addEncounter } from "../features/encounter/encountersSlice.js";
->>>>>>> main
 
 export default function EncounterBuilder({ route }) {
   const navigation = useNavigation();
@@ -85,11 +73,7 @@ export default function EncounterBuilder({ route }) {
     storeEncounter(newEncounter);
     addEncounter(newEncounter);
 
-<<<<<<< HEAD
-    dispatch(currentQuestUpdated({ ...currentQuest, encounter: newEncounter }))
-=======
     dispatch(currentQuestUpdated({ ...currentQuest, encounter: newEncounter }));
->>>>>>> main
 
     setTitle("");
     setLocation("");
@@ -138,29 +122,11 @@ export default function EncounterBuilder({ route }) {
         selectedItemIconColor="#CCC"
         itemTextColor="#000"
         displayKey="name"
-<<<<<<< HEAD
-        searchInputStyle={{ color: '#CCC' }}
-=======
         searchInputStyle={{ color: "#CCC" }}
->>>>>>> main
         submitButtonColor="#CCC"
         submitButtonText="Submit"
       ></MultiSelect>
       <View>
-<<<<<<< HEAD
-        {selectedMonsters && Object.values(selectedMonsters).map((monster) => (
-          <View key={monster.url}>
-          <Text>{`${monster.url.split('/')[3]}: ${monster.count}`}</Text>
-          </View>
-        ))}
-      </View>
-      <Button
-      title="Add Monster"
-      onPress={() => navigation.navigate('MonsterAdding')}
-      ></Button>
-      <Button
-        title='Submit Encounter'
-=======
         {selectedMonsters &&
           Object.values(selectedMonsters).map((monster) => (
             <View key={monster.url} style={styles.monsterCard}>
@@ -212,11 +178,10 @@ export default function EncounterBuilder({ route }) {
       </View>
       <CustomButton
         title="Submit Encounter"
->>>>>>> main
         onPress={submitEncounter}
         style={styles.button}
       />
-    </ScrollView>
+    </ScrollView >
   );
 }
 
@@ -254,14 +219,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   monsterCard: {
-<<<<<<< HEAD
-    backgroundColor: 'crimson',
-    color: 'white',
-    padding: 10,
-    marginVertical: 5,
-    borderRadius: 5
-  }
-=======
     backgroundColor: "#F7FAFC",
     padding: 15,
     marginVertical: 5,
@@ -305,5 +262,4 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
   },
->>>>>>> main
 });

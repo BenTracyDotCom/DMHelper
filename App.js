@@ -8,7 +8,6 @@ import { View } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import PrefsButton from "./src/features/preferences/PrefsButton";
 
-<<<<<<< HEAD
 import Launch from './src/screens/Launch';
 import Home from './src/screens/Home';
 import Spells from './src/screens/Spells';
@@ -20,19 +19,6 @@ import Initiative from './src/screens/Initiative';
 import Monsters from './src/screens/Monsters.jsx'
 import Monster from './src/screens/Monster.jsx'
 import Debug from './src/screens/Debug';
-=======
-import Launch from "./src/screens/Launch";
-import Home from "./src/screens/Home";
-import Spells from "./src/screens/Spells";
-import Spell from "./src/screens/Spell";
-import Encounter from "./src/screens/Encounter";
-import EncounterBuilder from "./src/screens/EncounterBuilder";
-import Campaign from "./src/screens/Campaign";
-
-import Monsters from "./src/screens/Monsters.jsx";
-import Monster from "./src/screens/Monster.jsx";
-import Debug from "./src/screens/Debug";
->>>>>>> main
 
 import Equipments from "./src/screens/Equipments.jsx";
 import Equipment from "./src/screens/Equipment.jsx";
@@ -61,7 +47,6 @@ export default function App() {
       <Preferences />
       <NavigationContainer>
         <Stack.Navigator initialRouteName="Launch">
-<<<<<<< HEAD
           <Stack.Screen
             name="Launch"
             component={Launch}
@@ -99,16 +84,6 @@ export default function App() {
             name="Encounter"
             component={Encounter}
           />
-=======
-          <Stack.Screen name="Launch" component={Launch} />
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Spells" component={Spells} />
-          <Stack.Screen name="Spell" component={Spell} />
-          <Stack.Screen name="Monsters" component={Monsters} />
-          <Stack.Screen name="MonsterAdding" component={MonsterAdding} />
-          <Stack.Screen name="Monster" component={Monster} />
-          <Stack.Screen name="Encounter" component={Encounter} />
->>>>>>> main
           <Stack.Screen
             name="EncounterBuilder"
             component={EncounterBuilder}
