@@ -54,7 +54,6 @@ export default function Campaign({ navigation }) {
   return (
     <View style={styles.container}>
       <Header toggleQuestModal={toggleQuestModal} />
-      <Button title="Log Current State" onPress={() => console.log(campaign)} />
       <View style={styles.content}>
         <AddNote />
         <EncounterMenu navigation={navigation} />
