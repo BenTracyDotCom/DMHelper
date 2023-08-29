@@ -7,7 +7,7 @@ import {
   previousObjective,
 } from "../../features/campaigns/campaignSlice.js";
 
-export default function Header() {
+export default function Header({toggleQuestModal}) {
   const dispatch = useDispatch();
 
   const { location, currentObjective, maps } = useSelector(
@@ -28,7 +28,7 @@ export default function Header() {
   };
 
   const handleQuest = () => {
-    //TODO
+    toggleQuestModal()
   };
 
   const handlePreviousObjective = () => {
@@ -40,7 +40,7 @@ export default function Header() {
   };
 
   const handleObjective = () => {
-    //TODO
+    toggleQuestModal()
   };
 
   const handleNPCs = () => {
@@ -54,13 +54,7 @@ export default function Header() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <View style={styles.questDataRow}>
-          <Text style={styles.title}>Quest:</Text>
-          <TouchableOpacity style={styles.locationButton} onPress={handleQuest}>
-            <Text style={styles.locationText}>{currentQuest}</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.questDataRow}>
+      <View style={styles.questDataRow}>
           <Text style={styles.title}>Where:</Text>
           <TouchableOpacity
             style={styles.locationButton}
@@ -70,6 +64,12 @@ export default function Header() {
           </TouchableOpacity>
           <TouchableOpacity style={styles.mapButton}>
             <Text style={styles.mapText}>Map</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.questDataRow}>
+          <Text style={styles.title}>Quest:</Text>
+          <TouchableOpacity style={styles.locationButton} onPress={handleQuest}>
+            <Text style={styles.locationText}>{currentQuest}</Text>
           </TouchableOpacity>
         </View>
         <Text style={{ ...styles.title, fontSize: 18 }}>Objective:</Text>
@@ -83,7 +83,7 @@ export default function Header() {
                 ? currentQuestData.objectives[currentObjectiveIndex]
                 : "None"}
             </Text>
-            <View style={styles.objectiveButtonsContainer}>
+            {/* <View style={styles.objectiveButtonsContainer}>
             <TouchableOpacity
               style={styles.objectiveButton}
               onPress={handlePreviousObjective}
@@ -96,7 +96,7 @@ export default function Header() {
             >
               <Text style={styles.objectiveButtonText}>Next Objective</Text>
             </TouchableOpacity>
-          </View>
+          </View> */}
           </TouchableOpacity>
         </View>
         <View style={styles.buttonBar}>

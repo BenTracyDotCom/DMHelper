@@ -15,19 +15,17 @@ export default function QuestModal({
   quests,
   setCurrentQuest,
   handleObjectivePress,
+  toggleQuestModal
 }) {
   const dispatch = useDispatch();
   const currentQuest = useSelector((state) => state.campaign.currentQuest);
 
   const handleQuestPress = (quest) => {
     if (currentQuest === quest.title) {
-      console.log(currentQuest, quest.title, "currentQuest === quest.title");
       setCurrentQuest(null);
     } else {
-      console.log(currentQuest, quest.title, "else block");
       setCurrentQuest(quest.title);
     }
-    onClose();
   };
 
   return (
@@ -53,8 +51,10 @@ export default function QuestModal({
                       index: objectiveIndex,
                     }) => (
                       <TouchableOpacity
-                        onPress={() =>
+                        onPress={() => {
                           handleObjectivePress(questIndex, objectiveIndex)
+                          onClose()
+                        }
                         }
                       >
                         <Text style={styles.objective}>{objective}</Text>

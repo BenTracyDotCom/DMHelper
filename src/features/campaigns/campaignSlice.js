@@ -14,7 +14,6 @@ const campaignSlice = createSlice({
   reducers: {
     currentQuestUpdated: (state, action) => {
       state.currentQuest = action.payload;
-      console.log(state.currentQuest, "currentQuest");
     },
     addNote: (state, action) => {
       newNotes = state.notes;
@@ -117,7 +116,6 @@ const campaignSlice = createSlice({
       }
     },
     setCurrentQuest: (state, action) => {
-      console.log(state, "state in setCurrentQuest");
       const selectedQuestTitle = action.payload;
       state.currentQuest = selectedQuestTitle;
     },

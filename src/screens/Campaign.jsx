@@ -53,8 +53,7 @@ export default function Campaign({ navigation }) {
   // TODO: Add Quest Management Screen ("Journal")
   return (
     <View style={styles.container}>
-      <Header />
-      <Button title="Show Quests" onPress={toggleQuestModal}></Button>
+      <Header toggleQuestModal={toggleQuestModal} />
       <Button title="Log Current State" onPress={() => console.log(campaign)} />
       <View style={styles.content}>
         <AddNote />
@@ -82,6 +81,7 @@ export default function Campaign({ navigation }) {
             quests={campaign.quests}
             setCurrentQuest={setCurrentQuest}
             handleObjectivePress={handleObjectivePress}
+            toggleQuestModal={toggleQuestModal}
           ></QuestModal>
         </View>
       </View>
