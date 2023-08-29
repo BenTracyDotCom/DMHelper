@@ -25,12 +25,14 @@ export default function Initiative({ navigation }) {
     //dispatch(autoResolveTies())
     if (JSON.stringify(ties) !== JSON.stringify({})) {
       dispatch(setActiveTie(Object.keys(ties)[0]))
-      dispatch(toggleTiebreak())
+      // dispatch(toggleTiebreak())
+      //   navigation.navigate('Encounter', { name: title })
+
     } else if (activeTie !== null && JSON.stringify(ties) === JSON.stringify({})){
       dispatch(sortByInitiative());
       navigation.navigate('Encounter', { name: title })
     }
-  }, [ties])
+  }, [ties, chars])
 
   const handleGrouping = () => {
     if (groupMode === 2) {
@@ -60,13 +62,15 @@ export default function Initiative({ navigation }) {
   const handleContinue = () => {
     dispatch(validateInitiative())
     dispatch(sortByInitiative());
+    navigation.navigate('Encounter', { name: title })
+
     //Actual continue depends on encounter.ties-triggered useEffect
   }
 
   return (
 
     <View style={styles.container}>
-      {tiebreak && <Tiebreak navigation={navigation} />}
+      {/* {tiebreak && <Tiebreak navigation={navigation} />} */}
       <View style={styles.chars}>
         {!!chars && chars.map((char, i) => (
           <InitiativeChar char={char} key={i} />
