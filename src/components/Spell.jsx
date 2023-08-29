@@ -1,11 +1,9 @@
-import { Text, View } from 'react-native';
+import { Text, View } from "react-native";
 
-export default function Spell({spell}) {
+export default function Spell({ spell }) {
   return (
     <View>
-      <Text>
-        Spell
-      </Text>
+      <Text>Spell</Text>
     </View>
-  )
+  );
 }

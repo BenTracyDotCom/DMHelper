@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement } from '../features/counter/counterSlice'
-import Counter from '../features/counter/Counter';
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import { increment, decrement } from "../features/counter/counterSlice";
+import Counter from "../features/counter/Counter";
 
 export default function Home({ navigation }) {
   const count = useSelector((state) => state.counter.value);
@@ -13,7 +13,7 @@ export default function Home({ navigation }) {
 
   const handleDecreament = () => {
     dispatch(decrement());
-    navigation.navigate('Spells')
+    navigation.navigate("Spells");
   };
 
   return (
@@ -27,8 +27,8 @@ export default function Home({ navigation }) {
 
       <TouchableOpacity
         onPress={handleDecreament}
-        style={{ ...styles.btn, backgroundColor: '#6e3b3b' }}
-      // className="p-10 m-10"
+        style={{ ...styles.btn, backgroundColor: "#6e3b3b" }}
+        // className="p-10 m-10"
       >
         <Text className="text-white"> Spells </Text>
       </TouchableOpacity>
@@ -38,30 +38,30 @@ export default function Home({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    flexDirection: 'column',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    flexDirection: "column",
     padding: 50,
   },
   title_text: {
     fontSize: 40,
-    fontWeight: '900',
+    fontWeight: "900",
     marginBottom: 55,
   },
   counter_text: {
     fontSize: 35,
-    fontWeight: '900',
+    fontWeight: "900",
     margin: 15,
   },
   btn: {
-    backgroundColor: '#086972',
+    backgroundColor: "#086972",
     padding: 10,
     margin: 10,
     borderRadius: 10,
   },
   btn_text: {
     fontSize: 23,
-    color: '#fff',
+    color: "#fff",
   },
 });
 
