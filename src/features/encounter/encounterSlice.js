@@ -1,7 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { tallyXp } from '../../api';
+import { createSlice } from "@reduxjs/toolkit";
+import { tallyXp } from "../../api";
 
-import sampleEncounter from '../../../utilities/sampleData/sampleEncounter';
+import sampleEncounter from "../../../utilities/sampleData/sampleEncounter";
 
 const encounterSlice = createSlice({
   name: 'encounter',

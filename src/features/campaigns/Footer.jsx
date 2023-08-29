@@ -1,14 +1,13 @@
-import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { toggleEncountersMenu } from '../encounter/encountersSlice';
+import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
+import { useDispatch } from "react-redux";
+import { toggleEncountersMenu } from "../encounter/encountersSlice";
 
-export default function Footer(){
-
-  const dispatch = useDispatch()
+export default function Footer() {
+  const dispatch = useDispatch();
 
   const handleEncounter = () => {
-    dispatch(toggleEncountersMenu())
-  }
+    dispatch(toggleEncountersMenu());
+  };
 
   return (
     <View style={styles.container}>
@@ -16,24 +15,24 @@ export default function Footer(){
         <Text style={styles.buttonText}>Encounters</Text>
       </TouchableOpacity>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
-    height: 150
+    height: 150,
   },
   encounters: {
     borderRadius: 12,
-    backgroundColor: 'blue',
+    backgroundColor: "blue",
     marginHorizontal: 9,
     marginTop: 9,
   },
   buttonText: {
-    color: 'white',
-    fontFamily: 'Scada',
+    color: "white",
+    fontFamily: "Scada",
     padding: 8,
-    textAlign: 'center',
-    fontSize: 20
-  }
-})
+    textAlign: "center",
+    fontSize: 20,
+  },
+});

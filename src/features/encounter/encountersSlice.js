@@ -1,28 +1,28 @@
-import { createSlice } from '@reduxjs/toolkit';
-import sampleEncounter from '../../../utilities/sampleData/sampleEncounter';
-
+import { createSlice } from "@reduxjs/toolkit";
+import sampleEncounter from "../../../utilities/sampleData/sampleEncounter";
 
 const encountersSlice = createSlice({
-  name: 'encounters',
+  name: "encounters",
   initialState: {
     showEncounterModal: false,
     //This will be an empty array once we can add encounters
-    encounters: [ sampleEncounter ]
+    encounters: [sampleEncounter],
   },
   reducers: {
-    toggleEncountersMenu: state => {
-      state.showEncounterModal = !state.showEncounterModal
+    toggleEncountersMenu: (state) => {
+      state.showEncounterModal = !state.showEncounterModal;
     },
     addEncounter: (state, action) => {
-      state.encounters.push(action.payload)
+      state.encounters.push(action.payload);
     },
     deleteEncounter: (state, action) => {
-      state.encounters = state.encounters.filter(encounter => (encounter !== action.payload))
-    }
+      state.encounters = state.encounters.filter(
+        (encounter) => encounter !== action.payload,
+      );
+    },
+  },
+});
 
-  }
-})
+export const { toggleEncountersMenu, addEncounter } = encountersSlice.actions;
 
-export const { toggleEncountersMenu, addEncounter } = encountersSlice.actions
-
-export default encountersSlice.reducer
+export default encountersSlice.reducer;
