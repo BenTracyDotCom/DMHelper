@@ -15,6 +15,9 @@ const encounterSlice = createSlice({
     activeTie: null
   },
   reducers: {
+    setChars: (state, action) => {
+      state.chars = action.payload
+    },
     setEncounter: (state, action) => {
       Object.keys(action.payload).forEach(key =>
         (state[key] = action.payload[key])
@@ -55,7 +58,7 @@ const encounterSlice = createSlice({
       })
     },
     sortByInitiative: (state) => {
-      const sortedChars = state.chars.slice(0).sort((a, b) => {
+      let sortedChars = state.chars.slice(0).sort((a, b) => {
         if (a.initiative > b.initiative) {
           return -1
         } else if (a.initiative < b.initiative) {
@@ -64,6 +67,7 @@ const encounterSlice = createSlice({
           return a.name.localeCompare(b.name)
         }
       })
+      sortedChars = sortedChars.map((char, i) => ({...char, key: i}))
       state.chars = sortedChars
     },
     validateInitiative: (state) => {
@@ -102,7 +106,7 @@ const encounterSlice = createSlice({
         }
       });
       //If there are no ties remaining,
-      if (JSON.stringify({}) === JSON.stringify(state.ties)) {
+      //if (JSON.stringify({}) === JSON.stringify(state.ties)) {
         //Find duplicates and assign them numbers
         const dupeCounts = {}
         const newChars = []
@@ -121,7 +125,7 @@ const encounterSlice = createSlice({
           }
         })
         state.chars = newChars
-      }
+      //}
     },
     //the following actions require a "target" integer corresponding to an index in the encounter's "chars" array
     statusAdded: (state, action) => {
@@ -192,5 +196,5 @@ const encounterSlice = createSlice({
   }
 })
 
-export const { setEncounter, nextChar, statusAdded, statusRemoved, hpAdded, hpRemoved, targetDestroye, setLocation, addNote, deleteNote, editNote, setInitiative, setAllEnemies, setEnemiesByType, sortByInitiative, cycleGroupMode, toggleTiebreak, validateInitiative, autoResolveTies, setActiveTie } = encounterSlice.actions
+export const { setEncounter, setChars, nextChar, statusAdded, statusRemoved, hpAdded, hpRemoved, targetDestroye, setLocation, addNote, deleteNote, editNote, setInitiative, setAllEnemies, setEnemiesByType, sortByInitiative, cycleGroupMode, toggleTiebreak, validateInitiative, autoResolveTies, setActiveTie } = encounterSlice.actions
 export default encounterSlice.reducer

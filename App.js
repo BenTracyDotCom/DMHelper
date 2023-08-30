@@ -6,6 +6,7 @@ import { store } from "./src/store";
 import { NavigationContainer } from "@react-navigation/native";
 import { View } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { gestureHandlerRootHOC } from 'react-native-gesture-handler'
 import PrefsButton from "./src/features/preferences/PrefsButton";
 
 import Launch from './src/screens/Launch';
@@ -70,7 +71,7 @@ export default function App() {
           <Stack.Screen
             name="Initiative"
             component={Initiative}
-            options={{title: 'Roll initiative!'}}
+            options={{ title: 'Roll initiative!' }}
           />
           <Stack.Screen
             name="MonsterAdding"
@@ -82,7 +83,7 @@ export default function App() {
           />
           <Stack.Screen
             name="Encounter"
-            component={Encounter}
+            component={gestureHandlerRootHOC(Encounter)}
           />
           <Stack.Screen
             name="EncounterBuilder"
