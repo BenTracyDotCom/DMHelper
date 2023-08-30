@@ -92,7 +92,7 @@ const encounterSlice = createSlice({
               toSet[key] = oneEnemyInits
               state.ties = toSet
             }
-            console.log(state.ties, 'ties in state')
+            //console.log(state.ties, 'ties in state')
           } else if (state.groupMode === 1) {
             //Case: duplicates for this initiative, enemies grouped by type
             const reducedByName = inits[key].filter((char, index) => inits[key].indexOf(char) === index);
@@ -165,7 +165,7 @@ const encounterSlice = createSlice({
     autoResolveTies: (state) => {
       //Buggy, needs work
       const highToLowTies = Object.keys(state.ties).sort((a,b) => (parseFloat(b) - parseFloat(a)))
-      console.log(highToLowTies, 'sorted tied inits')
+      //console.log(highToLowTies, 'sorted tied inits')
       highToLowTies.forEach(init => {
         const theseChars = state.ties[init]
         //console.log(theseChars, 'theseChars')
