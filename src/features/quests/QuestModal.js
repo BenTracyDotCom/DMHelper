@@ -4,10 +4,12 @@ import {
   FlatList,
   View,
   Text,
+  TextInput,
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
+import {addQuest} from '../../features/campaigns/campaignSlice'
 
 export default function QuestModal({
   isVisible,
@@ -19,6 +21,8 @@ export default function QuestModal({
 }) {
   const dispatch = useDispatch();
   const currentQuest = useSelector((state) => state.campaign.currentQuest);
+  const [newQuestTitle, setNewQuestTitle] = useState('');
+  const [showInput, setShowInput] = useState(false);
 
   const handleQuestPress = (quest) => {
     if (currentQuest === quest.title) {
@@ -27,6 +31,14 @@ export default function QuestModal({
       setCurrentQuest(quest.title);
     }
   };
+
+  const handleAddQuest = () => {
+    if (newQuestTitle) {
+      dispatch(addQuest(newQuestTitle));
+      setNewQuestTitle('')
+      setShowInput(false);
+    }
+  }
 
   return (
     <Modal
@@ -52,10 +64,9 @@ export default function QuestModal({
                     }) => (
                       <TouchableOpacity
                         onPress={() => {
-                          handleObjectivePress(questIndex, objectiveIndex)
-                          onClose()
-                        }
-                        }
+                          handleObjectivePress(questIndex, objectiveIndex);
+                          onClose();
+                        }}
                       >
                         <Text style={styles.objective}>{objective}</Text>
                       </TouchableOpacity>
@@ -67,6 +78,23 @@ export default function QuestModal({
             )}
             keyExtractor={(item) => item.title}
           />
+          {showInput ? (
+            <View style={styles.addQuestContainer}>
+              <TextInput
+                style={styles.questInput}
+                placeholder="Enter new quest title"
+                value={newQuestTitle}
+                onChangeText={setNewQuestTitle}
+              />
+              <TouchableOpacity style={styles.addButton} onPress={handleAddQuest}>
+                <Text style={styles.addButtonText}>Submit</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <TouchableOpacity onPress={() => setShowInput(true)}>
+              <Text style={styles.addButtonText}>Add Quest</Text>
+            </TouchableOpacity>
+          )}
           <TouchableOpacity style={styles.closeButton} onPress={onClose}>
             <Text>Close</Text>
           </TouchableOpacity>
@@ -74,6 +102,7 @@ export default function QuestModal({
       </View>
     </Modal>
   );
+
 }
 
 const styles = StyleSheet.create({
@@ -101,4 +130,29 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     fontSize: 16,
   },
+  addQuestContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginVertical: 10,
+  },
+  questInput: {
+    flex: 1,
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+    marginRight: 10,
+    padding: 5,
+  },
+  addButton: {
+    marginTop: 20,
+    alignSelf: 'center',
+    backgroundColor: '#d1d5db',
+    padding: 10,
+    borderRadius: 5,
+  },
+  addButtonText: {
+    fontSize: 16,
+    color: 'blues'
+  }
 });
