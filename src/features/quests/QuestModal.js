@@ -8,9 +8,62 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
+  Button
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
-import {addQuest} from '../../features/campaigns/campaignSlice'
+import {addQuest, addObjective} from '../../features/campaigns/campaignSlice'
+
+function QuestInput({ onAddQuest }) {
+  const [tempQuestTitle, setTempQuestTitle] = useState('');
+
+  return (
+    <View style={styles.addQuestContainer}>
+      <TextInput
+        style={styles.questInput}
+        placeholder="Enter new quest title"
+        value={tempQuestTitle}
+        onChangeText={setTempQuestTitle}
+      />
+      <TouchableOpacity style={styles.addButton}>
+        <Text
+          style={styles.addButtonText}
+          onPress={() => {
+            onAddQuest(tempQuestTitle);
+            setTempQuestTitle('');
+          }}
+        >
+          Add Quest
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+function ObjectiveInput({ onAddObjective }) {
+  const [tempObjectiveText, setTempObjectiveText] = useState('');
+
+  return (
+    <View style={styles.addQuestContainer}>
+      <TextInput
+        style={styles.questInput}
+        placeholder="Enter new objective"
+        value={tempObjectiveText}
+        onChangeText={setTempObjectiveText}
+      />
+      <TouchableOpacity style={styles.addButton}>
+        <Text
+          style={styles.addButtonText}
+          onPress={() => {
+            onAddObjective(tempObjectiveText);
+            setTempObjectiveText('');
+          }}
+        >
+          Add Objective
+        </Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
 
 export default function QuestModal({
   isVisible,
@@ -23,7 +76,11 @@ export default function QuestModal({
   const dispatch = useDispatch();
   const currentQuest = useSelector((state) => state.campaign.currentQuest);
   const [newQuestTitle, setNewQuestTitle] = useState('');
-  const [showInput, setShowInput] = useState(false);
+  const [tempQuestTitle, setTempQuestTitle] = useState('');
+  const [newObjectiveText, setNewObjectiveText] = useState('');
+  const [tempObjectiveText, setTempObjectiveText] = useState('');
+  const [showQuestInput, setShowQuestInput] = useState(false);
+  const [showObjectiveInput, setShowObjectiveInput] = useState(false);
 
   const handleQuestPress = (quest) => {
     if (currentQuest === quest.title) {
@@ -37,7 +94,15 @@ export default function QuestModal({
     if (newQuestTitle) {
       dispatch(addQuest(newQuestTitle));
       setNewQuestTitle('')
-      setShowInput(false);
+      setShowQuestInput(false);
+    }
+  }
+
+  const handleAddObjective = (questIndex) => {
+    if (newObjectiveText) {
+      dispatch(addObjective({questIndex, objective: newObjectiveText}))
+      setNewObjectiveText('')
+      setShowObjectiveInput(false);
     }
   }
 
@@ -59,40 +124,49 @@ export default function QuestModal({
               <TouchableOpacity onPress={() => handleQuestPress(item)}>
                 <Text>{item.title}</Text>
                 {currentQuest === item.title && (
-                  <FlatList
-                    data={item.objectives}
-                    renderItem={({ item: objective, index: objectiveIndex }) => (
-                      <TouchableOpacity
-                        onPress={() => {
-                          handleObjectivePress(questIndex, objectiveIndex);
-                          onClose();
+                  <>
+                    <FlatList
+                      data={item.objectives}
+                      renderItem={({ item: objective, index: objectiveIndex }) => (
+                        <TouchableOpacity
+                          onPress={() => {
+                            handleObjectivePress(questIndex, objectiveIndex);
+                            onClose();
+                          }}
+                        >
+                          <Text style={styles.objective}>{objective}</Text>
+                        </TouchableOpacity>
+                      )}
+                      keyExtractor={(item, index) => `${index}`}
+                    />
+                    {showObjectiveInput ? (
+                      <ObjectiveInput
+                        onAddObjective={(objectiveText) => {
+                          setNewObjectiveText(objectiveText);
+                          handleAddObjective(questIndex);
                         }}
-                      >
-                        <Text style={styles.objective}>{objective}</Text>
+                      />
+                    ) : (
+                      <TouchableOpacity onPress={() => setShowObjectiveInput(true)}>
+                        <Text style={styles.addButtonText}> Add Objective</Text>
                       </TouchableOpacity>
                     )}
-                    keyExtractor={(item, index) => `${index}`}
-                  />
+                  </>
                 )}
               </TouchableOpacity>
             )}
             keyExtractor={(item) => item.title}
             ListFooterComponent={() => (
               <>
-                {showInput ? (
-                  <View style={styles.addQuestContainer}>
-                    <TextInput
-                      style={styles.questInput}
-                      placeholder="Enter new quest title"
-                      value={newQuestTitle}
-                      onChangeText={setNewQuestTitle}
-                    />
-                    <TouchableOpacity style={styles.addButton} onPress={handleAddQuest}>
-                      <Text style={styles.addButtonText}>Submit</Text>
-                    </TouchableOpacity>
-                  </View>
+                {showQuestInput ? (
+                  <QuestInput
+                    onAddQuest={(questTitle) => {
+                      setNewQuestTitle(questTitle);
+                      handleAddQuest();
+                    }}
+                  />
                 ) : (
-                  <TouchableOpacity onPress={() => setShowInput(true)}>
+                  <TouchableOpacity onPress={() => setShowQuestInput(true)}>
                     <Text style={styles.addButtonText}>Add Quest</Text>
                   </TouchableOpacity>
                 )}

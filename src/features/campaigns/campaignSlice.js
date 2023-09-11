@@ -122,6 +122,13 @@ const campaignSlice = createSlice({
         title: action.payload,
         objectives: []
       })
+    },
+    addObjective: (state, action) => {
+      const {questTitle, objective} = action.payload;
+      const quest = state.quests.find(quest => quest.title === questTitle);
+      if (quest) {
+        quest.objectives.push(objective)
+      }
     }
   },
 });
@@ -143,6 +150,7 @@ export const {
   previousObjective,
   setCurrentQuest,
   addQuest,
+  addObjective
 } = campaignSlice.actions;
 
 export default campaignSlice.reducer;
