@@ -1,7 +1,7 @@
 # DM Helper
-![Campaign screen](https://imgur.com/ZQxjRcc)
-![Initiative screen](https://imgur.com/AhPnWpK)
-![Encounter screen](https://imgur.com/DWCsIiG)
+![Campaign screen](https://i.imgur.com/ZQxjRcc.png)
+![Initiative screen](https://i.imgur.com/AhPnWpK.png)
+![Encounter screen](https://i.imgur.com/DWCsIiG.png)
 
 ## Getting started:
 
