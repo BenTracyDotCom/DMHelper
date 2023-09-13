@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "DMHelper",
+    "name": "5e Campaign Manager",
     "slug": "DMHelper",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -17,11 +17,12 @@
       "bundleIdentifier": "com.anonymous.DMHelper"
     },
     "android": {
+      "package": "com.anonymous.DMHelper",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      },
-      "package": "com.anonymous.DMHelper"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"

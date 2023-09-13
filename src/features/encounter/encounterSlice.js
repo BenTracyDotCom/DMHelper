@@ -196,5 +196,5 @@ const encounterSlice = createSlice({
   }
 })
 
-export const { setEncounter, setChars, nextChar, statusAdded, statusRemoved, hpAdded, hpRemoved, targetDestroye, setLocation, addNote, deleteNote, editNote, setInitiative, setAllEnemies, setEnemiesByType, sortByInitiative, cycleGroupMode, toggleTiebreak, validateInitiative, autoResolveTies, setActiveTie } = encounterSlice.actions
+export const { setEncounter, setChars, nextChar, statusAdded, statusRemoved, hpAdded, hpRemoved, targetDestroyed, setLocation, addNote, deleteNote, editNote, setInitiative, setAllEnemies, setEnemiesByType, sortByInitiative, cycleGroupMode, toggleTiebreak, validateInitiative, autoResolveTies, setActiveTie } = encounterSlice.actions
 export default encounterSlice.reducer
