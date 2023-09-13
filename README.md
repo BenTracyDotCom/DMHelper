@@ -1,10 +1,12 @@
 # DM Helper
+![Campaign screen](https://imgur.com/ZQxjRcc)
+![Initiative screen](https://imgur.com/AhPnWpK)
+![Encounter screen](https://imgur.com/DWCsIiG)
+
 ## Getting started:
 
-### On Android:
+### On Android or iOS:
 Download the Expo Go app on the play store
-### On iOS:
-I think you're just good with the camera app
 
 ### Install Dependencies
 ```
