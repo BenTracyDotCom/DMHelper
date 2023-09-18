@@ -1,13 +1,8 @@
-import React, { useState } from "react";
-import {
-  Modal,
-  FlatList,
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-} from "react-native";
-import { useSelector, useDispatch } from "react-redux";
+import React, {useState, useCallback} from "react";
+import {View, Modal, StyleSheet} from "react-native";
+import {useDispatch, useSelector} from "react-redux";
+import {addQuest, addObjective} from '../campaigns/campaignSlice'
+import QuestModalBody from './QuestModalBody';
 
 export default function QuestModal({
   isVisible,
@@ -20,13 +15,36 @@ export default function QuestModal({
   const dispatch = useDispatch();
   const currentQuest = useSelector((state) => state.campaign.currentQuest);
 
-  const handleQuestPress = (quest) => {
-    if (currentQuest === quest.title) {
-      setCurrentQuest(null);
-    } else {
-      setCurrentQuest(quest.title);
-    }
-  };
+  const [showQuestInput, setShowQuestInput] = useState(false);
+  const [showObjectiveInput, setShowObjectiveInput] = useState(false);
+
+  const handleQuestPress = useCallback(
+    (quest) => {
+      setCurrentQuest(currentQuest === quest.title ? null : quest.title);
+    },
+    [currentQuest, setCurrentQuest]
+  )
+
+  const handleAddQuest = useCallback(
+    (newQuestTitle) => {
+      if (newQuestTitle) {
+        dispatch(addQuest(newQuestTitle));
+        setShowObjectiveInput(false);
+      }
+    },
+    [dispatch]
+  )
+  const onAddObjective = useCallback(
+    (questTitle, newObjectiveText) => {
+      if (newObjectiveText && questTitle) {
+        dispatch(addObjective({ questTitle, objective: newObjectiveText }));
+        setShowObjectiveInput(false);
+      }
+    },
+    [dispatch]
+  );
+
+
 
   return (
     <Modal
@@ -37,43 +55,23 @@ export default function QuestModal({
     >
       <View style={styles.container}>
         <View style={styles.modalBox}>
-          <Text style={styles.title}>Quests</Text>
-          <FlatList
-            data={quests}
-            renderItem={({ item, index: questIndex }) => (
-              <TouchableOpacity onPress={() => handleQuestPress(item)}>
-                <Text>{item.title}</Text>
-                {currentQuest === item.title && (
-                  <FlatList
-                    data={item.objectives}
-                    renderItem={({
-                      item: objective,
-                      index: objectiveIndex,
-                    }) => (
-                      <TouchableOpacity
-                        onPress={() => {
-                          handleObjectivePress(questIndex, objectiveIndex)
-                          onClose()
-                        }
-                        }
-                      >
-                        <Text style={styles.objective}>{objective}</Text>
-                      </TouchableOpacity>
-                    )}
-                    keyExtractor={(item, index) => `${index}`}
-                  />
-                )}
-              </TouchableOpacity>
-            )}
-            keyExtractor={(item) => item.title}
+          <QuestModalBody
+            quests={quests}
+            currentQuest={currentQuest}
+            handleQuestPress={handleQuestPress}
+            handleObjectivePress={handleObjectivePress}
+            showObjectiveInput={showObjectiveInput}
+            setShowObjectiveInput={setShowObjectiveInput}
+            onAddObjective={onAddObjective}
+            showQuestInput={showQuestInput}
+            setShowQuestInput={setShowQuestInput}
+            onAddQuest={handleAddQuest}
+            onClose={onClose}
           />
-          <TouchableOpacity style={styles.closeButton} onPress={onClose}>
-            <Text>Close</Text>
-          </TouchableOpacity>
         </View>
       </View>
     </Modal>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -84,21 +82,9 @@ const styles = StyleSheet.create({
   },
   modalBox: {
     width: "80%",
-    height: "60%",
     backgroundColor: "white",
     padding: 20,
     borderRadius: 10,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  closeButton: {
-    marginTop: 20,
-    alignSelf: "center",
-  },
-  objective: {
-    marginLeft: 20,
-    fontSize: 16,
-  },
-});
+    maxHeight: '60%'
+  }
+})

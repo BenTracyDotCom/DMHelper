@@ -14,8 +14,14 @@ module.exports = async function (env, argv) {
 
   config.module.rules.push({
     test: /\.css$/i,
-    use: ["postcss-loader", "@svgr/webpack"],
+    use: ["postcss-loader"],
   });
+
+  config.module.rules.push({
+    test: /\.svg$/,
+    use: ['@svgr/webpack'],
+  });
+
 
   return config;
 };

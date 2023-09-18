@@ -24,7 +24,6 @@ export default function Campaign({ navigation }) {
   }
 
   const setCurrentQuest = (questTitle) => {
-    console.log(questTitle, 'questTitle', typeof questTitle)
     dispatch(currentQuestUpdated(questTitle));
   }
 

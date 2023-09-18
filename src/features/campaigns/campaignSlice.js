@@ -1,13 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 //sample for testing
 import sampleCampaign from "../../../utilities/sampleData/sampleCampaign";
-import sampleNPCs from "../../../utilities/sampleData/sampleNPCs";
 
 const campaignSlice = createSlice({
   name: "campaign",
   initialState: {
     ...sampleCampaign,
-    npcs: sampleNPCs,
     currentQuest: "Meet Me in Phandalin",
     currentObjectiveIndex: 0,
   },
@@ -119,6 +117,19 @@ const campaignSlice = createSlice({
       const selectedQuestTitle = action.payload;
       state.currentQuest = selectedQuestTitle;
     },
+    addQuest: (state, action) => {
+      state.quests.push({
+        title: action.payload,
+        objectives: []
+      })
+    },
+    addObjective: (state, action) => {
+      const {questTitle, objective} = action.payload;
+      const quest = state.quests.find(quest => quest.title === questTitle);
+      if (quest) {
+        quest.objectives.push(objective)
+      }
+    }
   },
 });
 
@@ -138,6 +149,8 @@ export const {
   nextObjective,
   previousObjective,
   setCurrentQuest,
+  addQuest,
+  addObjective
 } = campaignSlice.actions;
 
 export default campaignSlice.reducer;
